@@ -1,6 +1,6 @@
 package cs525.project.fujframework.middleware;
 /**
- * 
+ * Refined Abstraction of Message Class 
  * @author Fish
  *
  */
@@ -12,7 +12,7 @@ public class EmailMessage extends Message {
 
 	@Override
 	public void send() {
-		messageSender.sendMessage();
+		messageSender.sendMessage(subject,body);
 
 	}
 

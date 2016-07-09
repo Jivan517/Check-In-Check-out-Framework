@@ -1,6 +1,6 @@
 package cs525.project.fujframework.middleware;
 /**
- * 
+ * Refined Abstraction of Message Class
  * @author Fish
  * 
  * @since 1.0.0
@@ -14,7 +14,7 @@ public class TextMessage extends Message {
 
 	@Override
 	public void send() {
-		messageSender.sendMessage();
+		messageSender.sendMessage(subject,body);
 
 	}
 
