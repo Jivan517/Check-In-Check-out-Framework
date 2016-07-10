@@ -21,8 +21,11 @@ public interface NotificationStrategy {
 	/**
 	 * sends notification to the customer - which can be an Email or SMS message
 	 * 
+	 * @param message
+	 *            the message that needs to be sent
 	 * @param person
 	 *            customer for which the notification has to be sent
+	 * 
 	 */
-	void sendNotification(Person person);
+	void sendNotification(String message, Person person);
 }
