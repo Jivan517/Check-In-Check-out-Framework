@@ -9,25 +9,10 @@ import java.util.Date;
 import java.util.Properties;
 
 public class LoggerImpl implements Logger {
-	private Properties prop = new Properties();
-	private InputStream input = null;
+	
 
 	public LoggerImpl() {
-		try {
-			input = new FileInputStream("logger.properties");
-			prop.load(input);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// get the property value and print it out
-		System.out.println(prop.getProperty("database"));
-		System.out.println(prop.getProperty("dbuser"));
-		System.out.println(prop.getProperty("dbpassword"));
+		
 	}
 
 	@Override

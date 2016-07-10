@@ -16,17 +16,17 @@ public interface CheckoutRecordFacade {
 	 * saves the checkout record into database
 	 * 
 	 * @param checkoutRecordEntry
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean saveCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry);
+	public int saveCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry);
 
 	/**
 	 * removes the checkout record from database
 	 * 
 	 * @param checkoutRecordEntry
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean removeCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry);
+	public int removeCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry);
 
 	/**
 	 * saves the check in record
