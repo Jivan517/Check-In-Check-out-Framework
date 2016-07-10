@@ -1,3 +1,5 @@
+!.gitignore
+.settings/
 .metadata/
 RemoteSystemsTempFiles/.project
 docs/~$Tasks.xlsx
