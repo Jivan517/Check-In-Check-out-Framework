@@ -8,14 +8,14 @@
 package cs525.project.fujframework.middleware;
 
 /**
- * concrete command for user save operation
+ * provides a concrete class for saving the overdue fine of customer
  * 
  * @author Jivan Nepali
  * 
  * @version 1.0.0
  *
  */
-public class SaveUserCommand implements Command {
+public class SaveOverdueFineCommand implements Command {
 
 	@Override
 	public boolean execute() {

@@ -10,7 +10,7 @@ package cs525.project.fujframework.middleware;
 import java.util.Stack;
 
 /**
- * base controller that invokes different commands
+ * base controllerF that invokes different commands
  * 
  * @author Jivan Nepali
  * 

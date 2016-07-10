@@ -17,11 +17,12 @@ package cs525.project.fujframework.middleware;
  */
 
 public interface MessageSender {
-   /**
-    * Method for sending message the implementation will be made by
-    * application user
-    * @param subject
-    * @param body
-    */
+	/**
+	 * Method for sending message the implementation will be made by application
+	 * user
+	 * 
+	 * @param subject
+	 * @param body
+	 */
 	public void sendMessage(String subject, String body);
 }

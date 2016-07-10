@@ -6,6 +6,8 @@
 package cs525.project.fujframework.middleware;
 
 /**
+ * 
+ * 
  * Abstraction Message class for sending Messages It could be text/Email
  * Message. It's implemented using Bridge Pattern which has Instance of
  * MessageSender as Implementer!
