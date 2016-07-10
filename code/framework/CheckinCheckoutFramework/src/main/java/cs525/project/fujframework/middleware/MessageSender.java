@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the MIT License (MIT);
  */
 package cs525.project.fujframework.middleware;
 
@@ -10,11 +12,17 @@ package cs525.project.fujframework.middleware;
  * 
  * @author Fish
  * 
- * @since 1.0.0
+ * @version 1.0.0
  *
  */
 
 public interface MessageSender {
-
+	/**
+	 * Method for sending message the implementation will be made by application
+	 * user
+	 * 
+	 * @param subject
+	 * @param body
+	 */
 	public void sendMessage(String subject, String body);
 }

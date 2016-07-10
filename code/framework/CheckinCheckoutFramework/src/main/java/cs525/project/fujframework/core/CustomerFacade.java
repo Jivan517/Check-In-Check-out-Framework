@@ -3,6 +3,8 @@
  */
 package cs525.project.fujframework.core;
 
+import cs525.project.fujframework.middleware.Customer;
+
 /**
  * defines a higher level interface for customer related subsystems using
  * "facade pattern"

@@ -8,16 +8,11 @@
 package cs525.project.fujframework.middleware;
 
 /**
- * provides an interface for factory method for creating person related
- * object(s)
- * 
- * @author Jivan Nepali
- * 
- * @version 1.0.0
+ * provides an interface for factory method
+ * @author paudelumesh
  *
  */
 public interface PersonFactory {
-
 	/**
 	 * creates concrete implementation of person
 	 * 
@@ -26,5 +21,5 @@ public interface PersonFactory {
 	 * @return PersonFactory an instance of PersonFactory
 	 * 
 	 */
-	PersonFactory createPerson(String type);
+	public Person createPerson(String type);
 }
