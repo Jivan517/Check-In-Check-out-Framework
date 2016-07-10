@@ -7,27 +7,18 @@
 
 package cs525.project.fujframework.middleware;
 
-import cs525.project.fujframework.core.CheckoutRecordFacade;
-
 /**
- * provides concrete command for checkout record save operation
+ * provides a concrete class for saving rental fee
  * 
  * @author Jivan Nepali
  * 
  * @version 1.0.0
  *
  */
-public class CheckoutCommand implements Command {
-
-	private CheckoutRecordFacade checkoutRecord;
-
-	public CheckoutCommand(CheckoutRecordFacade facade) {
-		this.checkoutRecord = facade;
-	}
+public class SaveRentalFeeCommand implements Command {
 
 	@Override
 	public boolean execute() {
-
 		return false;
 	}
 

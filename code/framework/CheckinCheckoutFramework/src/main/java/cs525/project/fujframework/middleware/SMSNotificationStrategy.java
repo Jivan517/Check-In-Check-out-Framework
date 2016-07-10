@@ -8,7 +8,7 @@
 package cs525.project.fujframework.middleware;
 
 /**
- * provides a concrete implementation for SMS notification strategy 
+ * provides a concrete implementation for SMS notification strategy
  * 
  * @author Jivan Nepali
  * 
