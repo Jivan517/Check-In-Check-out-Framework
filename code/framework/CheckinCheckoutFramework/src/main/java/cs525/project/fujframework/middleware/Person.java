@@ -1,20 +1,71 @@
-/*
- * Copyright 2016 the original author or authors.
- *
- * Licensed under the MIT License (MIT);
+/**
  * 
  */
-
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.Address;
+
 /**
- * provides an interface for managing the concrete classes for factory method
+ * defines the interface for managing concrete classes of person instance
  * 
- * @author Jivan Nepali
- * 
- * @version 1.0.0
+ * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public interface Person {
+	/**
+	 * sets the first name
+	 * 
+	 * @param firstName
+	 */
+	public void setFirstName(String firstName);
 
+	/**
+	 * returns the first name
+	 * 
+	 * @return String
+	 */
+	public String getFirstName();
+
+	/**
+	 * sets the last name
+	 * 
+	 * @param lastName
+	 */
+	public void setLastName(String lastName);
+
+	/**
+	 * returns the last name
+	 * 
+	 * @return string
+	 */
+	public String getLastName();
+
+	/**
+	 * sets the middle name
+	 * 
+	 * @param middleName
+	 */
+	public void setMiddleName(String middleName);
+
+	/**
+	 * returns the middle name
+	 * 
+	 * @return string
+	 */
+	public String getMiddleName();
+
+	/**
+	 * sets the address object
+	 * 
+	 * @param address
+	 */
+	public void setAddress(Address address);
+
+	/**
+	 * returns the address object
+	 * 
+	 * @return Address
+	 */
+	public Address getAddress();
 }
