@@ -17,7 +17,7 @@ import java.util.Stack;
  * @version 1.0.0
  *
  */
-public class BaseController {
+public class CommandManagerImpl {
 
 	/**
 	 * stack for the recently executed operations which can be used during roll
