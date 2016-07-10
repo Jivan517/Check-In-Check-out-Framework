@@ -8,6 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import cs525.project.fujframework.utils.ConfigProperties;
+import cs525.project.fujframework.utils.ConfigPropertiesImpl;
+
 /**
  * @author Fish
  *
@@ -30,13 +33,13 @@ public class DbActionImpl implements DbAction {
 		int countRecord = 0;
 		try {
 
-			 con = connection.getConnection();
+			con = connection.getConnection();
 			ps = con.prepareStatement(query);
 
 			countRecord = ps.executeUpdate();
 		} catch (Exception e) {
-			
-		}finally{
+
+		} finally {
 			cleanupResources(ps, con);
 		}
 		return countRecord;
@@ -52,16 +55,16 @@ public class DbActionImpl implements DbAction {
 	public Object read(String query) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs=null;
+		ResultSet rs = null;
 		try {
 
-			 con = connection.getConnection();
+			con = connection.getConnection();
 			ps = con.prepareStatement(query);
 
 			rs = ps.executeQuery();
 		} catch (Exception e) {
 			// false;
-		} finally{
+		} finally {
 			cleanupResources(ps, con);
 		}
 
@@ -80,16 +83,16 @@ public class DbActionImpl implements DbAction {
 		PreparedStatement ps = null;
 		Connection con = null;
 		int rs;
-		int countRecord= 0;
+		int countRecord = 0;
 		try {
 
-			 con = connection.getConnection();
+			con = connection.getConnection();
 			ps = con.prepareStatement(query);
 
 			rs = ps.executeUpdate();
 		} catch (Exception e) {
-			
-		} finally{
+
+		} finally {
 			cleanupResources(ps, con);
 		}
 		return countRecord;
@@ -107,28 +110,28 @@ public class DbActionImpl implements DbAction {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int rs;
-		int recordCounter=0;
+		int recordCounter = 0;
 		try {
 
-			 con = connection.getConnection();
+			con = connection.getConnection();
 			ps = con.prepareStatement(query);
 
 			recordCounter = ps.executeUpdate();
 		} catch (Exception e) {
-			
+
 			return recordCounter;
-		}finally{
+		} finally {
 			cleanupResources(ps, con);
 		}
 		return recordCounter;
 	}
-	
-	private void cleanupResources(PreparedStatement ps, Connection con){
+
+	private void cleanupResources(PreparedStatement ps, Connection con) {
 		try {
 			ps.close();
 			con.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 	}

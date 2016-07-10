@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import cs525.project.fujframework.utils.DbConfig;
+
 /**
  * singleton class for managing the connection pool
  * 
@@ -25,19 +27,23 @@ import java.util.Queue;
  */
 public class SimpleConnectionPool {
 	private static SimpleConnectionPool instance;
-	private SimpleConnectionPool(){}
-	
-	public static SimpleConnectionPool getInstance(){
-		if(instance==null){
-			instance = new SimpleConnectionPool();	
+
+	private SimpleConnectionPool() {
+	}
+
+	public static SimpleConnectionPool getInstance() {
+		if (instance == null) {
+			instance = new SimpleConnectionPool();
 		}
 		return instance;
 	}
-	public static Connection getConnection() throws ClassNotFoundException,SQLException{
+
+	public static Connection getConnection() throws ClassNotFoundException, SQLException {
+		DbConfig config = new DbConfig();
 		Connection con = null;
-		Class.forName("com.mysql.jdbc.Driver");
-		 con= DriverManager.getConnection("jdbc:mysql://localhost:3306/dbName", "root", "");  
-         return con;  
+		Class.forName(config.getDriver());
+		con = DriverManager.getConnection(config.getDbUrl(), config.getUserName(), config.getDbPassword());
+		return con;
 	}
-	
+
 }
