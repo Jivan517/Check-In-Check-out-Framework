@@ -12,7 +12,7 @@ package cs525.project.fujframework.core.dataaccess;
  *
  */
 
-public class dbAction {
+public class DbAction {
 	
 	void performRead(){
 		
