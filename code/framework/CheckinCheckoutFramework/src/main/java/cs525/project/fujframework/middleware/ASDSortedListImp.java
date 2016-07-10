@@ -1,6 +1,8 @@
 package cs525.project.fujframework.middleware;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -15,6 +17,8 @@ import java.util.List;
  */
 
 public class ASDSortedListImp implements ASDSortedList {
+	private Comparator<Person> nameComparator= Comparator.comparing(Person ::getFirstName)
+			                                           .thenComparing(Person::getLastName) ;
 	private List<Person> persons;
 	/**
      * @{ASDSortedListImp} constructor with list of @{Person} as a parameter
@@ -22,14 +26,23 @@ public class ASDSortedListImp implements ASDSortedList {
      * @param functor
      */
 	public ASDSortedListImp(List<Person> persons) {
-		this.persons = persons;
+		this.persons = getSortedPerson(persons);
 	}
 
 	@Override
-	public SortedListIterator CreateIterator(Predicate<String> functor) {
+	public SortedListIterator createIterator(Predicate<String> functor) {
 		return new SortedListIteratorImp(functor);
 	}
-
+    
+	/**
+	 * This method returns list of sorted persons
+	 * @param persons
+	 * @return
+	 */
+	private List<Person> getSortedPerson(List<Person> persons){
+		return persons.stream().sorted(nameComparator).collect(Collectors.toList());
+	}
+	
 	/**
 	 * 
 	 * This Inner class is implements {@SortedListIterator} which does the
@@ -57,12 +70,15 @@ public class ASDSortedListImp implements ASDSortedList {
 			return true;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public Object next() {
 			if (this.hasNext()) {
-				String element = "";// persons.get(index);
-				if ( predicate.apply(element) ) {
-					return element;
+				String firstName = persons.get(index).getFirstName();
+				String lastName = persons.get(index).getLastName();
+				index++;
+				if ( predicate.apply(firstName)|| predicate.apply(lastName) ) {
+					return persons.get(index);
 				} else {
 					return next();
 				}
@@ -74,6 +90,7 @@ public class ASDSortedListImp implements ASDSortedList {
 		public Object currentItem() {
 			return persons.get(index);
 		}
+		
 
 	}
 
