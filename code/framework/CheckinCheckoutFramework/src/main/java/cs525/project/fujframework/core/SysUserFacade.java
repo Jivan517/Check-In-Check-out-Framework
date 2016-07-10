@@ -3,6 +3,8 @@
  */
 package cs525.project.fujframework.core;
 
+import cs525.project.fujframework.middleware.SysUser;
+
 /**
  * defines a higher level interface for system user related subsystems
  * 
