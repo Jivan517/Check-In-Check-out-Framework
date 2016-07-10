@@ -32,12 +32,15 @@ public class CheckoutCommand implements Command {
 	@Override
 	public boolean execute() {
 
-		return facade.saveCheckoutRecord(checkoutRecordEntry);
+		int affectedRows = facade.saveCheckoutRecord(checkoutRecordEntry);
+		return affectedRows == 1 ? true : false;
 	}
 
 	@Override
 	public boolean undo() {
-		return facade.removeCheckoutRecord(checkoutRecordEntry);
+
+		int affectedRows = facade.removeCheckoutRecord(checkoutRecordEntry);
+		return affectedRows == 1 ? true : false;
 	}
 
 }
