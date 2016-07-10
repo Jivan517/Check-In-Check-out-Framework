@@ -3,6 +3,8 @@
  */
 package cs525.project.fujframework.core;
 
+import cs525.project.fujframework.utils.LoginUtil;
+
 /**
  * This @{CheckOutRecordProtectionProxy} class implements @{CheckoutRecordFacade} interface
  * acts like protection Proxy to provide access control for appropriate user.
@@ -16,6 +18,7 @@ public class CheckOutRecordProtectionProxy implements CheckoutRecordFacade {
     private boolean isAdmin=false;
     public CheckOutRecordProtectionProxy() {
     	this.checkOutRecordFacade = new CheckoutRecordFacadeImpl();
+    	isAdmin = LoginUtil.isAdmin();
     
 	}
 	/* (non-Javadoc)
