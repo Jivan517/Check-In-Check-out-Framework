@@ -8,13 +8,18 @@
 package cs525.project.fujframework.middleware;
 
 /**
- * provides an interface for managing the concrete classes for factory method
+ * provides a concrete implementation for SMS notification strategy 
  * 
  * @author Jivan Nepali
  * 
  * @version 1.0.0
  *
  */
-public interface Person {
+public class SMSNotificationStrategy implements NotificationStrategy {
+
+	@Override
+	public void sendNotification(Person person) {
+
+	}
 
 }
