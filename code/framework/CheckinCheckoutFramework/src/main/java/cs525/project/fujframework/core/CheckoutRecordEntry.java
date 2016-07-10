@@ -6,8 +6,11 @@ package cs525.project.fujframework.core;
 import java.time.LocalDate;
 
 /**
+ * this object holds the checkout record details
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public class CheckoutRecordEntry {
 	private int productId;

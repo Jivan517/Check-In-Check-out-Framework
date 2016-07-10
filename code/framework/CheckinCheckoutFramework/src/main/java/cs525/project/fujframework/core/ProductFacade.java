@@ -26,4 +26,11 @@ public interface ProductFacade {
 	 * @return boolean
 	 */
 	public boolean removeProduct(Product product);
+
+	/**
+	 * returns the product based on product id
+	 * @param productId
+	 * @return the product object
+	 */
+	public Product getProductById(int productId);
 }

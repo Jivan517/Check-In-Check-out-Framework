@@ -14,6 +14,7 @@ public class SysUser implements Person {
 	private String lastName;
 	private String middleName;
 	private Address address;
+	private String email;
 
 	/*
 	 * (non-Javadoc)
@@ -96,6 +97,27 @@ public class SysUser implements Person {
 	@Override
 	public Address getAddress() {
 		return address;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * cs525.project.fujframework.middleware.Person#setEmail(java.lang.String)
+	 */
+	@Override
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cs525.project.fujframework.middleware.Person#getEmail()
+	 */
+	@Override
+	public String getEmail() {
+		return email;
 	}
 
 }

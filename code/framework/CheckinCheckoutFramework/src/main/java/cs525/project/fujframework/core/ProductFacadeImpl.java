@@ -27,4 +27,13 @@ public class ProductFacadeImpl implements ProductFacade {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs525.project.fujframework.core.ProductFacade#getProductById(int)
+	 */
+	@Override
+	public Product getProductById(int productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

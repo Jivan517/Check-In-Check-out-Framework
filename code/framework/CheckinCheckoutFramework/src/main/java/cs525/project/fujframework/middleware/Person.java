@@ -68,4 +68,16 @@ public interface Person {
 	 * @return Address
 	 */
 	public Address getAddress();
+	
+	/**
+	 * sets an email of the person
+	 * @param email
+	 */
+	public void setEmail(String email);
+	
+	/**
+	 * returns an email of the person
+	 * @return email as string
+	 */
+	public String getEmail();
 }

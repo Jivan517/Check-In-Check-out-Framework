@@ -31,4 +31,12 @@ public interface CustomerFacade {
 	 * @return boolean
 	 */
 	public boolean removeCustomer(Customer customer);
+
+	/**
+	 * returns the customer based on customer id
+	 * 
+	 * @param customerId
+	 * @return the customer object
+	 */
+	public Customer getCustomerById(int customerId);
 }

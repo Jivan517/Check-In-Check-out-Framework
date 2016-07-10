@@ -29,4 +29,13 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs525.project.fujframework.core.CustomerFacade#getCustomerById(int)
+	 */
+	@Override
+	public Customer getCustomerById(int customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
