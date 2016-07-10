@@ -7,6 +7,10 @@
 
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.Product;
+import cs525.project.fujframework.core.ProductFacade;
+import cs525.project.fujframework.core.ProductFacadeImpl;
+
 /**
  * concrete command for product save operation
  * 
@@ -17,14 +21,22 @@ package cs525.project.fujframework.middleware;
  */
 public class SaveProductCommand implements Command {
 
+	private Product product;
+	private ProductFacade facade;
+
+	public SaveProductCommand(Product product) {
+		this.product = product;
+		facade = new ProductFacadeImpl();
+	}
+
 	@Override
 	public boolean execute() {
-		return false;
+		return facade.saveProduct(product);
 	}
 
 	@Override
 	public boolean undo() {
-		return false;
+		return facade.removeProduct(product);
 	}
 
 }

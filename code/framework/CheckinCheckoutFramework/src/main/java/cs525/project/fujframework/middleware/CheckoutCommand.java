@@ -7,7 +7,9 @@
 
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.CheckoutRecordEntry;
 import cs525.project.fujframework.core.CheckoutRecordFacade;
+import cs525.project.fujframework.core.CheckoutRecordFacadeImpl;
 
 /**
  * provides concrete command for checkout record save operation
@@ -19,21 +21,23 @@ import cs525.project.fujframework.core.CheckoutRecordFacade;
  */
 public class CheckoutCommand implements Command {
 
-	private CheckoutRecordFacade checkoutRecord;
+	private CheckoutRecordFacade facade;
+	private CheckoutRecordEntry checkoutRecordEntry;
 
-	public CheckoutCommand(CheckoutRecordFacade facade) {
-		this.checkoutRecord = facade;
+	public CheckoutCommand(CheckoutRecordEntry checkoutRecordEntry) {
+		this.facade = new CheckoutRecordFacadeImpl();
+		this.checkoutRecordEntry = checkoutRecordEntry;
 	}
 
 	@Override
 	public boolean execute() {
 
-		return false;
+		return facade.saveCheckoutRecord(checkoutRecordEntry);
 	}
 
 	@Override
 	public boolean undo() {
-		return false;
+		return facade.removeCheckoutRecord(checkoutRecordEntry);
 	}
 
 }

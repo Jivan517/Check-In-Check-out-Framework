@@ -7,6 +7,9 @@
 
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.CustomerFacade;
+import cs525.project.fujframework.core.CustomerFacadeImpl;
+
 /**
  * concrete command for customer save operation
  * 
@@ -17,14 +20,22 @@ package cs525.project.fujframework.middleware;
  */
 public class SaveCustomerCommand implements Command {
 
+	private Customer customer;
+	private CustomerFacade facade;
+
+	public SaveCustomerCommand(Customer customer) {
+		this.customer = customer;
+		this.facade = new CustomerFacadeImpl();
+	}
+
 	@Override
 	public boolean execute() {
-		return false;
+		return facade.saveCustomer(customer);
 	}
 
 	@Override
 	public boolean undo() {
-		return false;
+		return facade.removeCustomer(customer);
 	}
 
 }

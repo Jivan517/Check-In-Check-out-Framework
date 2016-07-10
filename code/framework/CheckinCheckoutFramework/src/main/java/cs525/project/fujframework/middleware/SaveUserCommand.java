@@ -7,6 +7,9 @@
 
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.SysUserFacade;
+import cs525.project.fujframework.core.SysUserFacadeImpl;
+
 /**
  * concrete command for user save operation
  * 
@@ -17,14 +20,22 @@ package cs525.project.fujframework.middleware;
  */
 public class SaveUserCommand implements Command {
 
+	private SysUserFacade facade;
+	private SysUser user;
+
+	public SaveUserCommand(SysUser user) {
+		this.user = user;
+		this.facade = new SysUserFacadeImpl();
+	}
+
 	@Override
 	public boolean execute() {
-		return false;
+		return facade.saveSysUser(user);
 	}
 
 	@Override
 	public boolean undo() {
-		return false;
+		return facade.removeSysUser(user);
 	}
 
 }
