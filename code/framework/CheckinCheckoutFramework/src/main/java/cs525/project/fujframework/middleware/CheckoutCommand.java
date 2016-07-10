@@ -7,6 +7,8 @@
 
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.CheckoutRecordFacade;
+
 /**
  * provides concrete command for checkout record save operation
  * 
