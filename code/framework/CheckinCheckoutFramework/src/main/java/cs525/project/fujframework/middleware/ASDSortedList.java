@@ -20,5 +20,5 @@ public interface ASDSortedList {
 	 *            which is implemented by user application
 	 * @return @{SortedListIterator} type
 	 */
-	public SortedListIterator CreateIterator(Predicate<String> functor);
+	public SortedListIterator createIterator(Predicate<String> functor);
 }
