@@ -6,6 +6,7 @@ package cs525.project.fujframework.core;
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
 import cs525.project.fujframework.middleware.Customer;
+import cs525.project.fujframework.utils.DbHelper;
 
 /**
  * @author paudelumesh
@@ -31,11 +32,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
-		queryBuilder = new StringBuilder();
-		String fullName = customer.getFirstName() + " " + customer.getMiddleName() + " " + customer.getLastName();
-		queryBuilder.append("INSERT INTO customer(customerId, customerName, address)");
-		queryBuilder.append(" values(" + customer.getPersonId() + "," + fullName + "," + customer.getAddress());
-		return this.dbaction.Create(queryBuilder.toString());
+		return this.dbaction.Create(DbHelper.getInsertQuery(customer));
 	}
 
 	/*
@@ -47,7 +44,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	@Override
 	public int removeCustomer(Customer customer) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("");
+		queryBuilder.append("DELETE FROM customer WHERE customerId=" + customer.getPersonId());
 		return this.dbaction.delete(queryBuilder.toString());
 	}
 

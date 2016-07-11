@@ -5,6 +5,7 @@ package cs525.project.fujframework.core;
 
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
+import cs525.project.fujframework.utils.DbHelper;
 
 /**
  * @author paudelumesh
@@ -30,9 +31,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	 */
 	@Override
 	public int saveProduct(Product product) {
-		queryBuilder = new StringBuilder();
-		queryBuilder.append("");
-		return this.dbaction.Create(queryBuilder.toString());
+		return this.dbaction.Create(DbHelper.getInsertQuery(product));
 	}
 
 	/*
@@ -45,7 +44,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	@Override
 	public int removeProduct(Product product) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("");
+		queryBuilder.append("DELETE FROM product WHERE productId=" + product.getProductId());
 		return this.dbaction.delete(queryBuilder.toString());
 	}
 
@@ -57,7 +56,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	@Override
 	public Product getProductById(int productId) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM customer where customerId = " + productId);
+		queryBuilder.append("SELECT * FROM product where productId = " + productId);
 		return (Product) this.dbaction.read(queryBuilder.toString());
 	}
 
