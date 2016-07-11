@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the MIT License (MIT);
  */
 package cs525.project.fujframework.core;
 
@@ -12,8 +14,11 @@ import cs525.project.fujframework.core.dataaccess.DbActionImpl;
 import cs525.project.fujframework.utils.DbHelper;
 
 /**
+ * Facade pattern implementation of CheckoutRecord
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	private DbAction dbaction;
