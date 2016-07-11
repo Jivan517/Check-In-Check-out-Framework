@@ -15,7 +15,7 @@ package cs525.project.fujframework.middleware;
 
 public interface Predicate <T>{
  /**
-  *  predicate interface implemented by user  for sorting 
+  *  predicate interface implemented by user  for filtering person 
   * @param t
   * @return 
   */

@@ -37,7 +37,7 @@ public abstract class Message {
 	 * 
 	 * @param person
 	 */
-	public void setSubject(Person person) {
+	public void setPerson(Person person) {
 		this.person = person;
 	}
 
