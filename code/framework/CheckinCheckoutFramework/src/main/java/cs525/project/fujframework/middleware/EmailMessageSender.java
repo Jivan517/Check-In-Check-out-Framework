@@ -23,10 +23,10 @@ public class EmailMessageSender implements MessageSender {
 	 * @see cs525.project.fujframework.middleware.MessageSender#sendMessage(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void sendMessage(String subject, String body) {
+	public void sendMessage(String body,Person person) {
 		final String username = config.readProperty("username");
 		final String password = config.readProperty("password");
-		//final String to="chari.fisseha@gmail.com";
+	    final String to=person.getEmail();
 
 		Properties props = new Properties();
 		props.put(config.readProperty("user"),username); 

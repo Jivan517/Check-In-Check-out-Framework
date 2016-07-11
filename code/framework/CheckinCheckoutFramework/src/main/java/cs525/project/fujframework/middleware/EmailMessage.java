@@ -23,7 +23,7 @@ public class EmailMessage extends Message {
 
 	@Override
 	public void send() {
-		messageSender.sendMessage(subject, body);
+		messageSender.sendMessage(body,person);
 
 	}
 
