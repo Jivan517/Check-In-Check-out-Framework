@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import cs525.project.fujframework.core.Address;
+
 /**
  * helper class for to genereate insertion query and the update query using
  * object on the fly
@@ -42,7 +44,10 @@ public class DbHelper {
 				if (field.getType().isAssignableFrom(String.class)) {
 					fields.add(field.getName());
 					values.add("'" + value + "'");
+				} else if (field.getType().isAssignableFrom(Address.class)) {
+					// left empty
 				} else {
+
 					fields.add(field.getName());
 					if (value == null)
 						values.add("NULL");

@@ -13,6 +13,9 @@ package cs525.project.fujframework.core;
  * @version 1.0.0
  */
 public class Address {
+	private int addressId;
+	private int personId;
+	private boolean isCustomer;
 	private String streetAddress;
 	private String city;
 	private int zipCode;
@@ -60,6 +63,51 @@ public class Address {
 	 */
 	public String getState() {
 		return state;
+	}
+
+	/**
+	 * @return the addressId
+	 */
+	public int getAddressId() {
+		return addressId;
+	}
+
+	/**
+	 * @param addressId
+	 *            the addressId to set
+	 */
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+
+	/**
+	 * @return the personId
+	 */
+	public int getPersonId() {
+		return personId;
+	}
+
+	/**
+	 * @param personId
+	 *            the personId to set
+	 */
+	public void setPersonId(int personId) {
+		this.personId = personId;
+	}
+
+	/**
+	 * @return the isCustomer
+	 */
+	public boolean isCustomer() {
+		return isCustomer;
+	}
+
+	/**
+	 * @param isCustomer
+	 *            the isCustomer to set
+	 */
+	public void setIsCustomer(boolean isCustomer) {
+		this.isCustomer = isCustomer;
 	}
 
 }

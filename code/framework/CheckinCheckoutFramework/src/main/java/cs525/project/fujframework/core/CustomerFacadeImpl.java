@@ -35,7 +35,14 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
-		return this.dbaction.Create(DbHelper.getInsertQuery(customer));
+		this.dbaction.Create(DbHelper.getInsertQuery(customer));
+
+		int personId = getRecentlyAddedCustomer();
+		Address address = customer.getAddress();
+		address.setPersonId(personId);
+		address.setIsCustomer(true);
+		return this.dbaction.Create(DbHelper.getInsertQuery(address));
+
 	}
 
 	/*
@@ -61,6 +68,12 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM customer where customerId = " + customerId);
 		return (Customer) this.dbaction.read(queryBuilder.toString());
+	}
+
+	private int getRecentlyAddedCustomer() {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT customerId FROM customer ORDER BY customerId LIMIT 1");
+		return (Integer) this.dbaction.read(queryBuilder.toString());
 	}
 
 }
