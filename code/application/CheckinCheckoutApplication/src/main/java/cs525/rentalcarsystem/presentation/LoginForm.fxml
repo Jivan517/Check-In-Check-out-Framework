@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="229.0" prefWidth="352.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <VBox layoutY="183.0" prefHeight="17.0" prefWidth="353.0" />
+      <Text layoutX="144.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="64.724609375">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <TextField id="txtUserName" layoutX="88.0" layoutY="57.0" prefHeight="25.0" prefWidth="191.0" promptText="User Name" />
+      <CheckBox id="chkRemember" layoutX="90.0" layoutY="129.0" mnemonicParsing="false" text="Remember Me" />
+      <PasswordField id="txtPassword" layoutX="88.0" layoutY="92.0" prefHeight="25.0" prefWidth="191.0" promptText="Password" />
+      <Button layoutX="213.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Login" />
+   </children>
+</AnchorPane>
