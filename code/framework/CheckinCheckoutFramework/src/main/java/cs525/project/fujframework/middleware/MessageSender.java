@@ -24,5 +24,5 @@ public interface MessageSender {
 	 * @param subject
 	 * @param body
 	 */
-	public void sendMessage(String subject, String body);
+	public void sendMessage(String body,Person person);
 }
