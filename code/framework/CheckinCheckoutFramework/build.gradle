@@ -17,7 +17,12 @@ version = '1.0.0-SNAPSHOT'
 repositories {
     // Use 'jcenter' for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
+   flatDir {
+       dirs 'src/main/resources'
+   }
     jcenter()
+    
+    
 }
 
 
@@ -33,7 +38,8 @@ dependencies {
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
     
-    compile fileTree(dir: 'libs', include: ['javaee.jar','mail.jar'])
-    //compile files('.src/main/resources/javaee.jar','.src/main/resources/mail.jar')
+    //compile fileTree(dir: 'libs', include: ['javaee.jar','mail.jar'])
+    compile name: 'javaee'
+    compile name: 'mail'
     
 }
