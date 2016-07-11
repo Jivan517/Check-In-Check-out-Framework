@@ -31,12 +31,14 @@ public class SaveProductCommand implements Command {
 
 	@Override
 	public boolean execute() {
-		return facade.saveProduct(product);
+		int affectedRows = facade.saveProduct(product);
+		return affectedRows == 1 ? true : false;
 	}
 
 	@Override
 	public boolean undo() {
-		return facade.removeProduct(product);
+		int affectedRows = facade.removeProduct(product);
+		return affectedRows == 1 ? true : false;
 	}
 
 }

@@ -30,12 +30,15 @@ public class SaveCustomerCommand implements Command {
 
 	@Override
 	public boolean execute() {
-		return facade.saveCustomer(customer);
+		int affectedRows = facade.saveCustomer(customer);
+		return affectedRows == 1 ? true : false;
 	}
 
 	@Override
 	public boolean undo() {
-		return facade.removeCustomer(customer);
+		int affectedRows = facade.removeCustomer(customer);
+		return affectedRows == 1 ? true : false;
+
 	}
 
 }

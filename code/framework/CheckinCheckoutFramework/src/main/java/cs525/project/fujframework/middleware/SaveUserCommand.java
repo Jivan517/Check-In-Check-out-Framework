@@ -30,12 +30,14 @@ public class SaveUserCommand implements Command {
 
 	@Override
 	public boolean execute() {
-		return facade.saveSysUser(user);
+		int affectedRows = facade.saveSysUser(user);
+		return affectedRows == 1 ? true : false;
 	}
 
 	@Override
 	public boolean undo() {
-		return facade.removeSysUser(user);
+		int affectedRows = facade.removeSysUser(user);
+		return affectedRows == 1 ? true : false;
 	}
 
 }
