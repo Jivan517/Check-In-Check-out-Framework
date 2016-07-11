@@ -7,6 +7,7 @@
 
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.Customer;
 import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
 

@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import cs525.project.fujframework.core.CheckoutRecordEntry;
+import cs525.project.fujframework.core.Customer;
 import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
 import cs525.project.fujframework.core.Product;

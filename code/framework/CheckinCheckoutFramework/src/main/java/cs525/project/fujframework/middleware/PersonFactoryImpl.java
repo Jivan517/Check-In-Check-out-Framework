@@ -6,6 +6,8 @@
  */
 package cs525.project.fujframework.middleware;
 
+import cs525.project.fujframework.core.Customer;
+
 /**
  * factory method implementation to create persons
  * 

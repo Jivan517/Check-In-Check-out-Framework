@@ -9,6 +9,7 @@ package cs525.project.fujframework.middleware;
 import java.util.List;
 
 import cs525.project.fujframework.core.CheckoutRecordEntry;
+import cs525.project.fujframework.core.Customer;
 import cs525.project.fujframework.core.Product;
 
 /**
