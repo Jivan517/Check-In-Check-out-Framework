@@ -33,6 +33,6 @@ dependencies {
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
     
-    compile files('.src/main/resources/*.jar')
+    compile files('.src/main/resources/javaee.jar','.src/main/resources/mail.jar')
     
 }
