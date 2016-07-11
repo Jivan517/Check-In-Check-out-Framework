@@ -34,7 +34,7 @@ public interface CheckoutRecordFacade {
 	 * @param checkoutRecordEntry
 	 * @return boolean
 	 */
-	public boolean checkInRecord(CheckoutRecordEntry checkoutRecordEntry);
+	public int checkInRecord(CheckoutRecordEntry checkoutRecordEntry);
 
 	/**
 	 * rolls back the previous checkin request
@@ -42,5 +42,5 @@ public interface CheckoutRecordFacade {
 	 * @param checkoutRecordEntry
 	 * @return boolean
 	 */
-	public boolean undoCheckIn(CheckoutRecordEntry checkoutRecordEntry);
+	public int undoCheckIn(CheckoutRecordEntry checkoutRecordEntry);
 }
