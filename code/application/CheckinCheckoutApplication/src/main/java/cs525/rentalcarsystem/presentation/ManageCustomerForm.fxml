@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="357.0" prefWidth="641.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TableView layoutX="20.0" layoutY="29.0" prefHeight="291.0" prefWidth="606.0">
+        <columns>
+          <TableColumn id="colCustomerName" prefWidth="119.0" text="Customer Name" />
+          <TableColumn id="colEmail" prefWidth="145.0" text="E-mail" />
+            <TableColumn id="colPhone" prefWidth="97.0" text="Phone No" />
+            <TableColumn id="colAddress" prefWidth="217.0" text="Address" />
+        </columns>
+      </TableView>
+      <Button layoutX="565.0" layoutY="323.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Delete" />
+      <Button layoutX="501.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Edit" />
+      <Text layoutX="214.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Customer" wrappingWidth="147.13671875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
