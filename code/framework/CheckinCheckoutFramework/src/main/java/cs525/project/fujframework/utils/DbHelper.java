@@ -11,14 +11,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * helper class for to genereate insertion query and the update query using
+ * object on the fly
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public class DbHelper {
 	/**
+	 * generates the insertion query
 	 * 
 	 * @param object
-	 * @return
+	 * 
+	 * @return insertion query as string
 	 */
 	public static String getInsertQuery(Object object) {
 
@@ -67,9 +73,11 @@ public class DbHelper {
 	}
 
 	/**
+	 * generates the update query
 	 * 
 	 * @param object
-	 * @return
+	 * 
+	 * @return update query as string
 	 */
 	public static String getUpdateQuery(Object object) {
 		StringBuilder query = new StringBuilder();
