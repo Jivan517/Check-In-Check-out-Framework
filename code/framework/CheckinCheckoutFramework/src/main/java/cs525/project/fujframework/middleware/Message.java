@@ -20,7 +20,8 @@ package cs525.project.fujframework.middleware;
 public abstract class Message {
 
 	MessageSender messageSender;
-	String subject, body;
+	String body;
+	Person person;
 
 	/**
 	 * @{Message} constructor with @{MessageSender} as a parameter
@@ -36,8 +37,8 @@ public abstract class Message {
 	 * 
 	 * @param subject
 	 */
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setSubject(Person person) {
+		this.person = person;
 	}
 
 	/**

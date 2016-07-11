@@ -16,10 +16,9 @@ import java.util.stream.Collectors;
  */
 public class DbHelper {
 	/**
-	 * makes the insert query out of an object
 	 * 
 	 * @param object
-	 * @return the insert query of string type
+	 * @return
 	 */
 	public static String getInsertQuery(Object object) {
 
@@ -68,10 +67,9 @@ public class DbHelper {
 	}
 
 	/**
-	 * makes the update query out of an object provided
 	 * 
 	 * @param object
-	 * @return the update query in string format
+	 * @return
 	 */
 	public static String getUpdateQuery(Object object) {
 		StringBuilder query = new StringBuilder();
