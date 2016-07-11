@@ -13,6 +13,7 @@ import java.time.LocalDate;
  * @version 1.0.0
  */
 public class CheckoutRecordEntry {
+	private int recordId;
 	private int productId;
 	private int customerId;
 	private int quantity;
@@ -156,6 +157,20 @@ public class CheckoutRecordEntry {
 	 */
 	public void setRentalFine(double rentalFine) {
 		this.rentalFine = rentalFine;
+	}
+
+	/**
+	 * @return the recordId
+	 */
+	public int getRecordId() {
+		return recordId;
+	}
+
+	/**
+	 * @param recordId the recordId to set
+	 */
+	public void setRecordId(int recordId) {
+		this.recordId = recordId;
 	}
 
 }
