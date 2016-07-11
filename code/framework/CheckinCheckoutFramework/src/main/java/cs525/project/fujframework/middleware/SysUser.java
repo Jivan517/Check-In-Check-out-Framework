@@ -1,4 +1,7 @@
-/**
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the MIT License (MIT);
  * 
  */
 package cs525.project.fujframework.middleware;
@@ -6,8 +9,11 @@ package cs525.project.fujframework.middleware;
 import cs525.project.fujframework.core.Address;
 
 /**
+ * System User implemenatation
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public class SysUser implements Person {
 	private String firstName;
@@ -15,6 +21,7 @@ public class SysUser implements Person {
 	private String middleName;
 	private Address address;
 	private String email;
+	private int sysuserId;
 
 	/*
 	 * (non-Javadoc)
@@ -120,22 +127,24 @@ public class SysUser implements Person {
 		return email;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see cs525.project.fujframework.middleware.Person#setPersonId(int)
 	 */
 	@Override
 	public void setPersonId(int personId) {
-		// TODO Auto-generated method stub
-		
+		this.sysuserId = personId;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see cs525.project.fujframework.middleware.Person#getPersonId()
 	 */
 	@Override
 	public int getPersonId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sysuserId;
 	}
 
 }

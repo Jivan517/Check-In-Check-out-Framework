@@ -1,11 +1,17 @@
-/**
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the MIT License (MIT);
  * 
  */
 package cs525.project.fujframework.middleware;
 
 /**
+ * factory method implementation to create persons
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public class PersonFactoryImpl implements PersonFactory {
 	private static PersonFactory factory = new PersonFactoryImpl();
