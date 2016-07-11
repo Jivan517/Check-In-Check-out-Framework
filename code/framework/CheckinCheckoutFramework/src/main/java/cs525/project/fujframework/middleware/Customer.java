@@ -16,7 +16,6 @@ public class Customer implements Person {
 	private String middleName;
 	private Address address;
 	private String email;
-	private int personId;
 
 	/*
 	 * (non-Javadoc)
@@ -129,7 +128,7 @@ public class Customer implements Person {
 	 */
 	@Override
 	public void setPersonId(int personId) {
-		this.personId = personId;
+		this.customerId = personId;
 	}
 
 	/*
@@ -139,7 +138,7 @@ public class Customer implements Person {
 	 */
 	@Override
 	public int getPersonId() {
-		return personId;
+		return customerId;
 	}
 
 }

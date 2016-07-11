@@ -9,8 +9,10 @@ package cs525.project.fujframework.middleware;
 
 /**
  * provides an interface for factory method
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public interface PersonFactory {
 	/**
