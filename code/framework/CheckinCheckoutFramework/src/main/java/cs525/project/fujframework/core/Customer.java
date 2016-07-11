@@ -4,9 +4,9 @@
  * Licensed under the MIT License (MIT);
  * 
  */
-package cs525.project.fujframework.middleware;
+package cs525.project.fujframework.core;
 
-import cs525.project.fujframework.core.Address;
+import cs525.project.fujframework.middleware.Person;
 
 /**
  * class that represents a customer

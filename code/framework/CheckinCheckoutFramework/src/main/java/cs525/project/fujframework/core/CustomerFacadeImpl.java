@@ -5,7 +5,6 @@ package cs525.project.fujframework.core;
 
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
-import cs525.project.fujframework.middleware.Customer;
 import cs525.project.fujframework.utils.DbHelper;
 
 /**
