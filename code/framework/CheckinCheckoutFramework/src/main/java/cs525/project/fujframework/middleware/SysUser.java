@@ -120,4 +120,22 @@ public class SysUser implements Person {
 		return email;
 	}
 
+	/* (non-Javadoc)
+	 * @see cs525.project.fujframework.middleware.Person#setPersonId(int)
+	 */
+	@Override
+	public void setPersonId(int personId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see cs525.project.fujframework.middleware.Person#getPersonId()
+	 */
+	@Override
+	public int getPersonId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
