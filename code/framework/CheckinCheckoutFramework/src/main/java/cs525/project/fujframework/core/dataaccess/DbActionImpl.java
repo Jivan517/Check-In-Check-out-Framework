@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the MIT License (MIT);
  */
 package cs525.project.fujframework.core.dataaccess;
 
@@ -8,11 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import cs525.project.fujframework.utils.ConfigProperties;
-import cs525.project.fujframework.utils.ConfigPropertiesImpl;
-
 /**
+ * This @{DbActionImpl} class implements @{DbAction} used for performing
+ * database actions by communicating with @{SimpleConnectionPool}
+ * 
  * @author Fish
+ * 
+ * version 1.0.0
  *
  */
 public class DbActionImpl implements DbAction {

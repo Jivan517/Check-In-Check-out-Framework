@@ -11,7 +11,7 @@ package cs525.project.fujframework.middleware;
  * 
  * @author Fish
  * 
- * @since 1.0.0
+ * @version 1.0.0
  */
 public interface ASDSortedList {
 	/**

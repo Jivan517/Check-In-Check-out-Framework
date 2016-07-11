@@ -12,11 +12,11 @@ import cs525.project.fujframework.utils.LoginUtil;
  * @version 1.0.0
  *
  */
-public class CheckOutRecordProtectionProxy implements CheckoutRecordFacade {
+public class CheckoutRecordProtectionProxy implements CheckoutRecordFacade {
 	
     private CheckoutRecordFacade checkOutRecordFacade;
     private boolean isAdmin=false;
-    public CheckOutRecordProtectionProxy() {
+    public CheckoutRecordProtectionProxy() {
     	this.checkOutRecordFacade = new CheckoutRecordFacadeImpl();
     	isAdmin = LoginUtil.isAdmin();
     
