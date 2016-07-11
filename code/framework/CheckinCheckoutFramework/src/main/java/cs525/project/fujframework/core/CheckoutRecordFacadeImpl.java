@@ -3,7 +3,8 @@
  */
 package cs525.project.fujframework.core;
 
-import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import cs525.project.fujframework.core.dataaccess.DbAction;
@@ -61,8 +62,15 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	@Override
 	public int checkInRecord(CheckoutRecordEntry checkoutRecordEntry) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("UPDATE checkoutrecord SET isReturned=true, returnedDate=" + LocalDate.now()
-				+ " WHERE customerId=" + checkoutRecordEntry.getRecordId());
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		try {
+			queryBuilder.append("UPDATE checkoutrecord SET isReturned='true', returnedDate='"
+					+ format.parse(LocalDate.now().toString()) + "' WHERE customerId="
+					+ checkoutRecordEntry.getRecordId());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return this.dbaction.update(queryBuilder.toString());
 	}
 
@@ -76,7 +84,7 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	@Override
 	public int undoCheckIn(CheckoutRecordEntry checkoutRecordEntry) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("UPDATE checkoutrecord SET isReturned=false, returnedDate=NULL" + " WHERE customerId="
+		queryBuilder.append("UPDATE checkoutrecord SET isReturned='false', returnedDate=NULL" + " WHERE customerId="
 				+ checkoutRecordEntry.getRecordId());
 		return this.dbaction.update(queryBuilder.toString());
 	}
