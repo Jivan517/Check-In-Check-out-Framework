@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the MIT License (MIT);
  */
 package cs525.project.fujframework.core;
 
@@ -9,6 +11,7 @@ package cs525.project.fujframework.core;
  * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public interface Product {
 	/**

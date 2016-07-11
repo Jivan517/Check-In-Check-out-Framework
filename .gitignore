@@ -1,5 +1,6 @@
 !.gitignore
 .settings/
+.gradle/
 .metadata/
 RemoteSystemsTempFiles/.project
 docs/~$Tasks.xlsx

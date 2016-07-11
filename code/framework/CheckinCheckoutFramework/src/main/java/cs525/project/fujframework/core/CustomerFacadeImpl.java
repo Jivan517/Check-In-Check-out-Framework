@@ -9,8 +9,11 @@ import cs525.project.fujframework.middleware.Customer;
 import cs525.project.fujframework.utils.DbHelper;
 
 /**
+ * facade pattern implementation of customer
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public class CustomerFacadeImpl implements CustomerFacade {
 	private DbAction dbaction;
