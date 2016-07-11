@@ -10,11 +10,13 @@ import cs525.project.fujframework.core.Address;
  *
  */
 public class Customer implements Person {
+	private int customerId;
 	private String firstName;
 	private String lastName;
 	private String middleName;
 	private Address address;
 	private String email;
+	private int personId;
 
 	/*
 	 * (non-Javadoc)
@@ -118,6 +120,26 @@ public class Customer implements Person {
 	@Override
 	public String getEmail() {
 		return email;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cs525.project.fujframework.middleware.Person#setPersonId(int)
+	 */
+	@Override
+	public void setPersonId(int personId) {
+		this.personId = personId;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cs525.project.fujframework.middleware.Person#getPersonId()
+	 */
+	@Override
+	public int getPersonId() {
+		return personId;
 	}
 
 }

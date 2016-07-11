@@ -19,18 +19,18 @@ public interface CustomerFacade {
 	 * saves the customer into database taking the request using command pattern
 	 * 
 	 * @param customer
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean saveCustomer(Customer customer);
+	public int saveCustomer(Customer customer);
 
 	/**
 	 * removes the customer from database takes the request using command
 	 * pattern
 	 * 
 	 * @param customer
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean removeCustomer(Customer customer);
+	public int removeCustomer(Customer customer);
 
 	/**
 	 * returns the customer based on customer id

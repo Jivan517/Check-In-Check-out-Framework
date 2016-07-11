@@ -19,16 +19,16 @@ public interface SysUserFacade {
 	 * pattern
 	 * 
 	 * @param sysUser
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean saveSysUser(SysUser sysUser);
+	public int saveSysUser(SysUser sysUser);
 
 	/**
 	 * removes the system user from database taking the request from command
 	 * pattern
 	 * 
 	 * @param sysUser
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean removeSysUser(SysUser sysUser);
+	public int removeSysUser(SysUser sysUser);
 }

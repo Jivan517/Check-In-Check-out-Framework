@@ -3,37 +3,62 @@
  */
 package cs525.project.fujframework.core;
 
+import cs525.project.fujframework.core.dataaccess.DbAction;
+import cs525.project.fujframework.core.dataaccess.DbActionImpl;
+
 /**
  * @author paudelumesh
  *
  */
 public class ProductFacadeImpl implements ProductFacade {
+	private DbAction dbaction;
+	StringBuilder queryBuilder;
 
-	/* (non-Javadoc)
-	 * @see cs525.project.fujframework.core.ProductFacade#saveProduct(cs525.project.fujframework.core.Product)
+	/**
+	 * 
 	 */
-	@Override
-	public boolean saveProduct(Product product) {
-		// TODO Auto-generated method stub
-		return false;
+	public ProductFacadeImpl() {
+		this.dbaction = new DbActionImpl();
 	}
 
-	/* (non-Javadoc)
-	 * @see cs525.project.fujframework.core.ProductFacade#removeProduct(cs525.project.fujframework.core.Product)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * cs525.project.fujframework.core.ProductFacade#saveProduct(cs525.project.
+	 * fujframework.core.Product)
 	 */
 	@Override
-	public boolean removeProduct(Product product) {
-		// TODO Auto-generated method stub
-		return false;
+	public int saveProduct(Product product) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("");
+		return this.dbaction.Create(queryBuilder.toString());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * cs525.project.fujframework.core.ProductFacade#removeProduct(cs525.project
+	 * .fujframework.core.Product)
+	 */
+	@Override
+	public int removeProduct(Product product) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("");
+		return this.dbaction.delete(queryBuilder.toString());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see cs525.project.fujframework.core.ProductFacade#getProductById(int)
 	 */
 	@Override
 	public Product getProductById(int productId) {
-		// TODO Auto-generated method stub
-		return null;
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM customer where customerId = " + productId);
+		return (Product) this.dbaction.read(queryBuilder.toString());
 	}
 
 }
