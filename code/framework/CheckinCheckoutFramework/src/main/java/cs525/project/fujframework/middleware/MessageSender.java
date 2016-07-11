@@ -21,8 +21,10 @@ public interface MessageSender {
 	 * Method for sending message the implementation will be made by application
 	 * user
 	 * 
-	 * @param subject
 	 * @param body
+	 *            this is an email body
+	 * @param Person
+	 *            to whom the email is sent
 	 */
-	public void sendMessage(String body,Person person);
+	public void sendMessage(String body, Person person);
 }
