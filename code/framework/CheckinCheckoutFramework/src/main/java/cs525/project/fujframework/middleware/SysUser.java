@@ -16,12 +16,27 @@ import cs525.project.fujframework.core.Address;
  * @version 1.0.0
  */
 public class SysUser implements Person {
+	private int sysuserId;
 	private String firstName;
 	private String lastName;
 	private String middleName;
 	private Address address;
 	private String email;
-	private int sysuserId;
+
+	/**
+	 * @return the sysuserId
+	 */
+	public int getSysuserId() {
+		return sysuserId;
+	}
+
+	/**
+	 * @param sysuserId
+	 *            the sysuserId to set
+	 */
+	public void setSysuserId(int sysuserId) {
+		this.sysuserId = sysuserId;
+	}
 
 	/*
 	 * (non-Javadoc)
