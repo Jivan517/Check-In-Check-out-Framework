@@ -3,30 +3,50 @@
  */
 package cs525.project.fujframework.core;
 
+import cs525.project.fujframework.core.dataaccess.DbAction;
+import cs525.project.fujframework.core.dataaccess.DbActionImpl;
 import cs525.project.fujframework.middleware.SysUser;
+import cs525.project.fujframework.utils.DbHelper;
 
 /**
  * @author paudelumesh
  *
  */
 public class SysUserFacadeImpl implements SysUserFacade {
+	private DbAction dbaction;
+	StringBuilder queryBuilder;
 
-	/* (non-Javadoc)
-	 * @see cs525.project.fujframework.core.SysUserFacade#saveSysUser(cs525.project.fujframework.middleware.SysUser)
+	/**
+	 * 
 	 */
-	@Override
-	public boolean saveSysUser(SysUser sysUser) {
-		// TODO Auto-generated method stub
-		return false;
+	public SysUserFacadeImpl() {
+		this.dbaction = new DbActionImpl();
 	}
 
-	/* (non-Javadoc)
-	 * @see cs525.project.fujframework.core.SysUserFacade#removeSysUser(cs525.project.fujframework.middleware.SysUser)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * cs525.project.fujframework.core.SysUserFacade#saveSysUser(cs525.project.
+	 * fujframework.middleware.SysUser)
 	 */
 	@Override
-	public boolean removeSysUser(SysUser sysUser) {
-		// TODO Auto-generated method stub
-		return false;
+	public int saveSysUser(SysUser sysUser) {
+		return this.dbaction.Create(DbHelper.getInsertQuery(sysUser));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * cs525.project.fujframework.core.SysUserFacade#removeSysUser(cs525.project
+	 * .fujframework.middleware.SysUser)
+	 */
+	@Override
+	public int removeSysUser(SysUser sysUser) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("DELETE FROM sysuser WHERE sysUserId=" + sysUser.getPersonId());
+		return this.dbaction.delete(queryBuilder.toString());
 	}
 
 }

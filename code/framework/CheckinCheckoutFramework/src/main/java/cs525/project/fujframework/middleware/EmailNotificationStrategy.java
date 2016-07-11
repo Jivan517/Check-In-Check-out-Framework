@@ -18,14 +18,13 @@ package cs525.project.fujframework.middleware;
  */
 public class EmailNotificationStrategy implements NotificationStrategy {
 
-	/**
-	 * sends an email notification to customer
-	 * 
-	 * @param person
-	 *            customer for which notification has to be sent
-	 */
+	private Message message;
+
+	public EmailNotificationStrategy() {
+	}
+
 	@Override
-	public void sendNotification(Person person) {
+	public void sendNotification(String message, Person person) {
 
 	}
 

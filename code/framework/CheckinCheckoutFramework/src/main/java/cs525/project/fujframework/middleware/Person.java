@@ -14,6 +14,18 @@ import cs525.project.fujframework.core.Address;
  */
 public interface Person {
 	/**
+	 * sets the person id
+	 * @param personId
+	 */
+	public void setPersonId(int personId);
+
+	/**
+	 * returns the person id
+	 * @return int
+	 */
+	public int getPersonId();
+
+	/**
 	 * sets the first name
 	 * 
 	 * @param firstName
@@ -68,4 +80,18 @@ public interface Person {
 	 * @return Address
 	 */
 	public Address getAddress();
+
+	/**
+	 * sets an email of the person
+	 * 
+	 * @param email
+	 */
+	public void setEmail(String email);
+
+	/**
+	 * returns an email of the person
+	 * 
+	 * @return email as string
+	 */
+	public String getEmail();
 }

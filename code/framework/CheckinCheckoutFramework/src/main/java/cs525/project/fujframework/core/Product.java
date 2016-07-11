@@ -66,4 +66,5 @@ public interface Product {
 	 * @return fine per day as integer
 	 */
 	public int getOverDueFinePerDay();
+
 }

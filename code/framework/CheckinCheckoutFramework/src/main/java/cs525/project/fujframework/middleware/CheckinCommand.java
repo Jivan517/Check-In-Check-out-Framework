@@ -31,13 +31,14 @@ public class CheckinCommand implements Command {
 
 	@Override
 	public boolean execute() {
-
-		return facade.checkInRecord(checkoutRecordEntry);
+		int affectedRows = facade.checkInRecord(checkoutRecordEntry);
+		return affectedRows == 1 ? true : false;
 	}
 
 	@Override
 	public boolean undo() {
-		return facade.undoCheckIn(checkoutRecordEntry);
+		int affectedRows = facade.undoCheckIn(checkoutRecordEntry);
+		return affectedRows == 1 ? true : false;
 	}
 
 }

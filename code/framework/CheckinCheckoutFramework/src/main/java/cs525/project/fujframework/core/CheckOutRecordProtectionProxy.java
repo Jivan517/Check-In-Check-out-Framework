@@ -48,22 +48,22 @@ public class CheckOutRecordProtectionProxy implements CheckoutRecordFacade {
 	 * @see cs525.project.fujframework.core.CheckoutRecordFacade#checkInRecord(cs525.project.fujframework.core.CheckoutRecordEntry)
 	 */
 	@Override
-	public boolean checkInRecord(CheckoutRecordEntry checkoutRecordEntry) {
+	public int checkInRecord(CheckoutRecordEntry checkoutRecordEntry) {
 		if(isAdmin){
 			return checkOutRecordFacade.checkInRecord(checkoutRecordEntry);
 		}
-		return false;
+		return 0;
 	}
 
 	/* (non-Javadoc)
 	 * @see cs525.project.fujframework.core.CheckoutRecordFacade#undoCheckIn(cs525.project.fujframework.core.CheckoutRecordEntry)
 	 */
 	@Override
-	public boolean undoCheckIn(CheckoutRecordEntry checkoutRecordEntry) {
+	public int undoCheckIn(CheckoutRecordEntry checkoutRecordEntry) {
 		if(isAdmin){
 			return checkOutRecordFacade.undoCheckIn(checkoutRecordEntry);
 		}
-		return false;
+		return 0;
 	}
 
 }

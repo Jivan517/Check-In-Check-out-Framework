@@ -15,15 +15,23 @@ public interface ProductFacade {
 	 * saves the product into database
 	 * 
 	 * @param product
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean saveProduct(Product product);
+	public int saveProduct(Product product);
 
 	/**
 	 * removes the product from database
 	 * 
 	 * @param product
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean removeProduct(Product product);
+	public int removeProduct(Product product);
+
+	/**
+	 * returns the product based on product id
+	 * 
+	 * @param productId
+	 * @return the product object
+	 */
+	public Product getProductById(int productId);
 }

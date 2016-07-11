@@ -34,9 +34,9 @@ public class Notifier {
 	 * and due date for checking back in
 	 * 
 	 * @param person
-	 *            person for which the notification needs to be sent
+	 *            customer for which the notification needs to be sent
 	 */
-	public void notifyPerson(Person person) {
-		notificationStrategy.sendNotification(person);
+	public void notifyPerson(String message, Person person) {
+		notificationStrategy.sendNotification(message, person);
 	}
 }
