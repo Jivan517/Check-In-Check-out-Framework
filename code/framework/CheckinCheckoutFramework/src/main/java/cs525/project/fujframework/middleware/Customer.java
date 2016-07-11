@@ -1,4 +1,7 @@
-/**
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the MIT License (MIT);
  * 
  */
 package cs525.project.fujframework.middleware;
@@ -6,8 +9,11 @@ package cs525.project.fujframework.middleware;
 import cs525.project.fujframework.core.Address;
 
 /**
+ * class that represents a customer
+ * 
  * @author paudelumesh
  *
+ * @version 1.0.0
  */
 public class Customer implements Person {
 	private int customerId;
