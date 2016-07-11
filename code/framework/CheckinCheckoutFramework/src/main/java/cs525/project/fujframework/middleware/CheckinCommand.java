@@ -25,7 +25,7 @@ public class CheckinCommand implements Command {
 	private CheckoutRecordEntry checkoutRecordEntry;
 
 	public CheckinCommand(CheckoutRecordEntry checkoutRecordEntry) {
-		this.facade = new CheckoutRecordFacadeImpl();
+		this.facade = new CheckoutRecordProtectionProxy();
 		this.checkoutRecordEntry = checkoutRecordEntry;
 	}
 

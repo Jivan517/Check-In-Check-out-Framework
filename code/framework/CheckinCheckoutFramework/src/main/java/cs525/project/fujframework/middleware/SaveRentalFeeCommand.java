@@ -15,6 +15,8 @@ package cs525.project.fujframework.middleware;
  * @version 1.0.0
  *
  */
+
+// it is not currently in use based on our architecture in this version
 public class SaveRentalFeeCommand implements Command {
 
 	@Override

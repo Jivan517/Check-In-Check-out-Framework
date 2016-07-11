@@ -25,7 +25,7 @@ public class CheckoutCommand implements Command {
 	private CheckoutRecordEntry checkoutRecordEntry;
 
 	public CheckoutCommand(CheckoutRecordEntry checkoutRecordEntry) {
-		this.facade = new CheckoutRecordFacadeImpl();
+		this.facade = new CheckoutRecordProtectionProxy();
 		this.checkoutRecordEntry = checkoutRecordEntry;
 	}
 

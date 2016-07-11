@@ -11,6 +11,8 @@ package cs525.project.fujframework.middleware;
  * provides a class to implement the console logging features
  * 
  * @author Jivan Nepali
+ * 
+ * @version 1.0.0
  *
  */
 public class ConsoleLogger extends LoggerDecorator {
