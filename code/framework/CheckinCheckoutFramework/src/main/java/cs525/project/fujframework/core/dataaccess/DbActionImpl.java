@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * 
  * @author Fish
  * 
- * version 1.0.0
+ *         version 1.0.0
  *
  */
 public class DbActionImpl implements DbAction {
@@ -33,7 +33,6 @@ public class DbActionImpl implements DbAction {
 	public int Create(String query) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs;
 		int countRecord = 0;
 		try {
 
@@ -86,14 +85,11 @@ public class DbActionImpl implements DbAction {
 	public int delete(String query) {
 		PreparedStatement ps = null;
 		Connection con = null;
-		int rs;
 		int countRecord = 0;
 		try {
 
 			con = connection.getConnection();
 			ps = con.prepareStatement(query);
-
-			rs = ps.executeUpdate();
 		} catch (Exception e) {
 
 		} finally {
@@ -113,7 +109,6 @@ public class DbActionImpl implements DbAction {
 	public int update(String query) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		int rs;
 		int recordCounter = 0;
 		try {
 
