@@ -33,9 +33,9 @@ public abstract class Message {
 	}
 
 	/**
-	 * Setter for message subject which is set by user application
+	 * Setter for message Person which is set by user application
 	 * 
-	 * @param subject
+	 * @param person
 	 */
 	public void setSubject(Person person) {
 		this.person = person;
