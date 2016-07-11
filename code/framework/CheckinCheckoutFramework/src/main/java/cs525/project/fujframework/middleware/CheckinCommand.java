@@ -9,7 +9,7 @@ package cs525.project.fujframework.middleware;
 
 import cs525.project.fujframework.core.CheckoutRecordEntry;
 import cs525.project.fujframework.core.CheckoutRecordFacade;
-import cs525.project.fujframework.core.CheckoutRecordFacadeImpl;
+import cs525.project.fujframework.core.CheckoutRecordProtectionProxy;
 
 /**
  * provides concrete command for check in record save operation
