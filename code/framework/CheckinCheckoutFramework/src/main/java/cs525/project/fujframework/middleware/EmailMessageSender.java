@@ -18,7 +18,11 @@ import cs525.project.fujframework.utils.ConfigProperties;
 import cs525.project.fujframework.utils.ConfigPropertiesImpl;
 
 /**
+ * This @{EmailMessageSender} used to send notification email to the user It
+ * implements @{MessageSender} ('Bridge/Implementor') interface
+ * 
  * @author Fish
+ * @version 1.0.0
  *
  */
 public class EmailMessageSender implements MessageSender {
