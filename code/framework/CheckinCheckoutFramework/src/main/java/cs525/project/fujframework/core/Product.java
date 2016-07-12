@@ -52,9 +52,9 @@ public interface Product {
 	/**
 	 * returns the rental fee per day
 	 * 
-	 * @return fee per day as integer
+	 * @return fee per day as double
 	 */
-	public int getRentalFeePerDay();
+	public double getRentalFeePerDay();
 
 	/**
 	 * sets the due fine per day
@@ -66,8 +66,8 @@ public interface Product {
 	/**
 	 * returns the fine rental per day
 	 * 
-	 * @return fine per day as integer
+	 * @return fine per day as double
 	 */
-	public int getOverDueFinePerDay();
+	public double getOverDueFinePerDay();
 
 }
