@@ -16,8 +16,9 @@ import java.time.LocalDate;
  */
 public class CheckoutRecordEntry {
 	private int checkoutRecordEntryId;
-	private int productId;
-	private int customerId;
+	private int productRefId;
+	private int customerRefId;
+	private int personRefId;
 	private int quantity;
 	private LocalDate checkoutDate;
 	private LocalDate dueDate;
@@ -27,33 +28,33 @@ public class CheckoutRecordEntry {
 	private double rentalFine;
 
 	/**
-	 * @return the productId
+	 * @return the productRefId
 	 */
-	public int getProductId() {
-		return productId;
+	public int getProductRefId() {
+		return productRefId;
 	}
 
 	/**
-	 * @param productId
-	 *            the productId to set
+	 * @param productRefId
+	 *            the productRefId to set
 	 */
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProductRefId(int productRefId) {
+		this.productRefId = productRefId;
 	}
 
 	/**
-	 * @return the customerId
+	 * @return the customerRefId
 	 */
-	public int getCustomerId() {
-		return customerId;
+	public int getCustomerRefId() {
+		return customerRefId;
 	}
 
 	/**
-	 * @param customerId
-	 *            the customerId to set
+	 * @param customerRefId
+	 *            the customerRefId to set
 	 */
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerRefId(int customerRefId) {
+		this.customerRefId = customerRefId;
 	}
 
 	/**
@@ -174,6 +175,14 @@ public class CheckoutRecordEntry {
 	 */
 	public void setCheckoutRecordEntryId(int checkoutRecordEntryId) {
 		this.checkoutRecordEntryId = checkoutRecordEntryId;
+	}
+
+	public int getPersonRefId() {
+		return personRefId;
+	}
+
+	public void setPersonRefId(int personRefId) {
+		this.personRefId = personRefId;
 	}
 
 }

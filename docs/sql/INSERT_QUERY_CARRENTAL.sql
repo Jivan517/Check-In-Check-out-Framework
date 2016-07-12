@@ -98,3 +98,15 @@ PRIMARY KEY (checkoutRecordEntryId)
  
         
 )ENGINE=INNODB;
+
+
+ALTER TABLE `carrentalsystem`.`customer` 
+RENAME TO  `carrentalsystem`.`appcustomer` ;
+
+ALTER TABLE `carrentalsystem`.`address` 
+CHANGE COLUMN `personId` `personRefId` INT(11) NOT NULL ;
+
+ALTER TABLE `carrentalsystem`.`checkoutrecordentry` 
+CHANGE COLUMN `customerId` `customerRefId` INT(11) NOT NULL ,
+CHANGE COLUMN `personId` `personRefId` INT(11) NULL ,
+CHANGE COLUMN `carId` `carRefId` INT(11) NOT NULL ;

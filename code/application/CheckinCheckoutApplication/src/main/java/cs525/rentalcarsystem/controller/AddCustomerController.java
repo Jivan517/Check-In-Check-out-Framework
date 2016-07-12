@@ -94,7 +94,7 @@ public class AddCustomerController extends Application {
 			customer.setMiddleName(txtiddleName.getText());
 			customer.setLastName(txtLastName.getText());
 			customer.setEmail(txtEmail.getText());
-			customer.setPhoneNumber(txtPhoneNumber.getText());
+			customer.setPhone(txtPhoneNumber.getText());
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
 					Integer.parseInt(txtZipCode.getText()), txtStreet.getText());
 			customer.setAddress(userAddress);

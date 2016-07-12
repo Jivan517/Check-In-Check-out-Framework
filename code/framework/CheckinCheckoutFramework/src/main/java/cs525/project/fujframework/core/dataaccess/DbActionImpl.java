@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import cs525.project.fujframework.middleware.ConsoleLogger;
 import cs525.project.fujframework.middleware.Logger;
@@ -42,7 +43,7 @@ public class DbActionImpl implements DbAction {
 		try {
 			Logger consoleLogger = new ConsoleLogger(new LoggerImpl());
 			consoleLogger.debug("QUERY: " + query);
-			con = connection.getConnection();
+			con = SimpleConnectionPool.getConnection();
 			consoleLogger.debug("CONNECTION: " + con);
 			ps = con.prepareStatement(query);
 			consoleLogger.debug("PERPAREDSTATEMENT: " + ps);
@@ -63,20 +64,22 @@ public class DbActionImpl implements DbAction {
 	 * String)
 	 */
 	@Override
-	public Object read(String query) {
+	public ResultSet read(String query) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 
-			con = connection.getConnection();
-			ps = con.prepareStatement(query);
+			con = SimpleConnectionPool.getConnection();
+			Statement statement = con.createStatement();
+			// ps = con.prepareStatement(query);
+			rs = statement.executeQuery(query);
 
-			rs = ps.executeQuery();
 		} catch (Exception e) {
 			// false;
 		} finally {
-			cleanupResources(ps, con);
+			if (ps != null && con != null)
+				cleanupResources(ps, con);
 		}
 
 		return rs;
@@ -96,8 +99,10 @@ public class DbActionImpl implements DbAction {
 		int countRecord = 0;
 		try {
 
-			con = connection.getConnection();
+			con = SimpleConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
+
+			countRecord = ps.executeUpdate();
 		} catch (Exception e) {
 
 		} finally {
@@ -120,7 +125,7 @@ public class DbActionImpl implements DbAction {
 		int recordCounter = 0;
 		try {
 
-			con = connection.getConnection();
+			con = SimpleConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
 
 			recordCounter = ps.executeUpdate();

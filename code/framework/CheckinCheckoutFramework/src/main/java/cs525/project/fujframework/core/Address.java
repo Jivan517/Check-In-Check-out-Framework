@@ -14,7 +14,7 @@ package cs525.project.fujframework.core;
  */
 public class Address {
 	private int addressId;
-	private int personId;
+	private int personRefId;
 	private boolean isCustomer;
 	private String streetAddress;
 	private String city;
@@ -81,18 +81,18 @@ public class Address {
 	}
 
 	/**
-	 * @return the personId
+	 * @return the personRefId
 	 */
-	public int getPersonId() {
-		return personId;
+	public int getPersonRefId() {
+		return personRefId;
 	}
 
 	/**
-	 * @param personId
-	 *            the personId to set
+	 * @param personRefId
+	 *            the personRefId to set
 	 */
-	public void setPersonId(int personId) {
-		this.personId = personId;
+	public void setPersonRefId(int personRefId) {
+		this.personRefId = personRefId;
 	}
 
 	/**

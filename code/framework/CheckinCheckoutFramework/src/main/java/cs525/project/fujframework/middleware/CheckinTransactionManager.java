@@ -48,7 +48,7 @@ public class CheckinTransactionManager extends TransactionManager {
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
 			long loanDays = java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(),
 					checkoutRecordEntry.getDueDate());
-			Product product = productFacade.getProductById(checkoutRecordEntry.getProductId());
+			Product product = productFacade.getProductById(checkoutRecordEntry.getProductRefId());
 			double rentalFine = loanDays * product.getOverDueFinePerDay();
 			checkoutRecordEntry.setRentalFee(rentalFine);
 		}
@@ -76,7 +76,7 @@ public class CheckinTransactionManager extends TransactionManager {
 	@Override
 	protected void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries) {
 		double totalFine = 0;
-		int customerId = checkoutRecordEntries.get(0).getCustomerId();
+		int customerId = checkoutRecordEntries.get(0).getCustomerRefId();
 		Customer customer = customerFacade.getCustomerById(customerId);
 
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {

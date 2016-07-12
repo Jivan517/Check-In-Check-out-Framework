@@ -42,7 +42,7 @@ public class DbHelper {
 
 				value = field.get(object);
 
-				if (field.getName().contains("Id")) {
+				if (field.getName().contains("Id") && !field.getName().contains("RefId")) {
 					// left empty
 				} else if (field.getType().isAssignableFrom(String.class)) {
 					fields.add(field.getName());
@@ -93,6 +93,7 @@ public class DbHelper {
 		query.append("UPDATE " + object.getClass().getSimpleName() + " SET ");
 		List<Field> fieldsCollection = ReflectionUtil.getAllFields(new ArrayList<Field>(), object.getClass());
 
+		String primaryKeyField = object.getClass().getSimpleName() + "Id";
 		for (Field field : fieldsCollection) {
 			// may sometimes need to make the modifier accessible
 			field.setAccessible(true);
@@ -100,8 +101,10 @@ public class DbHelper {
 			try {
 
 				value = field.get(object);
-				if (field.getName().equals(object.getClass().getSimpleName() + "Id")) {
+				if (field.getName().equals(object.getClass().getSimpleName() + "Id")
+						|| (field.getName().contains("Id") && !field.getName().contains("RefId"))) {
 					idValue = (int) value;
+					primaryKeyField = field.getName();
 				} else if (field.getType().isAssignableFrom(String.class)) {
 					query.append(field.getName() + " = '" + value + "'");
 				} else {
@@ -118,7 +121,7 @@ public class DbHelper {
 			}
 
 		}
-		query.append(" WHERE " + object.getClass().getSimpleName() + "Id = " + idValue);
+		query.append(" WHERE " + primaryKeyField + "= " + idValue);
 		return query.toString();
 	}
 

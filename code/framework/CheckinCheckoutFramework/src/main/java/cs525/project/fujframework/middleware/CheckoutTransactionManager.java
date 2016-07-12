@@ -64,7 +64,7 @@ public class CheckoutTransactionManager extends TransactionManager {
 	protected List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(
 			List<CheckoutRecordEntry> checkoutRecordEntries) {
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
-			Product product = productFacade.getProductById(checkoutRecordEntry.getProductId());
+			Product product = productFacade.getProductById(checkoutRecordEntry.getProductRefId());
 			double rentalFee = checkoutRecordEntry.getQuantity() * product.getRentalFeePerDay();
 			checkoutRecordEntry.setRentalFee(rentalFee);
 		}
@@ -81,7 +81,7 @@ public class CheckoutTransactionManager extends TransactionManager {
 	@Override
 	protected void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries) {
 		double totalFee = 0;
-		int customerId = checkoutRecordEntries.get(0).getCustomerId();
+		int customerId = checkoutRecordEntries.get(0).getCustomerRefId();
 		LocalDate dueDate = checkoutRecordEntries.get(0).getDueDate();
 		Customer customer = customerFacade.getCustomerById(customerId);
 		Set<String> productNames = new TreeSet<String>();
@@ -89,7 +89,7 @@ public class CheckoutTransactionManager extends TransactionManager {
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
 			totalFee += checkoutRecordEntry.getRentalFine();
 			productNames
-					.add(productFacade.getProductById(checkoutRecordEntries.get(0).getProductId()).getProductName());
+					.add(productFacade.getProductById(checkoutRecordEntries.get(0).getProductRefId()).getProductName());
 		}
 
 		StringBuilder message = new StringBuilder();
