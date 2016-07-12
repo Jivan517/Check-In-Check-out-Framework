@@ -73,7 +73,7 @@ public class ApplicationUserController extends Application {
 			user.setUserName(userName);
 			user.setPassword(password);
 			user.setEmail(email);
-			user.setPhoneNo(phone);
+			user.setPhone(phone);
 
 			command.saveSysUser(user);
 		}

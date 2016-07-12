@@ -21,7 +21,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("AddCustomerForm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("ApplicationUserForm.fxml"));
 		Scene scene = new Scene(root);
 
 		primaryStage.setResizable(false);
