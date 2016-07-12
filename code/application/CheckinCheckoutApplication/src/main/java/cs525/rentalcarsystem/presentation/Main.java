@@ -21,8 +21,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("AddCustomerForm.fxml"));
-		//Parent root = FXMLLoader.load(getClass().getResource("ApplicationUserForm.fxml"));
+//		Parent root = FXMLLoader.load(getClass().getResource("AddCustomerForm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("ApplicationUserForm.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
 
