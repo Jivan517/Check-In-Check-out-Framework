@@ -5,59 +5,82 @@
  */
 package cs525.rentalcarsystem.controller;
 
+import cs525.rentalcarsystem.backend.AppCustomer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * This class used to manage customers like edit and delete
- *  selected customer form the grid
+ * This class used to manage customers like edit and delete selected customer
+ * form the grid
+ * 
  * @author Fish
  *
  */
 public class ManageCustomerController extends Application {
-	
-	@FXML private Button btnDelete;
-	@FXML private Button btnEdit;
+
+	@FXML
+	private TableView<AppCustomer> taview = new TableView<>();
+	@FXML
+	private Button btnDelete;
+	@FXML
+	private Button btnEdit;
+	@FXML
+	private Text txtErrorMessage;
+	private AppCustomer selectedCustomer;
+
+	public ManageCustomerController() {
+
+	}
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root= FXMLLoader.load(getClass().getResource("ManageCustomerForm.fxml"));
+		FXMLLoader loader = FXMLLoader.load(getClass().getResource("ManageCustomerForm.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
 		primaryStage.setTitle("Manage Customer ");
-		Scene scene=new Scene(root);
+		Scene scene = new Scene(page);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
-		btnEdit.setOnAction(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
-		btnDelete.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-				
-		
 	}
-	
-	
-	
-	
+
+	@FXML
+	public void editCustomer() {
+		selectedCustomer = taview.getSelectionModel().getSelectedItem();
+		if (selectedCustomer != null) {
+
+			
+			
+			txtErrorMessage.setText("Customer Successfully Updated!");
+			txtErrorMessage.setFill(Color.GREEN);
+		} else {
+			txtErrorMessage.setText("Please Select Customer to Edit!");
+			txtErrorMessage.setFill(Color.RED);
+		}
+
+	}
+
+	@FXML
+	public void deleteCustomer() {
+		selectedCustomer = taview.getSelectionModel().getSelectedItem();
+		if (selectedCustomer != null) {
+            
+			
+			txtErrorMessage.setText("Customer Successfully Deleted!");
+			txtErrorMessage.setFill(Color.GREEN);
+			
+		} else {
+			txtErrorMessage.setText("Please Select Customer to Delete!");
+			txtErrorMessage.setFill(Color.RED);
+		}
+
+	}
 
 }
