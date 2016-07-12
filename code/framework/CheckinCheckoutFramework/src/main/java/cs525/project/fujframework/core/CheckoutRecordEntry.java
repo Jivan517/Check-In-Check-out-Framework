@@ -15,7 +15,7 @@ import java.time.LocalDate;
  * @version 1.0.0
  */
 public class CheckoutRecordEntry {
-	private int recordId;
+	private int checkoutRecordEntryId;
 	private int productId;
 	private int customerId;
 	private int quantity;
@@ -162,17 +162,18 @@ public class CheckoutRecordEntry {
 	}
 
 	/**
-	 * @return the recordId
+	 * @return the checkoutRecordEntryId
 	 */
-	public int getRecordId() {
-		return recordId;
+	public int getCheckoutRecordEntryId() {
+		return checkoutRecordEntryId;
 	}
 
 	/**
-	 * @param recordId the recordId to set
+	 * @param checkoutRecordEntryId
+	 *            the checkoutRecordEntryId to set
 	 */
-	public void setRecordId(int recordId) {
-		this.recordId = recordId;
+	public void setCheckoutRecordEntryId(int checkoutRecordEntryId) {
+		this.checkoutRecordEntryId = checkoutRecordEntryId;
 	}
 
 }

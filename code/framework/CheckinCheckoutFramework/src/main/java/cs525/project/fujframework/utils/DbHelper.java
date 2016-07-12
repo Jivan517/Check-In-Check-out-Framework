@@ -33,7 +33,8 @@ public class DbHelper {
 		List<String> fields = new ArrayList<>();
 		List<String> values = new ArrayList<>();
 
-		for (Field field : object.getClass().getDeclaredFields()) {
+		List<Field> fieldsCollection = ReflectionUtil.getAllFields(new ArrayList<Field>(), object.getClass());
+		for (Field field : fieldsCollection) {
 			// may sometimes need to make the modifier accessible
 			field.setAccessible(true);
 			Object value = null;
@@ -41,7 +42,9 @@ public class DbHelper {
 
 				value = field.get(object);
 
-				if (field.getType().isAssignableFrom(String.class)) {
+				if (field.getName().contains("Id")) {
+					// left empty
+				} else if (field.getType().isAssignableFrom(String.class)) {
 					fields.add(field.getName());
 					values.add("'" + value + "'");
 				} else if (field.getType().isAssignableFrom(Address.class)) {
@@ -88,18 +91,18 @@ public class DbHelper {
 		StringBuilder query = new StringBuilder();
 		int idValue = 0;
 		query.append("UPDATE " + object.getClass().getSimpleName() + " SET ");
+		List<Field> fieldsCollection = ReflectionUtil.getAllFields(new ArrayList<Field>(), object.getClass());
 
-		for (Field field : object.getClass().getDeclaredFields()) {
+		for (Field field : fieldsCollection) {
 			// may sometimes need to make the modifier accessible
 			field.setAccessible(true);
 			Object value = null;
 			try {
 
 				value = field.get(object);
-				if (field.getName().equals(object.getClass().getSimpleName() + "Id"))
+				if (field.getName().equals(object.getClass().getSimpleName() + "Id")) {
 					idValue = (int) value;
-
-				if (field.getType().isAssignableFrom(String.class)) {
+				} else if (field.getType().isAssignableFrom(String.class)) {
 					query.append(field.getName() + " = '" + value + "'");
 				} else {
 					if (value == null)
