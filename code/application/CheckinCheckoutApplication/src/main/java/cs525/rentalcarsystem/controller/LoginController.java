@@ -42,7 +42,7 @@ public class LoginController extends Application {
 		});
 		
 	}
-	
+	@FXML
 	public void login(){
 		
 		

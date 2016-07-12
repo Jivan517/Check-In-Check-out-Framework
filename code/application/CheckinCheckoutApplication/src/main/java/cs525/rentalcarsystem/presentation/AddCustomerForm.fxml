@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
@@ -43,5 +44,6 @@
       <Button id="btnCancel" fx:id="btnCancel" layoutX="487.0" layoutY="308.0" mnemonicParsing="false" onAction="#cancelHandler" prefHeight="25.0" prefWidth="72.0" text="Cancel" />
       <Label layoutX="60.0" layoutY="158.0" prefHeight="17.0" prefWidth="58.0" text="Phone" />
       <TextField id="txtPhone" fx:id="txtPhoneNumber" layoutX="145.0" layoutY="154.0" promptText="Phone" />
+      <Text fx:id="txtErrorMessag" layoutX="325.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.33039647577095" />
    </children>
 </AnchorPane>
