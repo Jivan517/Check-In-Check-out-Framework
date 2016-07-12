@@ -3,7 +3,7 @@ package cs525.rentalcarsystem.controller;
 import cs525.project.fujframework.core.Product;
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
-import cs525.rentalcarsystem.backend.Car;
+import cs525.rentalcarsystem.model.Car;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

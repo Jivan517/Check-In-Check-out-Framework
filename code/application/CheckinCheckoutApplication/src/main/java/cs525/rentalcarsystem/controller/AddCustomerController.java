@@ -6,8 +6,8 @@
 package cs525.rentalcarsystem.controller;
 import cs525.project.fujframework.middleware.Command;
 import cs525.project.fujframework.middleware.SaveCustomerCommand;
-import cs525.rentalcarsystem.backend.Address;
-import cs525.rentalcarsystem.backend.AppCustomer;
+import cs525.rentalcarsystem.model.Address;
+import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.presentation.Main;
 import javafx.application.Application;
 import javafx.fxml.FXML;

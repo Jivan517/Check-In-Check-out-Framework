@@ -3,7 +3,7 @@
  *
  * Licensed under the MIT License (MIT);
  */
-package cs525.rentalcarsystem.backend;
+package cs525.rentalcarsystem.model;
 /**
  * This address class extends fujframework address class
  * and passes application user address information to framework address class

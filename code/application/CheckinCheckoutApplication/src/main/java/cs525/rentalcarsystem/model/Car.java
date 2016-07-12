@@ -1,9 +1,8 @@
-package cs525.rentalcarsystem.backend;
+package cs525.rentalcarsystem.model;
 
 import cs525.project.fujframework.core.Product;
 
 public class Car implements Product {
-
 	private int productId;
 	private String name;
 	private String model;

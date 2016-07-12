@@ -5,7 +5,7 @@
  */
 package cs525.rentalcarsystem.controller;
 
-import cs525.rentalcarsystem.backend.AppCustomer;
+import cs525.rentalcarsystem.model.AppCustomer;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

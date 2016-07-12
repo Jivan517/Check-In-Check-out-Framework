@@ -3,7 +3,7 @@
  *
  * Licensed under the MIT License (MIT);
  */
-package cs525.rentalcarsystem.backend;
+package cs525.rentalcarsystem.model;
 import cs525.project.fujframework.core.Customer;
 /**
  * This class is Application User which extends fujframework customer class
