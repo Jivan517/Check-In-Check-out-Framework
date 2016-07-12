@@ -1,0 +1,7 @@
+.color-error {
+	-fx-text-fill: #F00;
+}
+
+.color-success {
+	-fx-text-fill: #0F0;
+}

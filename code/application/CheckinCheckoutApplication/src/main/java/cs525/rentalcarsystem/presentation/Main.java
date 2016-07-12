@@ -23,6 +23,7 @@ public class Main extends Application {
 
 		Parent root = FXMLLoader.load(getClass().getResource("ApplicationUserForm.fxml"));
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
 
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Checkout Form - Car List");
