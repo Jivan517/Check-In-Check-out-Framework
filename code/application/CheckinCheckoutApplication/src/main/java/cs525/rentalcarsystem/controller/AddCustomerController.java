@@ -87,7 +87,7 @@ public class AddCustomerController extends Application {
 	 * SaveCustomerCommand command
 	 */
 	@FXML
-	public void addCustomer() {
+	protected void addCustomer() {
 		if(!txtFirstName.getText().isEmpty()){
 			AppCustomer customer = new AppCustomer();
 			customer.setFirstName(txtFirstName.getText());
@@ -113,7 +113,7 @@ public class AddCustomerController extends Application {
 	 * Action will be performed when the user click cancel button
 	 */
 	@FXML
-	public void cancelHandler() {
+	protected void cancelHandler() {
        
 	}
 	

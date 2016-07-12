@@ -32,6 +32,9 @@ PRIMARY KEY (addressid)
         
 )ENGINE=INNODB;
 
+ALTER TABLE `carrentalsystem`.`Address` 
+MODIFY  COLUMN `zipCode` int 
+
 CREATE TABLE Customer
 (
 customerId int NOT NULL AUTO_INCREMENT,
