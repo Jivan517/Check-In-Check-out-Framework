@@ -92,6 +92,7 @@ public class DbHelper {
 		int idValue = 0;
 		query.append("UPDATE " + object.getClass().getSimpleName() + " SET ");
 		List<Field> fieldsCollection = ReflectionUtil.getAllFields(new ArrayList<Field>(), object.getClass());
+		List<String> fields = new ArrayList<>();
 
 		String primaryKeyField = object.getClass().getSimpleName() + "Id";
 		for (Field field : fieldsCollection) {
@@ -106,12 +107,15 @@ public class DbHelper {
 					idValue = (int) value;
 					primaryKeyField = field.getName();
 				} else if (field.getType().isAssignableFrom(String.class)) {
-					query.append(field.getName() + " = '" + value + "'");
+					fields.add(field.getName() + " = '" + value + "'");
+				} else if (field.getType().isAssignableFrom(Address.class)) {
+					// left empty
 				} else {
-					if (value == null)
-						query.append(field.getName() + " = NULL");
-					else
-						query.append(field.getName() + " = " + value.toString());
+					if (value == null) {
+						fields.add(field.getName() + " = NULL");
+					} else {
+						fields.add(field.getName() + " = " + value.toString());
+					}
 				}
 
 			} catch (IllegalArgumentException e) {
@@ -121,6 +125,9 @@ public class DbHelper {
 			}
 
 		}
+
+		String fieldQuery = fields.stream().collect(Collectors.joining(","));
+		query.append(fieldQuery);
 		query.append(" WHERE " + primaryKeyField + "= " + idValue);
 		return query.toString();
 	}
