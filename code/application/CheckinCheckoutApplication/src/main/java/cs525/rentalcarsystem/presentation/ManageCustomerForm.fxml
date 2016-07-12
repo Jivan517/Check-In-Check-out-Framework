@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="357.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ManageCustomerController">
+<AnchorPane prefHeight="357.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ManageCustomerController">
    <children>
-      <TableView layoutX="20.0" layoutY="29.0" prefHeight="291.0" prefWidth="606.0">
+      <TableView fx:id="tblView" layoutX="20.0" layoutY="29.0" prefHeight="291.0" prefWidth="606.0">
         <columns>
-          <TableColumn id="colCustomerName" prefWidth="119.0" text="Customer Name" />
-          <TableColumn id="colEmail" prefWidth="145.0" text="E-mail" />
-            <TableColumn id="colPhone" prefWidth="97.0" text="Phone No" />
-            <TableColumn id="colAddress" prefWidth="217.0" text="Address" />
+          <TableColumn id="colCustomerName" fx:id="colCustomerName" prefWidth="152.0" text="Customer Name" />
+          <TableColumn id="colEmail" fx:id="colEmail" prefWidth="159.0" text="E-mail" />
+            <TableColumn id="colPhone" fx:id="colPhoneNumber" prefWidth="114.0" text="Phone No" />
+            <TableColumn id="colAddress" fx:id="colAddress" prefWidth="153.0" text="Address" />
         </columns>
       </TableView>
       <Button fx:id="btnDelete" layoutX="565.0" layoutY="323.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="25.0" prefWidth="59.0" text="Delete" />
