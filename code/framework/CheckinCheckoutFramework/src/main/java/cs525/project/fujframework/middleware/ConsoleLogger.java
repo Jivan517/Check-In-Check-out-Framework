@@ -47,6 +47,6 @@ public class ConsoleLogger extends LoggerDecorator {
 	}
 
 	private void logToConsole(String message) {
-		logToConsole(message);
+		System.out.println(message);
 	}
 }

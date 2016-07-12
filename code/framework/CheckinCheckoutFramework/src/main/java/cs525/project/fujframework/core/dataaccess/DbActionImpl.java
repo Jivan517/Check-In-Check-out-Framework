@@ -10,6 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import cs525.project.fujframework.middleware.ConsoleLogger;
+import cs525.project.fujframework.middleware.Logger;
+import cs525.project.fujframework.middleware.LoggerDecorator;
+import cs525.project.fujframework.middleware.LoggerImpl;
+
 /**
  * This @{DbActionImpl} class implements @{DbAction} used for performing
  * database actions by communicating with @{SimpleConnectionPool}
@@ -35,15 +40,18 @@ public class DbActionImpl implements DbAction {
 		PreparedStatement ps = null;
 		int countRecord = 0;
 		try {
-
+			Logger consoleLogger = new ConsoleLogger(new LoggerImpl());
+			consoleLogger.debug("QUERY: " + query);
 			con = connection.getConnection();
+			consoleLogger.debug("CONNECTION: " + con);
 			ps = con.prepareStatement(query);
+			consoleLogger.debug("PERPAREDSTATEMENT: " + ps);
 
 			countRecord = ps.executeUpdate();
 		} catch (Exception e) {
 
 		} finally {
-			cleanupResources(ps, con);
+			// cleanupResources(ps, con);
 		}
 		return countRecord;
 	}
