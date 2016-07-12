@@ -59,7 +59,7 @@ public class ManageCustomerController extends Application {
 	}
 
 	@FXML
-	public void editCustomer() {
+	protected void editCustomer() {
 		selectedCustomer = taview.getSelectionModel().getSelectedItem();
 		if (selectedCustomer != null) {
 
@@ -75,7 +75,7 @@ public class ManageCustomerController extends Application {
 	}
 
 	@FXML
-	public void deleteCustomer() {
+	protected void deleteCustomer() {
 		selectedCustomer = taview.getSelectionModel().getSelectedItem();
 		if (selectedCustomer != null) {
             
