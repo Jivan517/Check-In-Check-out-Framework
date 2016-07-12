@@ -55,6 +55,9 @@ public class AddCustomerController extends Application {
 	private Button btnSave;
 	@FXML
 	private Button btnCancel;
+	
+	private Stage primaryStage;
+	private Stage rootStage = new Stage();
 
 	private Command command;
 	public AddCustomerController() {
@@ -63,7 +66,7 @@ public class AddCustomerController extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		/*this.primaryStage = primaryStage;
+		this.primaryStage = primaryStage;
 		this.rootStage = primaryStage;
 		this.primaryStage.setTitle("Add Customer Form");
 		try {
@@ -76,7 +79,7 @@ public class AddCustomerController extends Application {
 			primaryStage.show();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}*/
+		}
 	}
 
 	/**
@@ -107,7 +110,7 @@ public class AddCustomerController extends Application {
 	}
 
 	/**
-	 * Action will be performed when the user click cance button
+	 * Action will be performed when the user click cancel button
 	 */
 	@FXML
 	public void cancelHandler() {

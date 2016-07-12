@@ -6,13 +6,13 @@
 package cs525.rentalcarsystem.controller;
 import java.awt.TextField;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -26,24 +26,29 @@ public class LoginController extends Application {
 	@FXML private TextField txtUserName;
 	@FXML private TextField txtPassword;
 	@FXML private Button btnLogin;
+	@FXML private Text txtErrorMessage;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root= FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
+		FXMLLoader loader= FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
 		primaryStage.setTitle("Login ");
-		Scene scene=new Scene(root);
+		Scene scene=new Scene(page);
 		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-		btnLogin.setOnAction(new EventHandler<ActionEvent>() {			
-			@Override
-			public void handle(ActionEvent event) {
-				
-			}
-		});
-		
+		primaryStage.show();		
 	}
+	/**
+	 * This method authenticates user if the user name and password are correct
+	 * if not it displays appropriate message
+	 */
 	@FXML
 	public void login(){
+		if(!txtUserName.getText().isEmpty()&& !txtPassword.getText().isEmpty()){
+			
+		}
+		else{
+			txtErrorMessage.setFill(Color.RED);
+			txtErrorMessage.setText("Invalid User Name and Password!!");
+		}
 		
 		
 	}
