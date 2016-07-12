@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -34,8 +35,14 @@ public class ManageCustomerController extends Application {
 	private Button btnEdit;
 	@FXML
 	private Text txtErrorMessage;
+	
+	@FXML TableView tblView;
+	@FXML TableColumn colCustomerName;
+	@FXML TableColumn colEmail;
+	@FXML TableColumn colPhoneNumber;
+	@FXML TableColumn colAddress;
+	
 	private AppCustomer selectedCustomer;
-
 	public ManageCustomerController() {
 
 	}
