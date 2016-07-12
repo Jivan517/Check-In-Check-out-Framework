@@ -22,7 +22,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		Parent root = FXMLLoader.load(getClass().getResource("CarForm.fxml"));
+		//Parent root = FXMLLoader.load(getClass().getResource("ApplicationUserForm.fxml"));
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
 
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Checkout Form - Car List");

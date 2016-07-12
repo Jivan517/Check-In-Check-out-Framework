@@ -8,8 +8,11 @@ package cs525.rentalcarsystem.controller;
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
 import cs525.rentalcarsystem.model.ApplicationUser;
+import cs525.rentalcarsystem.model.FormException;
+import cs525.rentalcarsystem.model.Validator;
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -35,6 +38,8 @@ public class ApplicationUserController extends Application {
 	private TextField emailTxt;
 	@FXML
 	private TextField phoneTxt;
+	@FXML
+	private Label successMsgLabel;
 
 	private CommandManager command;
 
@@ -60,24 +65,59 @@ public class ApplicationUserController extends Application {
 
 	@FXML
 	void onSaveBtnClicked() {
-		String firstName = firstNameTxt.getText().toString(), middleName = middleNameTxt.getText().toString(),
-				lastName = lastNameTxt.getText().toString(), userName = usernameTxt.getText().toString(),
-				password = passwordTxt.getText().toString(), confirmPassword = confirmPasswordTxt.getText().toString(),
-				email = emailTxt.getText().toString(), phone = phoneTxt.getText().toString();
 
-		if (password.equals(confirmPassword)) {
-			ApplicationUser user = new ApplicationUser();
-			user.setFirstName(firstName);
-			user.setMiddleName(middleName);
-			user.setLastName(lastName);
-			user.setUserName(userName);
-			user.setPassword(password);
-			user.setEmail(email);
-			user.setPhoneNo(phone);
+		try {
+			Validator.validateEmptiness(firstNameTxt);
+			Validator.validateEmptiness(lastNameTxt);
+			Validator.validateEmptiness(passwordTxt);
+			Validator.validateEmptiness(confirmPasswordTxt);
+			Validator.validateNumeric(phoneTxt);
 
-			command.saveSysUser(user);
+			String firstName = firstNameTxt.getText().toString(), middleName = middleNameTxt.getText().toString(),
+					lastName = lastNameTxt.getText().toString(), userName = usernameTxt.getText().toString(),
+					password = passwordTxt.getText().toString(),
+					confirmPassword = confirmPasswordTxt.getText().toString(), email = emailTxt.getText().toString(),
+					phone = phoneTxt.getText().toString();
+
+			if (password.equals(confirmPassword)) {
+				ApplicationUser user = new ApplicationUser();
+				user.setFirstName(firstName);
+				user.setMiddleName(middleName);
+				user.setLastName(lastName);
+				user.setUserName(userName);
+				user.setPassword(password);
+				user.setEmail(email);
+				user.setPhone(phone);
+
+				if (command.saveSysUser(user)) {
+					successMsgLabel.setText("User added successfully !!!");
+					successMsgLabel.getStyleClass().add("color-success");
+				} else {
+					successMsgLabel.setText("There is an error while adding user !!!");
+					successMsgLabel.getStyleClass().add("color-error");
+					clearFields();
+				}
+			} else {
+				successMsgLabel.setText("Password Mismatch !!!");
+				successMsgLabel.getStyleClass().add("color-error");
+				clearFields();
+			}
+		} catch (FormException e) {
+			successMsgLabel.setText(e.getMessage());
+			successMsgLabel.getStyleClass().add("color-error");
 		}
 
+	}
+
+	void clearFields() {
+		firstNameTxt.setText("");
+		middleNameTxt.setText("");
+		lastNameTxt.setText("");
+		usernameTxt.setText("");
+		passwordTxt.setText("");
+		confirmPasswordTxt.setText("");
+		emailTxt.setText("");
+		phoneTxt.setText("");
 	}
 
 }
