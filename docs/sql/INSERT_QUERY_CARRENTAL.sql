@@ -2,7 +2,7 @@ create schema carrentalsystem;
 
 use carrentalsystem;
 
-/*DROP table APplicationUser
+/*DROP table ApplicationUser
 
 */
 
@@ -15,6 +15,13 @@ middleName varchar(255),
 phone varchar(255),
 email varchar(255),
 PRIMARY KEY (sysUserId)
+);
+
+ALTER TABLE carrentalsystem.ApplicationUser ADD COLUMN 
+(
+username VARCHAR(30) NOT NULL, 
+password varchar(255) NOT NULL,
+isadmin VARCHAR (10) NOT NULL DEFAULT 'false'
 );
 
 CREATE TABLE Address
