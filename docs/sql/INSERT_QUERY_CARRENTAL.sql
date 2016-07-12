@@ -15,7 +15,7 @@ middleName varchar(255),
 phone varchar(255),
 email varchar(255),
 PRIMARY KEY (sysUserId)
-)
+);
 
 CREATE TABLE Address
 (
