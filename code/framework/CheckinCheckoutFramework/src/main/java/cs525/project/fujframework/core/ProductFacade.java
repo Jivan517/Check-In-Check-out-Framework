@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+
 /**
  * provides the higher-level interface for product subsystems
  * 
@@ -36,4 +38,10 @@ public interface ProductFacade {
 	 * @return the product object
 	 */
 	public Product getProductById(int productId);
+	
+	/**
+	 * @param tableName
+	 * @return resultset object for all products
+	 */
+	public ResultSet getAllProduct(Class<?> tableName);
 }

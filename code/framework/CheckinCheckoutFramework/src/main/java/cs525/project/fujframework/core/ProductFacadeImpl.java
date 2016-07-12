@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
 import cs525.project.fujframework.utils.DbHelper;
@@ -63,6 +65,13 @@ public class ProductFacadeImpl implements ProductFacade {
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM product where productId = " + productId);
 		return (Product) this.dbaction.read(queryBuilder.toString());
+	}
+
+	@Override
+	public ResultSet getAllProduct(Class<?> tableName) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 }

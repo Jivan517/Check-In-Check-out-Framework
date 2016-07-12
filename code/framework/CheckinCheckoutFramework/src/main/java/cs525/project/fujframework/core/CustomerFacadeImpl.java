@@ -76,8 +76,11 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public Customer getCustomerById(int customerId) {
+
+		// TODO: Generalize the table name value
+		String tableName = "AppCustomer";
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM customer where customerId = " + customerId);
+		queryBuilder.append("SELECT * FROM " + tableName + " where customerId = " + customerId);
 		return (Customer) this.dbaction.read(queryBuilder.toString());
 	}
 
@@ -100,6 +103,14 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		}
 
 		return customerId;
+	}
+
+	@Override
+	public ResultSet getAllCustomers(Class<?> tableName) {
+
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 }
