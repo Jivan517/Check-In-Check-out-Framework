@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="750.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.CarController">
 	<center>
 		<HBox prefHeight="562.0" prefWidth="581.0" BorderPane.alignment="CENTER">
 			<children>
@@ -117,7 +117,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" />
                         <HBox prefHeight="244.0" prefWidth="253.0" />
-                        <TextField fx:id="mileage" prefHeight="42.0" prefWidth="19.0" promptText="Mileage">
+                        <TextField fx:id="mileageTxt" prefHeight="42.0" prefWidth="19.0" promptText="Mileage">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin>

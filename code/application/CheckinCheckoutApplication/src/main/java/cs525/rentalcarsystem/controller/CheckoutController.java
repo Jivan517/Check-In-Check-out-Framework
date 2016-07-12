@@ -1,5 +1,5 @@
 package cs525.rentalcarsystem.controller;
 
-public class Main {
+public class CheckoutController {
 
 }
