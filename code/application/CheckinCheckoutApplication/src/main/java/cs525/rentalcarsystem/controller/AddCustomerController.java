@@ -90,8 +90,6 @@ public class AddCustomerController extends Application {
 	public void cancelHandler() {
 
 	}
-	public static void main(String[] args) {
-        Application.launch(args);
-	}
+	
 
 }
