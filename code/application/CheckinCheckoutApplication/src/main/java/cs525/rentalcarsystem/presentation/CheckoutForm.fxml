@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<left>
+		<VBox prefHeight="471.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+	</left>
+	<right>
+		<VBox prefHeight="641.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+	</right>
+	<top>
+		<HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+			<children>
+				<Label text="Checkout Form" underline="true">
+					<HBox.margin>
+						<Insets top="40.0" />
+					</HBox.margin>
+					<padding>
+						<Insets left="250.0" />
+					</padding>
+					<font>
+						<Font size="24.0" />
+					</font>
+				</Label>
+			</children>
+		</HBox>
+	</top>
+	<bottom>
+		<HBox prefHeight="0.0" prefWidth="781.0" BorderPane.alignment="CENTER" />
+	</bottom>
+   <center>
+      <VBox prefHeight="576.0" prefWidth="581.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="125.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Customer">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="314.0">
+                     <children>
+                        <ComboBox prefHeight="31.0" prefWidth="271.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="437.0" prefWidth="581.0">
+               <children>
+                  <TableView prefHeight="437.0" prefWidth="586.0">
+                    <columns>
+                      <TableColumn prefWidth="123.0" text="Name" />
+                      <TableColumn prefWidth="87.0" text="Model" />
+                        <TableColumn prefWidth="78.0" text="Year" />
+                        <TableColumn prefWidth="149.0" text="Rental Fee/Day ($)" />
+                        <TableColumn prefWidth="75.0" text="Quantity" />
+                        <TableColumn prefWidth="75.0" text="Rent?" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="276.0" />
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="114.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Checkout" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="70.0" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" text="Cancel" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

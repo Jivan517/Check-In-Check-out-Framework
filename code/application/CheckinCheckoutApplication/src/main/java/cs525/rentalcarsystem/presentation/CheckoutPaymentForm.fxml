@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="471.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <VBox prefHeight="594.0" prefWidth="96.0" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Checkout Payment" underline="true">
+               <HBox.margin>
+                  <Insets top="40.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="250.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children></HBox>
+   </top>
+   <bottom>
+      <HBox prefHeight="0.0" prefWidth="781.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <VBox prefHeight="516.0" prefWidth="647.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="68.0" prefWidth="647.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="255.0">
+                     <children>
+                        <Label text="Customer">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="337.0">
+                     <children>
+                        <TextField fx:id="cutomerTxt" editable="false" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="61.0" prefWidth="647.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="251.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="202.0" text="Total Rental Fee ($)">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="341.0">
+                     <children>
+                        <TextField fx:id="totalRentalFeeTxt" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="56.0" prefWidth="647.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="248.0">
+                     <children>
+                        <Label text="Due Date">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="346.0">
+                     <children>
+                        <TextField fx:id="dueDateTxt" prefHeight="31.0" prefWidth="327.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="402.0" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="payBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Pay" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

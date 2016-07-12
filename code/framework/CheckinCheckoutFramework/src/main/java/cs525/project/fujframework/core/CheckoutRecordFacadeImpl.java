@@ -53,7 +53,8 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	@Override
 	public int removeCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("DELETE FROM checkoutrecord WHERE customerId=" + checkoutRecordEntry.getRecordId());
+		queryBuilder.append(
+				"DELETE FROM checkoutrecord WHERE customerId=" + checkoutRecordEntry.getCheckoutRecordEntryId());
 		return this.dbaction.delete(queryBuilder.toString());
 	}
 
@@ -72,7 +73,7 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 		try {
 			queryBuilder.append("UPDATE checkoutrecord SET isReturned='true', returnedDate='"
 					+ format.parse(LocalDate.now().toString()) + "' WHERE customerId="
-					+ checkoutRecordEntry.getRecordId());
+					+ checkoutRecordEntry.getCheckoutRecordEntryId());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +91,7 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	public int undoCheckIn(CheckoutRecordEntry checkoutRecordEntry) {
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("UPDATE checkoutrecord SET isReturned='false', returnedDate=NULL" + " WHERE customerId="
-				+ checkoutRecordEntry.getRecordId());
+				+ checkoutRecordEntry.getCheckoutRecordEntryId());
 		return this.dbaction.update(queryBuilder.toString());
 	}
 
