@@ -5,10 +5,15 @@
  */
 package cs525.rentalcarsystem.controller;
 
-import cs525.project.fujframework.middleware.Command;
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+import cs525.project.fujframework.core.CustomerFacade;
+import cs525.project.fujframework.core.CustomerFacadeImpl;
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
-import cs525.project.fujframework.middleware.SaveCustomerCommand;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.presentation.Main;
@@ -16,13 +21,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -33,7 +37,7 @@ import javafx.stage.Stage;
  * @author Fish
  *
  */
-public class AddCustomerController extends Application {
+public class AddCustomerController extends Application implements Initializable {
 
 	@FXML
 	private TextField txtFirstName;
@@ -66,14 +70,18 @@ public class AddCustomerController extends Application {
 	private Stage rootStage = new Stage();
 
 	private CommandManager command;
-	private int customerId;
+	public static int customerId;
+	private ManageCustomerController manageController;
 
 	public AddCustomerController() {
 
 		this.command = new CommandManagerImpl();
 	}
-	public AddCustomerController(int customerId){
-		this.customerId=customerId;
+
+	public AddCustomerController(int customerId) {
+		this.customerId = customerId;
+		
+		this.command = new CommandManagerImpl();
 	}
 
 	@Override
@@ -99,7 +107,7 @@ public class AddCustomerController extends Application {
 	 * SaveCustomerCommand command
 	 */
 	@FXML
-	protected void addCustomer(ActionEvent event) {
+	protected void addCustomer(ActionEvent event) throws Exception {
 		if (!txtFirstName.getText().isEmpty()) {
 			AppCustomer customer = new AppCustomer();
 			customer.setFirstName(txtFirstName.getText());
@@ -108,11 +116,14 @@ public class AddCustomerController extends Application {
 			customer.setEmail(txtEmail.getText());
 			customer.setPhone(txtPhoneNumber.getText());
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
-					Integer.parseInt(txtZipCode.getText()), txtStreet.getText());
+					Integer.parseInt(txtZipCode.getText().trim()), txtStreet.getText());
 			customer.setAddress(userAddress);
-			if(customerId>0)
+			if (customerId > 0)
 				customer.setPersonId(customerId);
 			this.command.saveCustomer(customer);
+			((Node) (event.getSource())).getScene().getWindow().hide();
+			backToMaageController();
+			
 		} else {
 
 			txtErrorMessag.setText("All fields are Required");
@@ -123,10 +134,53 @@ public class AddCustomerController extends Application {
 
 	/**
 	 * Action will be performed when the user click cancel button
+	 * @throws Exception 
 	 */
 	@FXML
-	protected void cancelHandler(ActionEvent event) {
+	protected void cancelHandler(ActionEvent event) throws Exception {
 		((Node) (event.getSource())).getScene().getWindow().hide();
+		backToMaageController();
+		
+	}
+
+	private void initCustomerInfo() {
+
+		try {
+			CustomerFacade custFacade = new CustomerFacadeImpl();
+			ResultSet result = custFacade.getCustomerById(customerId);
+			while (result.next()) {
+                txtFirstName.setText(result.getString("firstName"));
+                txtiddleName.setText(result.getString("middleName"));
+                txtLastName.setText(result.getString("lastName"));
+                txtEmail.setText(result.getString("email"));
+                txtPhoneNumber.setText(result.getString("phone"));
+				ResultSet address = custFacade.getAddressByCustomerId(customerId, Address.class);
+                while(address.next()){
+                	txtStreet.setText(address.getString("streetAddress"));
+                	txtCity.setText(address.getString("city"));
+                	txtZipCode.setText(""+address.getInt("zipCode"));
+                	txtState.setText(address.getString("state"));
+                	
+                }
+                
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		if(customerId > 0)
+			initCustomerInfo();
+		
+	}
+	private void backToMaageController() throws Exception{
+		manageController = new ManageCustomerController();
+		Stage stage = new Stage();
+		manageController.start(stage);
 	}
 
 }

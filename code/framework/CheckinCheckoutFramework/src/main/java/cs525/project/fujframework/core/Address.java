@@ -21,6 +21,9 @@ public class Address {
 	private int zipCode;
 	private String state;
 
+	public Address() {
+	}
+
 	/**
 	 * creates an address object
 	 * 
@@ -108,6 +111,13 @@ public class Address {
 	 */
 	public void setIsCustomer(boolean isCustomer) {
 		this.isCustomer = isCustomer;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getFullAddress(){
+		return getStreetAddress() + " , " + getCity() +" , " + getZipCode() + " , " + getState();
 	}
 
 }

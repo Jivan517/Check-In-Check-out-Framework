@@ -47,4 +47,12 @@ public interface CustomerFacade {
 	 * @return resultSet of all customers
 	 */
 	public ResultSet getAllCustomers(Class<?> tableName);
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param tableName
+	 * @return
+	 */
+	public ResultSet getAddressByCustomerId(int customerId,Class<?> tableName);
 }

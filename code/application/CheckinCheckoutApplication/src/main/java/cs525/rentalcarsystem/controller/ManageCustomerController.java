@@ -17,7 +17,6 @@ import cs525.project.fujframework.core.CustomerFacadeImpl;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
-import cs525.rentalcarsystem.model.Car;
 import cs525.rentalcarsystem.presentation.Main;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -26,8 +25,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -47,57 +48,82 @@ import javafx.stage.Stage;
 public class ManageCustomerController extends Application implements Initializable {
 
 	@FXML
-	private TableView<AppCustomer> taview = new TableView<>();
-	@FXML
 	private Button btnDelete;
 	@FXML
 	private Button btnEdit;
+	@FXML Button btnAddCustomer;
 	@FXML
 	private Text txtErrorMessage;
 	private Stage primaryStage;
 	private Stage rootStage = new Stage();
-	
-	@FXML TableView<AppCustomer> tblView;
-	//@FXML TableColumn<AppCustomer, String> colCustomerId;
-	@FXML TableColumn<AppCustomer,String> colCustomerName;
-	@FXML TableColumn<AppCustomer, String> colEmail;
-	@FXML TableColumn<AppCustomer,String> colPhoneNumber;
-	@FXML TableColumn<Address, String> colAddress;
-	private ObservableList<AppCustomer> customerList= FXCollections.observableArrayList();
-	
-	
-	private AppCustomer selectedCustomer;
+
+	@FXML
+	TableView<AppCustomer> tblView;
+	@FXML
+	TableColumn<AppCustomer, Integer> colCustomerId;
+	@FXML
+	TableColumn<AppCustomer, String> colCustomerName;
+	@FXML
+	TableColumn<AppCustomer, String> colEmail;
+	@FXML
+	TableColumn<AppCustomer, String> colPhoneNumber;
+	@FXML
+	TableColumn<Address, String> colAddress;
+
+	ObservableList<AppCustomer> customerList = FXCollections.observableArrayList();
+
+	// private AppCustomer selectedCustomer;
+
 	public ManageCustomerController() {
 
 	}
-	
-	
-	private void populateCustomer(){
-		try{
+
+	private void populateCustomer() {
+		try {
 			CustomerFacade customerFacade = new CustomerFacadeImpl();
-			ResultSet result=customerFacade.getAllCustomers(AppCustomer.class);
-			while(result.next()){
-				AppCustomer cus=new AppCustomer();
+			ResultSet result = customerFacade.getAllCustomers(AppCustomer.class);
+			while (result.next()) {
+				AppCustomer cus = new AppCustomer();
 				cus.setPersonId(result.getInt("customerId"));
 				cus.setFirstName(result.getString("firstName"));
+				cus.setMiddleName(result.getString("middleName"));
+				cus.setLastName(result.getString("lastName"));
 				cus.setEmail(result.getString("email"));
 				cus.setPhone(result.getString("phone"));
+				cus.setAddress(new cs525.project.fujframework.core.Address());
+				ResultSet addressResult = customerFacade.getAddressByCustomerId(cus.getPersonId(), Address.class);
+				while (addressResult.next()) {
+					String street = addressResult.getString("streetAddress");
+					String city = addressResult.getString("city");
+					int zipCode = addressResult.getInt("zipCode");
+					String state = addressResult.getString("state");
+					Address address = new Address(street, city, zipCode, state);
+					cus.setAddress(address);
+				}
+
 				customerList.add(cus);
 			}
-		}
-		catch (SQLException e) {
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+    private void populateTable(){
+    	colCustomerId.setCellValueFactory(new PropertyValueFactory<AppCustomer, Integer>("personId"));
+		colCustomerName.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("fullName"));
+		colEmail.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("email"));
+		colPhoneNumber.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("phone"));
+		colAddress.setCellValueFactory(new PropertyValueFactory<Address, String>("fullAddress"));
+		tblView.setItems(customerList);
+    }
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		tblView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		populateCustomer();
-		//colCustomerId.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("customerId"));
-		colCustomerName.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("firstName"));
-		colEmail.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("email"));
-		colPhoneNumber.setCellValueFactory(new PropertyValueFactory<AppCustomer,String>("phone"));
-		tblView.setItems(customerList);
+		populateTable();
 	}
+	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
@@ -116,11 +142,17 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 	}
-
+    @FXML protected void AddCustomer(ActionEvent event) throws Exception{
+    	AddCustomerController addcustomer = new AddCustomerController(0);
+    	Stage stage = new Stage();
+    	((Node) (event.getSource())).getScene().getWindow().hide();
+    	addcustomer.start(stage);
+    }
 	@FXML
-	protected void editCustomer(ActionEvent event) {
-		
-		ObservableList<AppCustomer> customers = taview.getSelectionModel().getSelectedItems();
+	protected void editCustomer(ActionEvent event) throws Exception {
+
+		ObservableList<AppCustomer> customers = tblView.getSelectionModel().getSelectedItems();
+		System.out.println("list size: " + customers.size());
 		if (customers.size() > 1) {
 			DialogHelper.toast("Please, select only one record!", AlertType.WARNING);
 			return;
@@ -131,38 +163,31 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 		int customerId = customers.get(0).getPersonId();
-		 AddCustomerController addCustomerController = new AddCustomerController(customerId);		
+		AddCustomerController addCustomerController = new AddCustomerController(customerId);
 		Stage stage = new Stage();
-		try {
-			addCustomerController.start(stage);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		/*	
-			txtErrorMessage.setText("Customer Successfully Updated!");
-			txtErrorMessage.setFill(Color.GREEN);
-		} else {
-			txtErrorMessage.setText("Please Select Customer to Edit!");
-			txtErrorMessage.setFill(Color.RED);
-		}*/
+		((Node) (event.getSource())).getScene().getWindow().hide();
+		addCustomerController.start(stage);
 
 	}
 
 	@FXML
 	protected void deleteCustomer(ActionEvent event) {
-		selectedCustomer = taview.getSelectionModel().getSelectedItem();
-		if (selectedCustomer != null) {
-            
-			
-			txtErrorMessage.setText("Customer Successfully Deleted!");
-			txtErrorMessage.setFill(Color.GREEN);
-			
-		} else {
-			txtErrorMessage.setText("Please Select Customer to Delete!");
-			txtErrorMessage.setFill(Color.RED);
+		ObservableList<AppCustomer> customers = tblView.getSelectionModel().getSelectedItems();
+		System.out.println("list size: " + customers.size());
+		if (customers.size() > 1) {
+			DialogHelper.toast("Please, select only one record!", AlertType.WARNING);
+			return;
 		}
+		if (customers.size() < 1) {
+			DialogHelper.toast("Please, select a record!", AlertType.WARNING);
+			return;
+		}
+
+		AppCustomer customer = customers.get(0);
+		CustomerFacade cutFacade = new CustomerFacadeImpl();
+	     cutFacade.removeCustomer(customer);
+	    txtErrorMessage.setText("Customer Successfully Deleted");
+	    txtErrorMessage.setFill(Color.GREEN);	     	     
 
 	}
 

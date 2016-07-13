@@ -89,8 +89,8 @@ public class CheckoutRecordProtectionProxy implements CheckoutRecordFacade {
 	}
 
 	@Override
-	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName) {
-		return checkOutRecordFacade.getAllCheckoutRecordsByCustomer(customerId, tableName);
+	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName, Class<?> joinTableName) {
+		return checkOutRecordFacade.getAllCheckoutRecordsByCustomer(customerId, tableName, joinTableName);
 	}
 
 	@Override
