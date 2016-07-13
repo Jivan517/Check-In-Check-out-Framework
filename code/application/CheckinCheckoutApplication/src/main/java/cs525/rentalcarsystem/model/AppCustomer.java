@@ -14,10 +14,9 @@ import cs525.project.fujframework.core.Customer;
  * @since 1.0.0
  *
  */
-public class AppCustomer extends Customer {
-
+public class AppCustomer extends Customer {	
 	private String phone;
-
+	
 	public void setPhone(String phoneNumber) {
 		this.phone = phoneNumber;
 	}

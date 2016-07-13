@@ -3,6 +3,8 @@
  */
 package cs525.project.fujframework.middleware;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import cs525.project.fujframework.core.CheckoutRecordEntry;
@@ -43,13 +45,22 @@ public class CheckinTransactionManager extends TransactionManager {
 	 * calculateRentalFeeOrOverdueFine(java.util.List)
 	 */
 	@Override
-	protected List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(
-			List<CheckoutRecordEntry> checkoutRecordEntries) {
+	protected List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(List<CheckoutRecordEntry> checkoutRecordEntries,
+			Class<?> productClass) {
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
 			long loanDays = java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(),
 					checkoutRecordEntry.getDueDate());
-			Product product = productFacade.getProductById(checkoutRecordEntry.getProductRefId());
-			double rentalFine = loanDays * product.getOverDueFinePerDay();
+			ResultSet rs = productFacade.getProductById(checkoutRecordEntry.getProductRefId(), productClass);
+			double fine = 0;
+			try {
+				while (rs.next()) {
+					fine = rs.getDouble("overdueFinePerDay");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			double rentalFine = loanDays * fine;
 			checkoutRecordEntry.setRentalFee(rentalFine);
 		}
 		return checkoutRecordEntries;
@@ -74,10 +85,21 @@ public class CheckinTransactionManager extends TransactionManager {
 	 * (java.util.List)
 	 */
 	@Override
-	protected void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries) {
+	protected void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries, Class<?> prodClass) {
 		double totalFine = 0;
 		int customerId = checkoutRecordEntries.get(0).getCustomerRefId();
-		Customer customer = customerFacade.getCustomerById(customerId);
+		ResultSet rs = customerFacade.getCustomerById(customerId);
+		Customer customer = new Customer();
+		try {
+			while (rs.next()) {
+
+				customer.setEmail(rs.getString("email"));
+				customer.setPersonId(rs.getInt("customerId"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
 			totalFine += checkoutRecordEntry.getRentalFine();
@@ -86,7 +108,7 @@ public class CheckinTransactionManager extends TransactionManager {
 		StringBuilder message = new StringBuilder();
 		message.append("Your total fine for the rented items is " + totalFine);
 
-		// notifier.notifyPerson(message.toString(), customer);
+		notifier.notifyPerson(message.toString(), customer);
 	}
 
 }

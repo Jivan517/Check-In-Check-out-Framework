@@ -23,7 +23,6 @@ import cs525.project.fujframework.utils.DbHelper;
 public class CustomerFacadeImpl implements CustomerFacade {
 	private DbAction dbaction;
 	StringBuilder queryBuilder;
-
 	private Logger logger;
 
 	/**
@@ -43,7 +42,6 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
-		this.dbaction.Create(DbHelper.getInsertQuery(customer));
 		String tableName = customer.getClass().getSimpleName();
 		int personId = getRecentlyAddedCustomer(tableName);
 		if (personId > 0) {
@@ -65,7 +63,8 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	@Override
 	public int removeCustomer(Customer customer) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("DELETE FROM customer WHERE customerId=" + customer.getPersonId());
+		String tableName = customer.getClass().getSimpleName();
+		queryBuilder.append("DELETE FROM " + tableName + " WHERE customerId=" + customer.getPersonId());
 		return this.dbaction.delete(queryBuilder.toString());
 	}
 
@@ -75,13 +74,13 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 * @see cs525.project.fujframework.core.CustomerFacade#getCustomerById(int)
 	 */
 	@Override
-	public Customer getCustomerById(int customerId) {
+	public ResultSet getCustomerById(int customerId) {
 
 		// TODO: Generalize the table name value
 		String tableName = "AppCustomer";
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName + " where customerId = " + customerId);
-		return (Customer) this.dbaction.read(queryBuilder.toString());
+		return  this.dbaction.read(queryBuilder.toString());
 	}
 
 	private int getRecentlyAddedCustomer(String tableName) {

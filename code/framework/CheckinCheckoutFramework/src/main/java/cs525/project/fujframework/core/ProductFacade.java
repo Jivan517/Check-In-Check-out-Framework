@@ -37,7 +37,7 @@ public interface ProductFacade {
 	 * @param productId
 	 * @return the product object
 	 */
-	public Product getProductById(int productId);
+	public ResultSet getProductById(int productId, Class<?> tableName);
 	
 	/**
 	 * @param tableName

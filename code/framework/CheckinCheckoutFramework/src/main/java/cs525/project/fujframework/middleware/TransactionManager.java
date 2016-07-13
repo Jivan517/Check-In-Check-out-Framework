@@ -19,20 +19,22 @@ public abstract class TransactionManager {
 	 * 
 	 * @param checkoutRecordEntry
 	 */
-	public final void proceedTransaction(List<CheckoutRecordEntry> checkoutRecordEntries) {
-		List<CheckoutRecordEntry> rentalFeeFine = calculateRentalFeeOrOverdueFine(checkoutRecordEntries);
+	public final void proceedTransaction(List<CheckoutRecordEntry> checkoutRecordEntries, Class<?> productClass) {
+		List<CheckoutRecordEntry> rentalFeeFine = calculateRentalFeeOrOverdueFine(checkoutRecordEntries, productClass);
 		processCheckoutRecord(checkoutRecordEntries);
-		sendNotification(checkoutRecordEntries);
+		sendNotification(checkoutRecordEntries, productClass);
 		printBill(rentalFeeFine);
 	}
 
 	/**
 	 * calculates the rental fee or overdue fine whichever is applicable
+	 * 
 	 * @param checkoutRecordEntries
+	 * @param productClass
 	 * @return list of updated checkout record entries
 	 */
 	protected abstract List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(
-			List<CheckoutRecordEntry> checkoutRecordEntries);
+			List<CheckoutRecordEntry> checkoutRecordEntries, Class<?> productClass);
 
 	/**
 	 * processes the checkout record entries to insert it into database
@@ -45,8 +47,9 @@ public abstract class TransactionManager {
 	 * sends the notification to customers
 	 * 
 	 * @param checkoutRecordEntries
+	 * @param productClass
 	 */
-	protected abstract void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries);
+	protected abstract void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries, Class<?> productClass);
 
 	/**
 	 * prints the bill by going through each of the checkout record entries

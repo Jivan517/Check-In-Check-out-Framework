@@ -1,5 +1,7 @@
 package cs525.rentalcarsystem.presentation;
 
+import cs525.rentalcarsystem.controller.CarController;
+import cs525.rentalcarsystem.controller.CheckoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,16 +23,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-//		Parent root = FXMLLoader.load(getClass().getResource("AddCustomerForm.fxml"));
-		Parent root = FXMLLoader.load(getClass().getResource("CheckinForm.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
-
-		primaryStage.setResizable(true);
-		primaryStage.setTitle("Checkout Form - Car List");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
+		CheckoutController checkout = new CheckoutController();
+		checkout.start(primaryStage);
 	}
 
 	public static void main(String[] args) {
