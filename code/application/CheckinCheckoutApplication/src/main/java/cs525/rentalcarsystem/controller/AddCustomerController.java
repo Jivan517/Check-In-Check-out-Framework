@@ -116,15 +116,13 @@ public class AddCustomerController extends Application implements Initializable 
 			customer.setEmail(txtEmail.getText());
 			customer.setPhone(txtPhoneNumber.getText());
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
-					Integer.parseInt(txtZipCode.getText()), txtStreet.getText());
+					Integer.parseInt(txtZipCode.getText().trim()), txtStreet.getText());
 			customer.setAddress(userAddress);
 			if (customerId > 0)
 				customer.setPersonId(customerId);
 			this.command.saveCustomer(customer);
 			((Node) (event.getSource())).getScene().getWindow().hide();
-			manageController = new ManageCustomerController();
-			Stage stage = new Stage();
-			manageController.start(stage);
+			backToMaageController();
 			
 		} else {
 
@@ -136,10 +134,13 @@ public class AddCustomerController extends Application implements Initializable 
 
 	/**
 	 * Action will be performed when the user click cancel button
+	 * @throws Exception 
 	 */
 	@FXML
-	protected void cancelHandler(ActionEvent event) {
+	protected void cancelHandler(ActionEvent event) throws Exception {
 		((Node) (event.getSource())).getScene().getWindow().hide();
+		
+		
 	}
 
 	private void initCustomerInfo() {
@@ -157,7 +158,7 @@ public class AddCustomerController extends Application implements Initializable 
                 while(address.next()){
                 	txtStreet.setText(address.getString("streetAddress"));
                 	txtCity.setText(address.getString("city"));
-                	txtZipCode.setText(" "+address.getInt("zipCode"));
+                	txtZipCode.setText(""+address.getInt("zipCode"));
                 	txtState.setText(address.getString("state"));
                 	
                 }
@@ -175,6 +176,11 @@ public class AddCustomerController extends Application implements Initializable 
 		if(customerId > 0)
 			initCustomerInfo();
 		
+	}
+	private void backToMaageController() throws Exception{
+		manageController = new ManageCustomerController();
+		Stage stage = new Stage();
+		manageController.start(stage);
 	}
 
 }

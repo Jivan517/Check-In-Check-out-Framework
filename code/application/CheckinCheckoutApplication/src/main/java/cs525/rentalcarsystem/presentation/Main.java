@@ -26,7 +26,7 @@ public class Main extends Application {
 		checkout.start(primaryStage);*/
 		/*CheckinFormController checkin = new CheckinFormController();
 		checkin.start(primaryStage);*/
-		AddCustomerController customer = new AddCustomerController();
+		ManageCustomerController customer = new ManageCustomerController();
 		customer.start(primaryStage);
 	}
 

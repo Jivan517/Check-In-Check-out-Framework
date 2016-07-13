@@ -146,5 +146,14 @@ public class Customer implements Person {
 	public int getPersonId() {
 		return customerId;
 	}
+	
+	/**
+	 * returns customer full name
+	 * @return
+	 */
+	public String getFullName(){
+		return getFirstName() +" "+ getMiddleName()+ " "+getLastName();
+	}
+	
 
 }

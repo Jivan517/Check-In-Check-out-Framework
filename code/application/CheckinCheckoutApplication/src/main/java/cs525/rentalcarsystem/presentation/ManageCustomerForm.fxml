@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="357.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ManageCustomerController">
+<AnchorPane prefHeight="462.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ManageCustomerController">
    <children>
-      <TableView fx:id="tblView" layoutX="20.0" layoutY="29.0" prefHeight="291.0" prefWidth="606.0">
+      <TableView fx:id="tblView" layoutX="13.0" layoutY="29.0" prefHeight="399.0" prefWidth="762.0">
         <columns>
             <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Customer ID" />
           <TableColumn id="colCustomerName" fx:id="colCustomerName" prefWidth="152.0" text="Customer Name" />
@@ -17,13 +17,14 @@
             <TableColumn id="colAddress" fx:id="colAddress" prefWidth="153.0" text="Address" />
         </columns>
       </TableView>
-      <Button fx:id="btnDelete" layoutX="565.0" layoutY="323.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="25.0" prefWidth="59.0" text="Delete" />
-      <Button fx:id="btnEdit" layoutX="501.0" layoutY="324.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="59.0" text="Edit" />
-      <Text layoutX="214.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Customer" wrappingWidth="147.13671875">
+      <Button fx:id="btnAddCustomer" layoutX="529.0" layoutY="433.0" mnemonicParsing="false" onAction="#AddCustomer" text="AddCustomer" />
+      <Button fx:id="btnEdit" layoutX="627.0" layoutY="433.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="80.0" text="Edit" />
+      <Button fx:id="btnDelete" layoutX="716.0" layoutY="432.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="25.0" prefWidth="59.0" text="Delete" />
+      <Text layoutX="214.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Customer" wrappingWidth="286.13671875">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="txtErrorMessage" layoutX="161.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="240.13671875" />
+      <Text fx:id="txtErrorMessage" layoutX="288.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="240.13671875" />
    </children>
 </AnchorPane>
