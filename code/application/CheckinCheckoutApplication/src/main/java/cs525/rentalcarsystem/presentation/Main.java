@@ -48,6 +48,9 @@ public class Main extends Application {
 		 * primaryStage.show();
 		 */
 
+/*
+		CheckoutController checkout = new CheckoutController();
+		checkout.start(primaryStage);*/
 	}
 
 	public static void main(String[] args) {
