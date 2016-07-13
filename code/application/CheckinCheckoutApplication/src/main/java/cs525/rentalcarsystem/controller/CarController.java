@@ -133,6 +133,9 @@ public class CarController extends Application implements Initializable {
 	@FXML
 	protected void btnCancelAction(ActionEvent event) throws Exception {
 		((Node) (event.getSource())).getScene().getWindow().hide();
+//		Stage stg = new Stage();
+//		CheckoutController controller = new CheckoutController();
+//		controller.start(stg);
 	}
 
 	private void initCarInfo() {
