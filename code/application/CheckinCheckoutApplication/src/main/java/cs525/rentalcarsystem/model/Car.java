@@ -11,7 +11,7 @@ public class Car implements Product {
 	private String color;
 	private String make;
 	private int quantity;
-	private int year;
+	private int releaseYear;
 	private double overdueFinePerDay;
 	private double rentalFeePerDay;
 	private int mileage;
@@ -21,7 +21,7 @@ public class Car implements Product {
 	}
 
 	public Car(String name, String model, String description, String plate, String color, String make, int quantity,
-			int year, double overdueFinePerDay, double rentalFeePerDay, int mileage) {
+			int releaseYear, double overdueFinePerDay, double rentalFeePerDay, int mileage) {
 		super();
 		this.name = name;
 		this.setModel(model);
@@ -30,7 +30,7 @@ public class Car implements Product {
 		this.setColor(color);
 		this.setMake(make);
 		this.setQuantity(quantity);
-		this.setYear(year);
+		this.setYear(releaseYear);
 		this.overdueFinePerDay = overdueFinePerDay;
 		this.rentalFeePerDay = rentalFeePerDay;
 		this.setMileage(mileage);
@@ -105,11 +105,11 @@ public class Car implements Product {
 	}
 
 	public int getYear() {
-		return year;
+		return releaseYear;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setYear(int releaseYear) {
+		this.releaseYear = releaseYear;
 	}
 
 	public int getMileage() {

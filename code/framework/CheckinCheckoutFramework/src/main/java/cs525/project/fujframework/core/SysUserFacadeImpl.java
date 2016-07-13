@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
 import cs525.project.fujframework.middleware.SysUser;
@@ -37,6 +39,8 @@ public class SysUserFacadeImpl implements SysUserFacade {
 	 */
 	@Override
 	public int saveSysUser(SysUser sysUser) {
+		if (sysUser.getSysuserId() > 0)
+			return this.dbaction.update(DbHelper.getUpdateQuery(sysUser));
 		return this.dbaction.Create(DbHelper.getInsertQuery(sysUser));
 	}
 
@@ -52,6 +56,13 @@ public class SysUserFacadeImpl implements SysUserFacade {
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("DELETE FROM sysuser WHERE sysUserId=" + sysUser.getPersonId());
 		return this.dbaction.delete(queryBuilder.toString());
+	}
+
+	@Override
+	public ResultSet getAllUsers(Class<?> tableName) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 }

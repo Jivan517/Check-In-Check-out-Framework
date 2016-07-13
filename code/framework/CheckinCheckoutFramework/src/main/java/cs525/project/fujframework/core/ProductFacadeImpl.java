@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
 import cs525.project.fujframework.utils.DbHelper;
@@ -36,6 +38,8 @@ public class ProductFacadeImpl implements ProductFacade {
 	 */
 	@Override
 	public int saveProduct(Product product) {
+		if (product.getProductId() > 0)
+			return this.dbaction.update(DbHelper.getUpdateQuery(product));
 		return this.dbaction.Create(DbHelper.getInsertQuery(product));
 	}
 
@@ -59,10 +63,17 @@ public class ProductFacadeImpl implements ProductFacade {
 	 * @see cs525.project.fujframework.core.ProductFacade#getProductById(int)
 	 */
 	@Override
-	public Product getProductById(int productId) {
+	public ResultSet getProductById(int productId, Class<?> tableName) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM product where productId = " + productId);
-		return (Product) this.dbaction.read(queryBuilder.toString());
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName() + " where productId = " + productId);
+		return this.dbaction.read(queryBuilder.toString());
+	}
+
+	@Override
+	public ResultSet getAllProduct(Class<?> tableName) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 }

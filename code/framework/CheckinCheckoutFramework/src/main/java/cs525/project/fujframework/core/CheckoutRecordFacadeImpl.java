@@ -5,6 +5,7 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -93,6 +94,22 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 		queryBuilder.append("UPDATE checkoutrecord SET isReturned='false', returnedDate=NULL" + " WHERE customerId="
 				+ checkoutRecordEntry.getCheckoutRecordEntryId());
 		return this.dbaction.update(queryBuilder.toString());
+	}
+
+	@Override
+	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName) {
+
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName() + " WHERE customerRefId = " + customerId);
+		return this.dbaction.read(queryBuilder.toString());
+	}
+
+	@Override
+	public ResultSet getAllCheckoutRecordsByCustomerAndUser(int customerId, int userId, Class<?> tableName) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName() + " WHERE customerRefId = " + customerId
+				+ " and personRefId = " + userId);
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 }

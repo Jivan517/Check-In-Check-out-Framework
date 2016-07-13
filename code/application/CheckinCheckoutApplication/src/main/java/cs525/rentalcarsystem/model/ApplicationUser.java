@@ -17,7 +17,7 @@ import cs525.project.fujframework.middleware.SysUser;
 public class ApplicationUser extends SysUser {
 	String userName;
 	String password;
-	String phoneNo;
+	String phone;
 	boolean isAdmin;
 
 	/**
@@ -69,17 +69,17 @@ public class ApplicationUser extends SysUser {
 	
 
 	/**
-	 * @return the phoneNo
+	 * @return the phone
 	 */
-	public String getPhoneNo() {
-		return phoneNo;
+	public String getPhone() {
+		return phone;
 	}
 
 	/**
-	 * @param phoneNo the phoneNo to set
+	 * @param phone the phone to set
 	 */
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	/*

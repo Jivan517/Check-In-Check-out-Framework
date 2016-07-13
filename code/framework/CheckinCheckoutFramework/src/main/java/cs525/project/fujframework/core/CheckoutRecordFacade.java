@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+
 /**
  * provides a higher level interface for checkout record subsystems using
  * "facade pattern"
@@ -45,4 +47,23 @@ public interface CheckoutRecordFacade {
 	 * @return boolean
 	 */
 	public int undoCheckIn(CheckoutRecordEntry checkoutRecordEntry);
+
+	/**
+	 * 
+	 * @param customerId
+	 * @param tableName
+	 *            className
+	 * @return resultSet of all checkout entries of customers
+	 */
+	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName);
+
+	/**
+	 * 
+	 * @param customerId
+	 * @param userId
+	 * @param tableName
+	 *            className
+	 * @return resultSet of all checkout entries of customers
+	 */
+	public ResultSet getAllCheckoutRecordsByCustomerAndUser(int customerId, int userId, Class<?> tableName);
 }

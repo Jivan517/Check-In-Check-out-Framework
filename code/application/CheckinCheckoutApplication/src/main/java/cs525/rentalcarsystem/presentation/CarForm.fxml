@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -15,7 +16,7 @@
 					<children>
 						<VBox prefHeight="641.0" prefWidth="163.0">
 							<children>
-								<Label alignment="BOTTOM_LEFT" prefHeight="39.0" prefWidth="75.0" text="Name">
+								<Label alignment="BOTTOM_LEFT" prefHeight="39.0" prefWidth="75.0" text="Name *">
 									<VBox.margin>
 										<Insets top="10.0" />
 									</VBox.margin>
@@ -31,7 +32,7 @@
 										<Font name="System Bold" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="41.0" prefWidth="84.0" text="Model">
+								<Label prefHeight="41.0" prefWidth="84.0" text="Model *">
 									<VBox.margin>
 										<Insets top="15.0" />
 									</VBox.margin>
@@ -47,23 +48,24 @@
 										<Font name="System Bold" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="60.0" prefWidth="125.0" text="Year">
+								<Label prefHeight="60.0" prefWidth="125.0" text="Year *">
 									<font>
 										<Font name="System Bold" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="60.0" prefWidth="125.0" text="Make">
+								<Label prefHeight="60.0" prefWidth="125.0" text="Make *">
 									<font>
 										<Font name="System Bold" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="80.0" prefWidth="148.0" text="Quantity">
+								<Label prefHeight="80.0" prefWidth="148.0" text="Quantity *">
 									<font>
 										<Font name="System Bold" size="15.0" />
 									</font>
 								</Label>
 							</children>
 						</VBox>
+                  <Label fx:id="lblCarId" visible="false" />
 						<VBox prefHeight="641.0" prefWidth="322.0">
 							<children>
 								<TextField fx:id="nameTxt" prefHeight="48.0" prefWidth="324.0" promptText="Name">
@@ -101,16 +103,32 @@
 										<Insets top="20.0" />
 									</VBox.margin>
 								</TextField>
-								<TextField fx:id="rentalFeeTxt" prefHeight="45.0" prefWidth="324.0" promptText="Rental Fee Per Day">
+								<TextField fx:id="rentalFeeTxt" prefHeight="45.0" prefWidth="324.0" promptText="Rental Fee Per Day *">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
 								</TextField>
-								<Button fx:id="saveCarBtn" defaultButton="true" mnemonicParsing="false" prefHeight="45.0" prefWidth="87.0" text="Save">
-									<VBox.margin>
-										<Insets top="20.0" />
-									</VBox.margin>
-								</Button>
+                        <VBox prefHeight="72.0" prefWidth="310.0">
+                           <children>
+                              <VBox prefHeight="63.0" prefWidth="310.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                  								<Button fx:id="saveCarBtn" defaultButton="true" mnemonicParsing="false" onAction="#btnSaveCarAction" prefHeight="45.0" prefWidth="87.0" text="Save" />
+                                          <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="46.0" prefWidth="77.0" text="Cancel">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
 							</children>
 						</VBox>
                   <VBox prefHeight="625.0" prefWidth="265.0">
@@ -122,12 +140,12 @@
                               <Insets left="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="plateTxt" prefHeight="48.0" prefWidth="243.0" promptText="Plate">
+                        <TextField fx:id="plateTxt" prefHeight="48.0" prefWidth="243.0" promptText="Plate *">
                            <VBox.margin>
                               <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="overdueFineTxt" prefHeight="44.0" prefWidth="243.0" promptText="Overdue Fine Per Day">
+                        <TextField fx:id="overdueFineTxt" prefHeight="44.0" prefWidth="243.0" promptText="Overdue Fine Per Day *">
                            <VBox.margin>
                               <Insets left="10.0" top="20.0" />
                            </VBox.margin>

@@ -42,19 +42,15 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
-		this.dbaction.Create(DbHelper.getInsertQuery(customer));
-
 		String tableName = customer.getClass().getSimpleName();
-
-		logger.info("customer saved in " + tableName);
 		int personId = getRecentlyAddedCustomer(tableName);
-
-		Address address = customer.getAddress();
-		address.setPersonId(personId);
-
-		logger.info("PersonID " + personId);
-		address.setIsCustomer(true);
-		return this.dbaction.Create(DbHelper.getInsertQuery(address));
+		if (personId > 0) {
+			Address address = customer.getAddress();
+			address.setPersonRefId(personId);
+			address.setIsCustomer(true);
+			return this.dbaction.Create(DbHelper.getInsertQuery(address));
+		}
+		return 0;
 
 	}
 
@@ -78,19 +74,42 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 * @see cs525.project.fujframework.core.CustomerFacade#getCustomerById(int)
 	 */
 	@Override
-	public Customer getCustomerById(int customerId) {
+	public ResultSet getCustomerById(int customerId) {
+
+		// TODO: Generalize the table name value
+		String tableName = "AppCustomer";
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM customer where customerId = " + customerId);
-		return (Customer) this.dbaction.read(queryBuilder.toString());
+		queryBuilder.append("SELECT * FROM " + tableName + " where customerId = " + customerId);
+		return  this.dbaction.read(queryBuilder.toString());
 	}
 
 	private int getRecentlyAddedCustomer(String tableName) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM " + tableName + " ORDER BY customerId LIMIT 1");
+		queryBuilder.append("SELECT * FROM " + tableName + " ORDER BY customerId DESC LIMIT 1");
 
+		logger.info(queryBuilder.toString());
 		ResultSet result = this.dbaction.read(queryBuilder.toString());
-		Customer customer = (Customer) result;
-		return customer.getPersonId();
+		int customerId = 0;
+		try {
+
+			while (result.next()) {
+				customerId = result.getInt("customerId");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return customerId;
+	}
+
+	@Override
+	public ResultSet getAllCustomers(Class<?> tableName) {
+
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 }

@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.middleware;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -61,11 +63,21 @@ public class CheckoutTransactionManager extends TransactionManager {
 	 * calculateRentalFee(java.util.List)
 	 */
 	@Override
-	protected List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(
-			List<CheckoutRecordEntry> checkoutRecordEntries) {
+	protected List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(List<CheckoutRecordEntry> checkoutRecordEntries,
+			Class<?> productClass) {
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
-			Product product = productFacade.getProductById(checkoutRecordEntry.getProductId());
-			double rentalFee = checkoutRecordEntry.getQuantity() * product.getRentalFeePerDay();
+			ResultSet rs = productFacade.getProductById(checkoutRecordEntry.getProductRefId(), productClass);
+
+			double fee = 0;
+			try {
+				while (rs.next()) {
+					fee = rs.getDouble("rentalFeePerDay");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			double rentalFee = checkoutRecordEntry.getQuantity() * fee;
 			checkoutRecordEntry.setRentalFee(rentalFee);
 		}
 		return checkoutRecordEntries;
@@ -79,17 +91,27 @@ public class CheckoutTransactionManager extends TransactionManager {
 	 * (java.util.List)
 	 */
 	@Override
-	protected void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries) {
+	protected void sendNotification(List<CheckoutRecordEntry> checkoutRecordEntries, Class<?> productClass) {
 		double totalFee = 0;
-		int customerId = checkoutRecordEntries.get(0).getCustomerId();
+		int customerId = checkoutRecordEntries.get(0).getCustomerRefId();
 		LocalDate dueDate = checkoutRecordEntries.get(0).getDueDate();
-		Customer customer = customerFacade.getCustomerById(customerId);
+		ResultSet rs = customerFacade.getCustomerById(customerId);
+		Customer customer = new Customer();
+		try {
+			while (rs.next()) {
+				customer.setEmail(rs.getString("email"));
+				customer.setPersonId(rs.getInt("customerId"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		Set<String> productNames = new TreeSet<String>();
 
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
 			totalFee += checkoutRecordEntry.getRentalFine();
-			productNames
-					.add(productFacade.getProductById(checkoutRecordEntries.get(0).getProductId()).getProductName());
+			productNames.add(getProductName(checkoutRecordEntries.get(0).getProductRefId(), productClass));
 		}
 
 		StringBuilder message = new StringBuilder();
@@ -101,6 +123,21 @@ public class CheckoutTransactionManager extends TransactionManager {
 		message.append("Your total fee for the rented item(s) is " + totalFee + "\n");
 
 		notifier.notifyPerson(message.toString(), customer);
+	}
+
+	private String getProductName(int productId, Class<?> prodClass) {
+		ResultSet rs = productFacade.getProductById(productId, prodClass);
+
+		String name = "";
+		try {
+			while (rs.next()) {
+				name = rs.getString("name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return name;
 	}
 
 }

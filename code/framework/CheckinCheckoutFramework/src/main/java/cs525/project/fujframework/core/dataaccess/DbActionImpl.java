@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import cs525.project.fujframework.middleware.ConsoleLogger;
 import cs525.project.fujframework.middleware.Logger;
@@ -26,6 +27,14 @@ import cs525.project.fujframework.middleware.LoggerImpl;
  */
 public class DbActionImpl implements DbAction {
 	SimpleConnectionPool connection = SimpleConnectionPool.getInstance();
+	Logger consoleLogger;
+	
+	/**
+	 * 
+	 */
+	public DbActionImpl() {
+		consoleLogger = new ConsoleLogger(new LoggerImpl());
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -40,12 +49,9 @@ public class DbActionImpl implements DbAction {
 		PreparedStatement ps = null;
 		int countRecord = 0;
 		try {
-			Logger consoleLogger = new ConsoleLogger(new LoggerImpl());
-			consoleLogger.debug("QUERY: " + query);
-			con = connection.getConnection();
-			consoleLogger.debug("CONNECTION: " + con);
+			consoleLogger.debug("INSERT QUERY: " + query);
+			con = SimpleConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
-			consoleLogger.debug("PERPAREDSTATEMENT: " + ps);
 
 			countRecord = ps.executeUpdate();
 		} catch (Exception e) {
@@ -69,14 +75,16 @@ public class DbActionImpl implements DbAction {
 		ResultSet rs = null;
 		try {
 
-			con = connection.getConnection();
-			ps = con.prepareStatement(query);
+			con = SimpleConnectionPool.getConnection();
+			Statement statement = con.createStatement();
+			// ps = con.prepareStatement(query);
+			rs = statement.executeQuery(query);
 
-			rs = ps.executeQuery();
 		} catch (Exception e) {
 			// false;
 		} finally {
-			cleanupResources(ps, con);
+			if (ps != null && con != null)
+				cleanupResources(ps, con);
 		}
 
 		return rs;
@@ -96,8 +104,10 @@ public class DbActionImpl implements DbAction {
 		int countRecord = 0;
 		try {
 
-			con = connection.getConnection();
+			con = SimpleConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
+
+			countRecord = ps.executeUpdate();
 		} catch (Exception e) {
 
 		} finally {
@@ -120,9 +130,10 @@ public class DbActionImpl implements DbAction {
 		int recordCounter = 0;
 		try {
 
-			con = connection.getConnection();
+			con = SimpleConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
 
+			consoleLogger.debug("UPDATE QUERY: " + query);
 			recordCounter = ps.executeUpdate();
 		} catch (Exception e) {
 

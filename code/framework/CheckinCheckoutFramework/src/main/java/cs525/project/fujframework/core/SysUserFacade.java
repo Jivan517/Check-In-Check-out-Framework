@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+
 import cs525.project.fujframework.middleware.SysUser;
 
 /**
@@ -33,4 +35,10 @@ public interface SysUserFacade {
 	 * @return int
 	 */
 	public int removeSysUser(SysUser sysUser);
+
+	/**
+	 * @param tableName
+	 * @return resultSet of all system users
+	 */
+	public ResultSet getAllUsers(Class<?> tableName);
 }

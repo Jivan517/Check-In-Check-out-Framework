@@ -5,6 +5,8 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+
 /**
  * defines a higher level interface for customer related subsystems using
  * "facade pattern"
@@ -38,5 +40,11 @@ public interface CustomerFacade {
 	 * @param customerId
 	 * @return the customer object
 	 */
-	public Customer getCustomerById(int customerId);
+	public ResultSet getCustomerById(int customerId);
+
+	/**
+	 * @param tableName
+	 * @return resultSet of all customers
+	 */
+	public ResultSet getAllCustomers(Class<?> tableName);
 }

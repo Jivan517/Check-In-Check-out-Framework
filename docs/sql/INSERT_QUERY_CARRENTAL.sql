@@ -2,7 +2,7 @@ create schema carrentalsystem;
 
 use carrentalsystem;
 
-/*DROP table APplicationUser
+/*DROP table ApplicationUser
 
 */
 
@@ -15,6 +15,13 @@ middleName varchar(255),
 phone varchar(255),
 email varchar(255),
 PRIMARY KEY (sysUserId)
+);
+
+ALTER TABLE carrentalsystem.ApplicationUser ADD COLUMN 
+(
+username VARCHAR(30) NOT NULL, 
+password varchar(255) NOT NULL,
+isadmin VARCHAR (10) NOT NULL DEFAULT 'false'
 );
 
 CREATE TABLE Address
@@ -92,4 +99,18 @@ PRIMARY KEY (checkoutRecordEntryId)
         
 )ENGINE=INNODB;
 
+<<<<<<< HEAD
 ALTER TABLE `carrentalsystem`.`customer` RENAME TO `carrentalsystem`.`appcustomer`;
+=======
+
+ALTER TABLE `carrentalsystem`.`customer` 
+RENAME TO  `carrentalsystem`.`appcustomer` ;
+
+ALTER TABLE `carrentalsystem`.`address` 
+CHANGE COLUMN `personId` `personRefId` INT(11) NOT NULL ;
+
+ALTER TABLE `carrentalsystem`.`checkoutrecordentry` 
+CHANGE COLUMN `customerId` `customerRefId` INT(11) NOT NULL ,
+CHANGE COLUMN `personId` `personRefId` INT(11) NULL ,
+CHANGE COLUMN `carId` `carRefId` INT(11) NOT NULL ;
+>>>>>>> a272da1bf227d05a94ef3d13080d7ff2ed6c025f
