@@ -35,6 +35,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -94,7 +95,7 @@ public class ApplicationUserController extends Application implements Initializa
 				getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/ApplicationUserForm.fxml"));
 		Scene scene = new Scene(root);
 		// scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
-
+		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Application User Form");
 		primaryStage.setScene(scene);
