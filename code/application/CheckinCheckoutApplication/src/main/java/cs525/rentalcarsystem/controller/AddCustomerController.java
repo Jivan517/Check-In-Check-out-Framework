@@ -139,7 +139,7 @@ public class AddCustomerController extends Application implements Initializable 
 	@FXML
 	protected void cancelHandler(ActionEvent event) throws Exception {
 		((Node) (event.getSource())).getScene().getWindow().hide();
-		
+		backToMaageController();
 		
 	}
 

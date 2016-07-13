@@ -145,7 +145,7 @@ public class ManageCustomerController extends Application implements Initializab
     @FXML protected void AddCustomer(ActionEvent event) throws Exception{
     	AddCustomerController addcustomer = new AddCustomerController(0);
     	Stage stage = new Stage();
-    	//((Node) (event.getSource())).getScene().getWindow().hide();
+    	((Node) (event.getSource())).getScene().getWindow().hide();
     	addcustomer.start(stage);
     }
 	@FXML
@@ -165,6 +165,7 @@ public class ManageCustomerController extends Application implements Initializab
 		int customerId = customers.get(0).getPersonId();
 		AddCustomerController addCustomerController = new AddCustomerController(customerId);
 		Stage stage = new Stage();
+		((Node) (event.getSource())).getScene().getWindow().hide();
 		addCustomerController.start(stage);
 
 	}
@@ -186,8 +187,7 @@ public class ManageCustomerController extends Application implements Initializab
 		CustomerFacade cutFacade = new CustomerFacadeImpl();
 	     cutFacade.removeCustomer(customer);
 	    txtErrorMessage.setText("Customer Successfully Deleted");
-	    txtErrorMessage.setFill(Color.GREEN);
-	     	     
+	    txtErrorMessage.setFill(Color.GREEN);	     	     
 
 	}
 
