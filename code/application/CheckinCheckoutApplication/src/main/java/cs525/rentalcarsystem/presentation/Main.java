@@ -31,7 +31,6 @@ public class Main extends Application {
 		 * CheckinFormController checkin = new CheckinFormController();
 		 * checkin.start(primaryStage);
 		 */
-<<<<<<< HEAD
 		// AddCustomerController customer = new AddCustomerController();
 		// customer.start(primaryStage);
 //		CheckoutController checkout = new CheckoutController();
@@ -44,7 +43,6 @@ public class Main extends Application {
 //		customer.start(primaryStage);
 		/*AddCustomerController customer = new AddCustomerController();
 		customer.start(primaryStage);*/
-=======
 		/*
 		 * CheckoutController checkout = new CheckoutController();
 		 * checkout.start(primaryStage);
@@ -67,7 +65,6 @@ public class Main extends Application {
 		 * AddCustomerController customer = new AddCustomerController();
 		 * customer.start(primaryStage);
 		 */
->>>>>>> 016739bb233c5fd07bea242abc9009e08e976eda
 	}
 
 	public static void main(String[] args) {

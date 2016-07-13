@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
+import cs525.project.fujframework.middleware.ConsoleLogger;
 import cs525.project.fujframework.utils.DbHelper;
 
 /**
@@ -24,6 +25,7 @@ import cs525.project.fujframework.utils.DbHelper;
 public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	private DbAction dbaction;
 	StringBuilder queryBuilder;
+	StringBuilder updateProductQuery;
 
 	/**
 	 * 
@@ -41,6 +43,7 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	 */
 	@Override
 	public int saveCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry) {
+		System.out.println("QUERY: " + DbHelper.getInsertQuery(checkoutRecordEntry));
 		return this.dbaction.Create(DbHelper.getInsertQuery(checkoutRecordEntry));
 	}
 
@@ -69,15 +72,19 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	@Override
 	public int checkInRecord(CheckoutRecordEntry checkoutRecordEntry) {
 		queryBuilder = new StringBuilder();
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat format = new SimpleDateFormat(pattern);
-		try {
-			queryBuilder.append("UPDATE checkoutrecord SET isReturned='true', returnedDate='"
-					+ format.parse(LocalDate.now().toString()) + "' WHERE customerId="
-					+ checkoutRecordEntry.getCheckoutRecordEntryId());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		updateProductQuery = new StringBuilder();
+
+		queryBuilder.append("UPDATE checkoutrecordentry SET isReturned=b'1', returnedDate='"
+				+ LocalDate.now().toString() + "', rentalFine=" + checkoutRecordEntry.getRentalFine()
+				+ " WHERE checkoutRecordEntryId=" + checkoutRecordEntry.getCheckoutRecordEntryId());
+
+		updateProductQuery.append("UPDATE car SET quantity = quantity + " + checkoutRecordEntry.getQuantity()
+				+ " WHERE productId=" + checkoutRecordEntry.getProductRefId());
+
+		System.out.println("UPDATE QUERY: " + queryBuilder.toString());
+		System.out.println("UPDATE PRODUCT QUERY: " + updateProductQuery.toString());
+
+		this.dbaction.update(updateProductQuery.toString());
 		return this.dbaction.update(queryBuilder.toString());
 	}
 
@@ -100,9 +107,9 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName, Class<?> joinTableName) {
 
 		queryBuilder = new StringBuilder();
-		queryBuilder
-				.append("SELECT * FROM " + tableName.getSimpleName() + " a INNER JOIN " + joinTableName.getSimpleName()
-						+ " b ON a.customerRefId = " + customerId + " AND a.carRefId=b.productId");
+		queryBuilder.append("SELECT a.*, b.make, b.model, b.name, b.rentalFeePerDay, b.overduefinePerDay, b.plate FROM "
+				+ tableName.getSimpleName() + " a INNER JOIN " + joinTableName.getSimpleName()
+				+ " b ON a.customerRefId = " + customerId + " AND a.productRefId=b.productId");
 		return this.dbaction.read(queryBuilder.toString());
 	}
 

@@ -128,6 +128,7 @@ public class ApplicationUserController extends Application implements Initializa
 				user.setPassword(password);
 				user.setEmail(email);
 				user.setPhone(phone);
+				user.setIsAdmin(true);
 
 				if (command.saveSysUser(user)) {
 					successMsgLabel.setText("User added/updated successfully !!!");

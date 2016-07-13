@@ -58,11 +58,11 @@ public abstract class TransactionManager {
 	 */
 	protected void printBill(List<CheckoutRecordEntry> checkoutRecordEntries) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("---------------------------------------");
-		builder.append("========Rental System Bill=========");
+		builder.append("--------------------------------------- \n");
+		builder.append("========Rental System Bill========= \n");
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
-			builder.append("Your total Rental Fee is : " + checkoutRecordEntry.getRentalFee());
-			builder.append("Your total Rental Fine is : " + checkoutRecordEntry.getRentalFine());
+			builder.append("Your total Rental Fee is : " + checkoutRecordEntry.getRentalFee() + "\n");
+			builder.append("Your total Rental Fine is : " + checkoutRecordEntry.getRentalFine() + "\n");
 		}
 		builder.append("---------------------------------------");
 

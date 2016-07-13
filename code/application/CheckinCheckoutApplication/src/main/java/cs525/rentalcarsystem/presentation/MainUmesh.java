@@ -1,5 +1,6 @@
 package cs525.rentalcarsystem.presentation;
 
+import cs525.rentalcarsystem.controller.ApplicationUserController;
 import cs525.rentalcarsystem.controller.CheckinFormController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -41,12 +42,13 @@ public class MainUmesh extends Application {
 		 * CheckoutController checkout = new CheckoutController();
 		 * checkout.start(primaryStage);
 		 */
+		ApplicationUserController appuser = new ApplicationUserController();
+		appuser.start(primaryStage);
+
 		/*
-		 * ApplicationUserController appuser = new ApplicationUserController();
-		 * appuser.start(primaryStage);
+		 * CheckinFormController checkin = new CheckinFormController();
+		 * checkin.start(primaryStage);
 		 */
-		CheckinFormController checkin = new CheckinFormController();
-		checkin.start(primaryStage);
 		/*
 		 * LoginController login = new LoginController();
 		 * login.start(primaryStage);

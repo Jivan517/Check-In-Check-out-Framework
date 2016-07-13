@@ -8,6 +8,7 @@ package cs525.rentalcarsystem.controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,23 +16,18 @@ import java.util.ResourceBundle;
 import cs525.project.fujframework.core.CheckoutRecordEntry;
 import cs525.project.fujframework.core.CheckoutRecordFacade;
 import cs525.project.fujframework.core.CheckoutRecordFacadeImpl;
-import cs525.project.fujframework.core.Customer;
 import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
-import cs525.project.fujframework.core.Product;
-import cs525.project.fujframework.core.ProductFacade;
-import cs525.project.fujframework.core.SysUserFacade;
-import cs525.project.fujframework.core.SysUserFacadeImpl;
+import cs525.project.fujframework.middleware.CheckinTransactionManager;
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
+import cs525.project.fujframework.middleware.TransactionManager;
+import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.AppCustomer;
-import cs525.rentalcarsystem.model.ApplicationUser;
 import cs525.rentalcarsystem.model.Car;
 import cs525.rentalcarsystem.model.CheckinData;
 import cs525.rentalcarsystem.model.ComboBoxData;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,10 +37,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -104,6 +101,7 @@ public class CheckinFormController extends Application implements Initializable 
 
 	@FXML
 	void onCustomerSelected() {
+		ObservableList<CheckoutRecordEntry> entries = FXCollections.observableArrayList();
 		ObservableList<CheckinData> data = FXCollections.observableArrayList();
 		// selected customer
 		ComboBoxData<Integer, String> selectedCustomer = customerCombo.getSelectionModel().getSelectedItem();
@@ -112,15 +110,24 @@ public class CheckinFormController extends Application implements Initializable 
 		try {
 			while (recordEntries.next()) {
 				CheckinData checkinData = new CheckinData();
+				// CheckoutRecordEntry checkoutRecordEntries = new
+				// CheckoutRecordEntry();
 				checkinData.setModel(recordEntries.getString("model"));
 				checkinData.setName(recordEntries.getString("name"));
 				checkinData.setRentalFee(recordEntries.getDouble("rentalFeePerDay"));
 				checkinData.setRentalFinePerDay(recordEntries.getDouble("overDueFinePerDay"));
 				checkinData.setRentalFee(recordEntries.getDouble("rentalFee"));
-				checkinData.setDueDate(recordEntries.getString("dueDate"));
+				checkinData.setDueDate(recordEntries.getDate("dueDate").toLocalDate());
+				checkinData.setCheckoutDate(recordEntries.getDate("checkoutDate").toLocalDate());
+				checkinData.setCheckoutRecordEntryId(recordEntries.getInt("checkoutRecordEntryId"));
+				checkinData.setQuantity(recordEntries.getInt("quantity"));
+				checkinData.setPersonRefId(recordEntries.getInt("personRefId"));
+				checkinData.setProductRefId(recordEntries.getInt("productRefId"));
+				checkinData.setReturned(recordEntries.getBoolean("isReturned"));
 
-				data.add(checkinData);
-				System.out.println(checkinData.toString());
+				if (!checkinData.isReturned())
+					data.add(checkinData);
+				// entries.add(checkoutRecordEntries);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -170,6 +177,50 @@ public class CheckinFormController extends Application implements Initializable 
 		}
 		this.customerCombo.setPromptText("--Choose for checkin");
 		this.customerCombo.setItems(customerListObservable);
+
+		checkinRecordTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+	}
+
+	@FXML
+	protected void btnCheckinAction(ActionEvent event) throws Exception {
+
+		ObservableList<CheckinData> checkins = checkinRecordTable.getSelectionModel().getSelectedItems();
+		for (CheckinData checkin : checkins) {
+			System.out.println(checkin.toString());
+		}
+		if (checkins.size() < 1) {
+			DialogHelper.toast("Please, select a record!", AlertType.WARNING);
+			return;
+		}
+
+		List<CheckoutRecordEntry> entries = new ArrayList<>();
+		for (CheckinData checkin : checkins) {
+			CheckoutRecordEntry checkOutRecordEntry = new CheckoutRecordEntry();
+			checkOutRecordEntry.setCheckoutRecordEntryId(checkin.getCheckoutRecordEntryId());
+			checkOutRecordEntry.setCustomerRefId(checkin.getCustomerRefId());
+			checkOutRecordEntry.setPersonRefId(checkin.getPersonRefId());
+			checkOutRecordEntry.setQuantity(checkin.getQuantity());
+			checkOutRecordEntry.setRentalFee(checkin.getRentalFee());
+			checkOutRecordEntry.setRentalFine(checkin.getRentalFine());
+			checkOutRecordEntry.setDueDate(checkin.getDueDate());
+			checkOutRecordEntry.setReturnedDate(LocalDate.now());
+			checkOutRecordEntry.setReturnedDate(checkin.getReturnedDate());
+			checkOutRecordEntry.setReturned(true);
+			checkOutRecordEntry.setProductRefId(checkin.getProductRefId());
+
+			long loanDays = java.time.temporal.ChronoUnit.DAYS.between(checkOutRecordEntry.getDueDate(),
+					LocalDate.now());
+			System.out.println("TODAY: " + LocalDate.now());
+			System.out.println("DUEDATE: " + checkOutRecordEntry.getDueDate());
+
+			double rentalFine = loanDays * checkin.getQuantity() * checkin.getRentalFinePerDay();
+			checkOutRecordEntry.setRentalFine(rentalFine);
+			entries.add(checkOutRecordEntry);
+		}
+
+		Stage stage = new Stage();
+		CheckinPaymentController controller = new CheckinPaymentController(entries);
+		controller.start(stage);
 	}
 
 	@FXML
