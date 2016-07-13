@@ -43,6 +43,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -92,7 +93,7 @@ public class CheckinFormController extends Application implements Initializable 
 				.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/CheckinForm.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
-
+		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Checkin Form");
 		primaryStage.setScene(scene);

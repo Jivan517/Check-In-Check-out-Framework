@@ -22,6 +22,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -56,8 +58,11 @@ public class LoginController extends Application {
 		this.primaryStage.setTitle("Login");
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("LoginForm.fxml"));
+			primaryStage.setResizable(false);
+			primaryStage.setTitle("Login - Car Rental System [V1.0.0]");
+			primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 			AnchorPane page = (AnchorPane) loader.load();
-			Scene scene = new Scene(page);
+			Scene scene = new Scene(page, 400, 400);
 			Stage ps = new Stage();
 			ps.setScene(scene);
 			primaryStage.setScene(scene);
@@ -81,7 +86,6 @@ public class LoginController extends Application {
 			String password = txtPassword.getText();
 			ApplicationUser user = authenticateUser(userName, password);
 			if (user != null) {
-
 				SessionCache session = SessionCache.getInstance();
 				if (user.isAdmin())
 					session.add(BusinessConstants.ADMIN, BusinessConstants.ADMIN);

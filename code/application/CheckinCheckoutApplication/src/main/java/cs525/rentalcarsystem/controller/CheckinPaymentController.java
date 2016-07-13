@@ -17,7 +17,6 @@ import cs525.project.fujframework.utils.BusinessConstants;
 import cs525.project.fujframework.utils.SessionCache;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.Car;
-import cs525.rentalcarsystem.model.CheckinData;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -65,7 +65,7 @@ public class CheckinPaymentController extends Application implements Initializab
 				getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/CheckinPaymentForm.fxml"));
 		Scene scene = new Scene(root);
 		// scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
-
+		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Overdue Fee Payment");
 		primaryStage.setScene(scene);
