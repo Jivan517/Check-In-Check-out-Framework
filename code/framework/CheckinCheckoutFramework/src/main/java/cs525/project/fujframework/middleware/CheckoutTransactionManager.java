@@ -65,22 +65,23 @@ public class CheckoutTransactionManager extends TransactionManager {
 	@Override
 	protected List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(List<CheckoutRecordEntry> checkoutRecordEntries,
 			Class<?> productClass) {
-		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
-			ResultSet rs = productFacade.getProductById(checkoutRecordEntry.getProductRefId(), productClass);
 
-			double fee = 0;
-			try {
-				while (rs.next()) {
-					fee = rs.getDouble("rentalFeePerDay");
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			double rentalFee = checkoutRecordEntry.getQuantity() * fee;
-			checkoutRecordEntry.setRentalFee(rentalFee);
-		}
 		return checkoutRecordEntries;
+
+		/*
+		 * for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries)
+		 * { ResultSet rs =
+		 * productFacade.getProductById(checkoutRecordEntry.getProductRefId(),
+		 * productClass);
+		 * 
+		 * double fee = 0; try { while (rs.next()) { fee =
+		 * rs.getDouble("rentalFeePerDay"); } } catch (SQLException e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * double rentalFee = checkoutRecordEntry.getQuantity() * fee;
+		 * checkoutRecordEntry.setRentalFee(rentalFee); } return
+		 * checkoutRecordEntries;
+		 */
 	}
 
 	/*

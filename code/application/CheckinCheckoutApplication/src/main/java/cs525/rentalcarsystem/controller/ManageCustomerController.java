@@ -195,7 +195,7 @@ public class ManageCustomerController extends Application implements Initializab
 		String searchText = txtSearchCustomer.getText();
 		if(!searchText.isEmpty()){
 			customerList.stream().filter(m->m.getFirstName().contains(searchText));
-			
+			populateTable();
 		}
 		txtErrorMessage.setText(txtSearchCustomer.getText()+" Customer Not Found");
 		txtErrorMessage.setFill(Color.RED);

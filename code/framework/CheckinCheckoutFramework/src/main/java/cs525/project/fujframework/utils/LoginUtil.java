@@ -21,7 +21,12 @@ public class LoginUtil {
 	 * @return
 	 */
 	public static boolean isLoggedIn() {
-		return (Boolean) SessionCache.getInstance().get(BusinessConstants.LOGGED_IN);
+		Object value = SessionCache.getInstance().get(BusinessConstants.LOGGED_IN);
+		Boolean flag = false;
+		if (value != null)
+			flag = true;
+		System.out.println("LoggedIn: " + flag);
+		return flag;
 	}
 
 	/**
@@ -30,7 +35,21 @@ public class LoginUtil {
 	 * @return
 	 */
 	public static boolean isAdmin() {
-		return (Boolean) SessionCache.getInstance().get(BusinessConstants.ADMIN);
+		Object value = SessionCache.getInstance().get(BusinessConstants.ADMIN);
+		Boolean flag = false;
+		if (value != null)
+			flag = true;
+		System.out.println("IsADMIN: " + flag);
+		return flag;
+	}
+
+	public static boolean isStaff() {
+		Object value = SessionCache.getInstance().get(BusinessConstants.STAFF);
+		Boolean flag = false;
+		if (value != null)
+			flag = true;
+		System.out.println("IsStaff: " + flag);
+		return flag;
 	}
 
 }
