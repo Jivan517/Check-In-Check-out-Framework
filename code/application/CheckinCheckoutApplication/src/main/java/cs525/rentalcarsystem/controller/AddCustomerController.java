@@ -14,8 +14,11 @@ import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
+import cs525.rentalcarsystem.controller.utils.DialogHelper;
+import cs525.rentalcarsystem.controller.utils.Validator;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
+import cs525.rentalcarsystem.model.FormException;
 import cs525.rentalcarsystem.presentation.Main;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -26,6 +29,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -109,6 +113,13 @@ public class AddCustomerController extends Application implements Initializable 
 	@FXML
 	protected void addCustomer(ActionEvent event) throws Exception {
 		if (!txtFirstName.getText().isEmpty()) {
+			
+			/*Validator.validateEmptiness(txtFirstName);
+			Validator.validateEmptiness(txtiddleName);
+			Validator.validateEmptiness(txtLastName);
+			
+			Validator.validateNumeric(txtZipCode);*/
+			
 			AppCustomer customer = new AppCustomer();
 			customer.setFirstName(txtFirstName.getText());
 			customer.setMiddleName(txtiddleName.getText());

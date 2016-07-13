@@ -55,8 +55,6 @@ public class ManageCustomerController extends Application implements Initializab
 	@FXML
 	private Text txtErrorMessage;
 	private Stage primaryStage;
-	private Stage rootStage = new Stage();
-
 	@FXML
 	TableView<AppCustomer> tblView;
 	@FXML
@@ -127,7 +125,6 @@ public class ManageCustomerController extends Application implements Initializab
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		this.rootStage = primaryStage;
 		this.primaryStage.setTitle("Add Customer Form");
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("ManageCustomerForm.fxml"));
