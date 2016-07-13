@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
@@ -52,9 +53,12 @@ public class ManageCustomerController extends Application implements Initializab
 	private Button btnDelete;
 	@FXML
 	private Button btnEdit;
-	@FXML Button btnAddCustomer;
-	@FXML Button btnSearch;
-	@FXML TextField txtSearchCustomer;
+	@FXML
+	Button btnAddCustomer;
+	@FXML
+	Button btnSearch;
+	@FXML
+	TextField txtSearchCustomer;
 	@FXML
 	private Text txtErrorMessage;
 	private Stage primaryStage;
@@ -106,26 +110,27 @@ public class ManageCustomerController extends Application implements Initializab
 
 				customerList.add(cus);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-    private void populateTable(){
-    	colCustomerId.setCellValueFactory(new PropertyValueFactory<AppCustomer, Integer>("personId"));
+
+	private void populateTable() {
+		colCustomerId.setCellValueFactory(new PropertyValueFactory<AppCustomer, Integer>("personId"));
 		colCustomerName.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("fullName"));
 		colEmail.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("email"));
 		colPhoneNumber.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("phone"));
 		colAddress.setCellValueFactory(new PropertyValueFactory<Address, String>("fullAddress"));
 		tblView.setItems(customerList);
-    }
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tblView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		populateCustomer();
 		populateTable();
 	}
-	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -144,12 +149,15 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 	}
-    @FXML protected void AddCustomer(ActionEvent event) throws Exception{
-    	AddCustomerController addcustomer = new AddCustomerController(0,0);
-    	Stage stage = new Stage();
-    	((Node) (event.getSource())).getScene().getWindow().hide();
-    	addcustomer.start(stage);
-    }
+
+	@FXML
+	protected void AddCustomer(ActionEvent event) throws Exception {
+		AddCustomerController addcustomer = new AddCustomerController(0, 0);
+		Stage stage = new Stage();
+		((Node) (event.getSource())).getScene().getWindow().hide();
+		addcustomer.start(stage);
+	}
+
 	@FXML
 	protected void editCustomer(ActionEvent event) throws Exception {
 
@@ -165,8 +173,8 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 		int customerId = customers.get(0).getPersonId();
-		int addressId =customers.get(0).getAddress().getAddressId();
-		AddCustomerController addCustomerController = new AddCustomerController(customerId,addressId);
+		int addressId = customers.get(0).getAddress().getAddressId();
+		AddCustomerController addCustomerController = new AddCustomerController(customerId, addressId);
 		Stage stage = new Stage();
 		((Node) (event.getSource())).getScene().getWindow().hide();
 		addCustomerController.start(stage);
@@ -188,25 +196,34 @@ public class ManageCustomerController extends Application implements Initializab
 
 		AppCustomer customer = customers.get(0);
 		CustomerFacade cutFacade = new CustomerFacadeImpl();
-	     cutFacade.removeCustomer(customer);
-	    txtErrorMessage.setText("Customer Successfully Deleted");
-	    txtErrorMessage.setFill(Color.GREEN);	     	     
+		cutFacade.removeCustomer(customer);
+		txtErrorMessage.setText("Customer Successfully Deleted");
+		txtErrorMessage.setFill(Color.GREEN);
 
 	}
-	@FXML 
-	protected void searchCustomer(ActionEvent event){
+
+	@FXML
+	protected void searchCustomer(ActionEvent event) {
 		String searchText = txtSearchCustomer.getText();
-		if(!searchText.isEmpty()){
-			
-			customerList.stream().filter(m->m.getFirstName().contains(searchText)|| 
-					                        m.getMiddleName().contains(searchText)|| 
-			                                m.getLastName().contains(searchText) );			
+		searchText.toLowerCase();
+		if (!searchText.isEmpty()) {
+
+			List<AppCustomer> appCustomerList = customerList
+					.stream().filter(m -> m.getFirstName().toLowerCase().contains(searchText)
+							           || m.getMiddleName().toLowerCase().contains(searchText)
+							           || m.getLastName().toLowerCase().contains(searchText))
+					.collect(Collectors.toList());
+
+			customerList.clear();
+			for (AppCustomer cust : appCustomerList) {
+				customerList.add(cust);
+			}
 			populateTable();
-		}else{
-			txtErrorMessage.setText(txtSearchCustomer.getText()+" Customer Not Found");
+		} else {
+			txtErrorMessage.setText(txtSearchCustomer.getText() + " Customer Not Found");
 			txtErrorMessage.setFill(Color.RED);
 		}
-		
+
 	}
 
 }
