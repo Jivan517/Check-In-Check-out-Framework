@@ -31,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -52,6 +53,8 @@ public class ManageCustomerController extends Application implements Initializab
 	@FXML
 	private Button btnEdit;
 	@FXML Button btnAddCustomer;
+	@FXML Button btnSearch;
+	@FXML TextField txtSearchCustomer;
 	@FXML
 	private Text txtErrorMessage;
 	private Stage primaryStage;
@@ -186,6 +189,16 @@ public class ManageCustomerController extends Application implements Initializab
 	    txtErrorMessage.setText("Customer Successfully Deleted");
 	    txtErrorMessage.setFill(Color.GREEN);	     	     
 
+	}
+	@FXML 
+	protected void searchCustomer(ActionEvent event){
+		String searchText = txtSearchCustomer.getText();
+		if(!searchText.isEmpty()){
+			customerList.stream().filter(m->m.getFirstName().contains(searchText));
+			
+		}
+		txtErrorMessage.setText(txtSearchCustomer.getText()+" Customer Not Found");
+		txtErrorMessage.setFill(Color.RED);
 	}
 
 }
