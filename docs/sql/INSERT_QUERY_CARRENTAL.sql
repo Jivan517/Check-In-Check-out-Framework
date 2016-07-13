@@ -91,3 +91,5 @@ PRIMARY KEY (checkoutRecordEntryId)
  
         
 )ENGINE=INNODB;
+
+ALTER TABLE `carrentalsystem`.`customer` RENAME TO `carrentalsystem`.`appcustomer`;

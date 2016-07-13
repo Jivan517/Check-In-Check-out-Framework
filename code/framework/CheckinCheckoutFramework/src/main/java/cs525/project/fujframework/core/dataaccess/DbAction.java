@@ -4,6 +4,9 @@
  * Licensed under the MIT License (MIT);
  */
 package cs525.project.fujframework.core.dataaccess;
+
+import java.sql.ResultSet;
+
 /**
  * This @{DbAction} class used for performing database actions
  * by communicating with @{SimpleConnectionPool} 
@@ -23,7 +26,7 @@ public interface DbAction {
 	 * @param query
 	 * @return Object 
 	 */
-	public Object read(String query);
+	public ResultSet read(String query);
 
 	/**
 	 * This method Performs delete query based passed query statement

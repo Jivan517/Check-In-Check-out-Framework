@@ -4,14 +4,19 @@
  * Licensed under the MIT License (MIT);
  */
 package cs525.rentalcarsystem.controller;
+
 import cs525.project.fujframework.middleware.Command;
+import cs525.project.fujframework.middleware.CommandManager;
+import cs525.project.fujframework.middleware.CommandManagerImpl;
 import cs525.project.fujframework.middleware.SaveCustomerCommand;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.presentation.Main;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -48,20 +53,23 @@ public class AddCustomerController extends Application {
 	private TextField txtZipCode;
 	@FXML
 	private TextField txtState;
-	
-	@FXML private Text txtErrorMessag;
+
+	@FXML
+	private Text txtErrorMessag;
 
 	@FXML
 	private Button btnSave;
 	@FXML
 	private Button btnCancel;
-	
+
 	private Stage primaryStage;
 	private Stage rootStage = new Stage();
 
-	private Command command;
+	private CommandManager command;
+
 	public AddCustomerController() {
 
+		this.command = new CommandManagerImpl();
 	}
 
 	@Override
@@ -87,35 +95,32 @@ public class AddCustomerController extends Application {
 	 * SaveCustomerCommand command
 	 */
 	@FXML
-	protected void addCustomer() {
-		if(!txtFirstName.getText().isEmpty()){
+	protected void addCustomer(ActionEvent event) {
+		if (!txtFirstName.getText().isEmpty()) {
 			AppCustomer customer = new AppCustomer();
 			customer.setFirstName(txtFirstName.getText());
 			customer.setMiddleName(txtiddleName.getText());
 			customer.setLastName(txtLastName.getText());
 			customer.setEmail(txtEmail.getText());
-			customer.setPhoneNumber(txtPhoneNumber.getText());
+			customer.setPhone(txtPhoneNumber.getText());
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
 					Integer.parseInt(txtZipCode.getText()), txtStreet.getText());
 			customer.setAddress(userAddress);
-			command = new SaveCustomerCommand(customer);
-			command.execute();
-		}
-		else{
-			
+			this.command.saveCustomer(customer);
+		} else {
+
 			txtErrorMessag.setText("All fields are Required");
 			txtErrorMessag.setFill(Color.RED);
 		}
-		
+
 	}
 
 	/**
 	 * Action will be performed when the user click cancel button
 	 */
 	@FXML
-	protected void cancelHandler() {
-       
+	protected void cancelHandler(ActionEvent event) {
+		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
-	
 
 }

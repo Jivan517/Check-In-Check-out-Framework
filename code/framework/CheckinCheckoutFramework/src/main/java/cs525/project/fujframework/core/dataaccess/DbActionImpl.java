@@ -63,7 +63,7 @@ public class DbActionImpl implements DbAction {
 	 * String)
 	 */
 	@Override
-	public Object read(String query) {
+	public ResultSet read(String query) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

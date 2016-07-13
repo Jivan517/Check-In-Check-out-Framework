@@ -3,8 +3,14 @@
  */
 package cs525.project.fujframework.core;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
+import cs525.project.fujframework.middleware.ConsoleLogger;
+import cs525.project.fujframework.middleware.Logger;
+import cs525.project.fujframework.middleware.LoggerImpl;
 import cs525.project.fujframework.utils.DbHelper;
 
 /**
@@ -17,12 +23,14 @@ import cs525.project.fujframework.utils.DbHelper;
 public class CustomerFacadeImpl implements CustomerFacade {
 	private DbAction dbaction;
 	StringBuilder queryBuilder;
+	private Logger logger;
 
 	/**
 	 * 
 	 */
 	public CustomerFacadeImpl() {
 		this.dbaction = new DbActionImpl();
+		this.logger = new ConsoleLogger(new LoggerImpl());
 	}
 
 	/*
@@ -36,9 +44,15 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	public int saveCustomer(Customer customer) {
 		this.dbaction.Create(DbHelper.getInsertQuery(customer));
 
-		int personId = getRecentlyAddedCustomer();
+		String tableName = customer.getClass().getSimpleName();
+
+		logger.info("customer saved in " + tableName);
+		int personId = getRecentlyAddedCustomer(tableName);
+
 		Address address = customer.getAddress();
 		address.setPersonId(personId);
+
+		logger.info("PersonID " + personId);
 		address.setIsCustomer(true);
 		return this.dbaction.Create(DbHelper.getInsertQuery(address));
 
@@ -53,7 +67,8 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	@Override
 	public int removeCustomer(Customer customer) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("DELETE FROM customer WHERE customerId=" + customer.getPersonId());
+		String tableName = customer.getClass().getSimpleName();
+		queryBuilder.append("DELETE FROM " + tableName + " WHERE customerId=" + customer.getPersonId());
 		return this.dbaction.delete(queryBuilder.toString());
 	}
 
@@ -69,10 +84,13 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		return (Customer) this.dbaction.read(queryBuilder.toString());
 	}
 
-	private int getRecentlyAddedCustomer() {
+	private int getRecentlyAddedCustomer(String tableName) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT customerId FROM customer ORDER BY customerId LIMIT 1");
-		return (Integer) this.dbaction.read(queryBuilder.toString());
+		queryBuilder.append("SELECT * FROM " + tableName + " ORDER BY customerId LIMIT 1");
+
+		ResultSet result = this.dbaction.read(queryBuilder.toString());
+		Customer customer = (Customer) result;
+		return customer.getPersonId();
 	}
 
 }

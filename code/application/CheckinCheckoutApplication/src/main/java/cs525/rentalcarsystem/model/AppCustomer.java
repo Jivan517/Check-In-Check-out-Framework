@@ -13,10 +13,10 @@ import cs525.project.fujframework.core.Customer;
  */
 public class AppCustomer extends Customer {
 	
-	private String phoneNumber;
+	private String phone;
 	
-	public void setPhoneNumber(String phoneNumber){
-		this.phoneNumber = phoneNumber;
+	public void setPhone(String phone){
+		this.phone = phone;
 	}
 
 }
