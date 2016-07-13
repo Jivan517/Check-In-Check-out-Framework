@@ -14,7 +14,9 @@ import javafx.scene.control.TextField;
  */
 public class Validator {
 	public static void validateNumeric(TextField field) throws FormException {
-		if (!field.getText().toString().matches("^\\d+$"))
+
+		// ^[1-9]\d*(\.\d+)?$
+		if (!field.getText().toString().matches("^[1-9]\\d*(\\.\\d+)?$"))
 			throw new FormException(field.getId() + " field must be numeric");
 	}
 

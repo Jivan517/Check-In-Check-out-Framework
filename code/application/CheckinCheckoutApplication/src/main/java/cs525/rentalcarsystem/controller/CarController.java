@@ -70,7 +70,7 @@ public class CarController extends Application implements Initializable {
 		Parent root = FXMLLoader
 				.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/CarForm.fxml"));
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
+		//scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
 
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Add/Update Car Information");
