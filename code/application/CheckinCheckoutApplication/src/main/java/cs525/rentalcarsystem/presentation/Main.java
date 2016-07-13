@@ -30,13 +30,10 @@ public class Main extends Application {
 		appuser.start(primaryStage);
 		/*CheckinFormController checkin = new CheckinFormController();
 		checkin.start(primaryStage);*/
-<<<<<<< HEAD
 		ManageCustomerController customer = new ManageCustomerController();
 		customer.start(primaryStage);
-=======
 		/*AddCustomerController customer = new AddCustomerController();
 		customer.start(primaryStage);*/
->>>>>>> f9f11f0503429656f938931d7058b3e99931540d
 	}
 
 	public static void main(String[] args) {
