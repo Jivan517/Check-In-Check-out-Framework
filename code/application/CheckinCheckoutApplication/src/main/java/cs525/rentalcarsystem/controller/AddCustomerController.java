@@ -119,7 +119,6 @@ public class AddCustomerController extends Application implements Initializable 
 
 		try {
 			Validator.validateEmptiness(txtFirstName);
-			Validator.validateEmptiness(txtiddleName);
 			Validator.validateEmptiness(txtLastName);
 			Validator.validateEmptiness(txtStreet);
 			Validator.validateNumeric(txtZipCode);
