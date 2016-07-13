@@ -41,4 +41,12 @@ public interface SysUserFacade {
 	 * @return resultSet of all system users
 	 */
 	public ResultSet getAllUsers(Class<?> tableName);
+	
+	/**
+	 * checks if the user exists or not
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public ResultSet getUserByUserNameAndPassword(String userName,String password,Class<?> userTable);
 }
