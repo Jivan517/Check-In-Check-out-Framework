@@ -28,7 +28,7 @@ import cs525.project.fujframework.middleware.LoggerImpl;
 public class DbActionImpl implements DbAction {
 	SimpleConnectionPool connection = SimpleConnectionPool.getInstance();
 	Logger consoleLogger;
-	
+
 	/**
 	 * 
 	 */
@@ -78,6 +78,7 @@ public class DbActionImpl implements DbAction {
 			con = SimpleConnectionPool.getConnection();
 			Statement statement = con.createStatement();
 			// ps = con.prepareStatement(query);
+			consoleLogger.debug(query);
 			rs = statement.executeQuery(query);
 
 		} catch (Exception e) {

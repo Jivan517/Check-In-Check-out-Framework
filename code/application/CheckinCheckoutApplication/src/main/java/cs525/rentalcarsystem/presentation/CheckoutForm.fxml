@@ -88,7 +88,7 @@
 						</VBox>
 						<VBox alignment="CENTER" prefHeight="100.0" prefWidth="114.0">
 							<children>
-								<Button fx:id="checkoutBtn" defaultButton="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Checkout" />
+								<Button fx:id="checkoutBtn" defaultButton="true" mnemonicParsing="false" onAction="#btnCheckoutAction" prefHeight="31.0" prefWidth="113.0" text="Checkout" />
 							</children>
 						</VBox>
 						<VBox alignment="CENTER" prefHeight="100.0" prefWidth="22.0" />
