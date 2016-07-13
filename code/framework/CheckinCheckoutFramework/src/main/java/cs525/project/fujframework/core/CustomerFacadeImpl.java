@@ -80,7 +80,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		String tableName = "AppCustomer";
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName + " where customerId = " + customerId);
-		return  this.dbaction.read(queryBuilder.toString());
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 	private int getRecentlyAddedCustomer(String tableName) {
@@ -109,6 +109,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		System.out.println(queryBuilder.toString());
 		return this.dbaction.read(queryBuilder.toString());
 	}
 

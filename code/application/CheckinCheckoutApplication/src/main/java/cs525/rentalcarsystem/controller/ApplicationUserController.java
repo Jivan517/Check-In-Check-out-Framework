@@ -21,7 +21,10 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
@@ -85,8 +88,15 @@ public class ApplicationUserController extends Application implements Initializa
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
+		Parent root = FXMLLoader
+				.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/ApplicationUserForm.fxml"));
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
 
+		primaryStage.setResizable(true);
+		primaryStage.setTitle("Application User Form");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	@FXML
