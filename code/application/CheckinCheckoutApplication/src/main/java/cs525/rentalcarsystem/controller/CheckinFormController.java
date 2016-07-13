@@ -34,9 +34,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -134,8 +136,9 @@ public class CheckinFormController extends Application implements Initializable 
 		rentalFinePerDay.setCellValueFactory(new PropertyValueFactory<CheckinData, Double>("rentalFinePerDay"));
 		rentalFee.setCellValueFactory(new PropertyValueFactory<CheckinData, Double>("rentalFee"));
 		dueDate.setCellValueFactory(new PropertyValueFactory<CheckinData, String>("dueDate"));
-		
-		checkinRecordTable.setItems(checkinRecords);
+
+		if (checkinRecords != null)
+			checkinRecordTable.setItems(checkinRecords);
 	}
 
 	/*
@@ -169,32 +172,8 @@ public class CheckinFormController extends Application implements Initializable 
 		this.customerCombo.setItems(customerListObservable);
 	}
 
-	public void populateProductTable() {
-		ObservableList<ApplicationUser> users = FXCollections.observableArrayList();
-		/*
-		 * try { ResultSet rs =
-		 * productFacade.getAllUsers(ApplicationUser.class); while (rs.next()) {
-		 * ApplicationUser user = new ApplicationUser();
-		 * user.setSysuserId(rs.getInt("sysuserId"));
-		 * user.setUserName(rs.getString("userName"));
-		 * user.setFirstName(rs.getString("firstName"));
-		 * user.setMiddleName(rs.getString("middleName"));
-		 * user.setLastName(rs.getString("lastName"));
-		 * user.setEmail(rs.getString("email"));
-		 * user.setIsAdmin(rs.getBoolean("isAdmin"));
-		 * user.setPhone(rs.getString("phone"));
-		 * 
-		 * users.add(user); } } catch (SQLException e) { e.printStackTrace(); }
-		 * populateTable(users);
-		 * userTable.getSelectionModel().selectedItemProperty().addListener((
-		 * obs, oldSelection, newSelection) -> { if (newSelection != null) {
-		 * userId = newSelection.getSysuserId();
-		 * usernameTxt.setText(newSelection.getUserName());
-		 * firstNameTxt.setText(newSelection.getFirstName());
-		 * middleNameTxt.setText(newSelection.getMiddleName());
-		 * lastNameTxt.setText(newSelection.getLastName());
-		 * emailTxt.setText(newSelection.getEmail());
-		 * phoneTxt.setText(newSelection.getPhone()); } });
-		 */
+	@FXML
+	protected void btnCancelAction(ActionEvent event) throws Exception {
+		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
 }

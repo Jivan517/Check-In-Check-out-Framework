@@ -50,6 +50,11 @@
                               <Insets top="40.0" />
                            </VBox.margin>
                         </Button>
+                        <Button cancelButton="true" mnemonicParsing="false" onAction="#btnCancelAction" text="Cancel">
+                           <VBox.margin>
+                              <Insets left="90.0" top="-30.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
                </children>

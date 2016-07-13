@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="741.0" prefWidth="870.0"
-	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="cs525.rentalcarsystem.controller.ApplicationUserController">
+<BorderPane prefHeight="741.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ApplicationUserController">
 	<center>
 		<HBox prefHeight="641.0" prefWidth="380.0" BorderPane.alignment="CENTER">
 			<children>
@@ -18,65 +16,75 @@
 					<children>
 						<VBox prefHeight="641.0" prefWidth="237.0">
 							<children>
-								<Label alignment="BOTTOM_RIGHT" prefHeight="39.0"
-									prefWidth="104.0" text="First Name:">
+								<Label alignment="BOTTOM_RIGHT" prefHeight="39.0" prefWidth="80.0" text="First Name:">
 									<VBox.margin>
 										<Insets top="10.0" />
 									</VBox.margin>
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
 								</Label>
 								<Label prefHeight="62.0" prefWidth="127.0" text="Middle Name:">
 									<VBox.margin>
-										<Insets top="25.0" />
+										<Insets top="30.0" />
 									</VBox.margin>
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
 								</Label>
 								<Label prefHeight="41.0" prefWidth="84.0" text="LastName">
 									<VBox.margin>
-										<Insets top="15.0" />
+										<Insets top="20.0" />
 									</VBox.margin>
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="67.0" prefWidth="106.0" text="UserName:">
+								<Label prefHeight="67.0" prefWidth="104.0" text="UserName:">
 									<VBox.margin>
 										<Insets top="10.0" />
 									</VBox.margin>
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
 								</Label>
 								<Label prefHeight="60.0" prefWidth="125.0" text="Password:">
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
+                           <VBox.margin>
+                              <Insets top="-5.0" />
+                           </VBox.margin>
 								</Label>
 								<Label prefHeight="60.0" prefWidth="163.0" text="Confirm Password:">
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
 								</Label>
 								<Label prefHeight="80.0" prefWidth="125.0" text="Email:">
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
 								</Label>
 								<Label prefHeight="80.0" prefWidth="125.0" text="Phone:">
 									<font>
-										<Font name="Broadway" size="15.0" />
+										<Font name="SansSerif Regular" size="15.0" />
 									</font>
+                           <VBox.margin>
+                              <Insets top="-10.0" />
+                           </VBox.margin>
 								</Label>
 							</children>
 						</VBox>
 						<VBox prefHeight="542.0" prefWidth="324.0">
 							<children>
-								<TextField fx:id="firstNameTxt" prefHeight="48.0"
-									prefWidth="324.0" promptText="First Name">
+								<TextField fx:id="firstNameTxt" prefHeight="48.0" prefWidth="324.0" promptText="First Name">
 									<padding>
 										<Insets top="4.0" />
 									</padding>
@@ -84,54 +92,51 @@
 										<Insets top="10.0" />
 									</VBox.margin>
 								</TextField>
-								<TextField fx:id="middleNameTxt" prefHeight="51.0"
-									prefWidth="324.0" promptText="Middle Name">
+								<TextField fx:id="middleNameTxt" prefHeight="51.0" prefWidth="324.0" promptText="Middle Name">
 									<VBox.margin>
 										<Insets top="25.0" />
 									</VBox.margin>
 								</TextField>
-								<TextField fx:id="lastNameTxt" prefHeight="44.0"
-									prefWidth="324.0" promptText="Last Name">
+								<TextField fx:id="lastNameTxt" prefHeight="44.0" prefWidth="324.0" promptText="Last Name">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
 								</TextField>
-								<TextField fx:id="usernameTxt" prefHeight="45.0"
-									prefWidth="324.0" promptText="User Name">
+								<TextField fx:id="usernameTxt" prefHeight="45.0" prefWidth="324.0" promptText="User Name">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
 								</TextField>
-								<PasswordField fx:id="passwordTxt" prefHeight="47.0"
-									prefWidth="324.0" promptText="Password">
+								<PasswordField fx:id="passwordTxt" prefHeight="47.0" prefWidth="324.0" promptText="Password">
 									<VBox.margin>
 										<Insets top="15.0" />
 									</VBox.margin>
 								</PasswordField>
-								<PasswordField fx:id="confirmPasswordTxt"
-									prefHeight="51.0" prefWidth="324.0" promptText="Confirm Password">
+								<PasswordField fx:id="confirmPasswordTxt" prefHeight="51.0" prefWidth="324.0" promptText="Confirm Password">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
 								</PasswordField>
-								<TextField fx:id="emailTxt" prefHeight="45.0"
-									prefWidth="324.0" promptText="Email">
+								<TextField fx:id="emailTxt" prefHeight="45.0" prefWidth="324.0" promptText="Email">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
 								</TextField>
-								<TextField fx:id="phoneTxt" prefHeight="45.0"
-									prefWidth="324.0" promptText="Phone">
+								<TextField fx:id="phoneTxt" prefHeight="45.0" prefWidth="324.0" promptText="Phone">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
 								</TextField>
-								<Button fx:id="saveBtn" defaultButton="true"
-									mnemonicParsing="false" onAction="#onSaveBtnClicked" text="Save User">
+								<Button fx:id="saveBtn" defaultButton="true" mnemonicParsing="false" onAction="#onSaveBtnClicked" text="Save User">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
 								</Button>
+                        <Button cancelButton="true" mnemonicParsing="false" onAction="#btnCancelAction" text="Cancel">
+                           <VBox.margin>
+                              <Insets left="90.0" top="-30.0" />
+                           </VBox.margin>
+                        </Button>
 								<Label fx:id="successMsgLabel" textFill="#61bc5a">
 									<VBox.margin>
 										<Insets top="15.0" />
@@ -163,8 +168,7 @@
 	<top>
 		<HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
-				<Label text="Add/Update Application User" textFill="#0000008c"
-					underline="true">
+				<Label text="Add/Update Application User" textFill="#0000008c" underline="true">
 					<HBox.margin>
 						<Insets top="40.0" />
 					</HBox.margin>
