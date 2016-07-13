@@ -94,11 +94,13 @@ public class ManageCustomerController extends Application implements Initializab
 				cus.setAddress(new cs525.project.fujframework.core.Address());
 				ResultSet addressResult = customerFacade.getAddressByCustomerId(cus.getPersonId(), Address.class);
 				while (addressResult.next()) {
+					int addressId = addressResult.getInt("addressId");
 					String street = addressResult.getString("streetAddress");
 					String city = addressResult.getString("city");
 					int zipCode = addressResult.getInt("zipCode");
 					String state = addressResult.getString("state");
 					Address address = new Address(street, city, zipCode, state);
+					address.setAddressId(addressId);
 					cus.setAddress(address);
 				}
 
@@ -143,7 +145,7 @@ public class ManageCustomerController extends Application implements Initializab
 
 	}
     @FXML protected void AddCustomer(ActionEvent event) throws Exception{
-    	AddCustomerController addcustomer = new AddCustomerController(0);
+    	AddCustomerController addcustomer = new AddCustomerController(0,0);
     	Stage stage = new Stage();
     	((Node) (event.getSource())).getScene().getWindow().hide();
     	addcustomer.start(stage);
@@ -163,7 +165,8 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 		int customerId = customers.get(0).getPersonId();
-		AddCustomerController addCustomerController = new AddCustomerController(customerId);
+		int addressId =customers.get(0).getAddress().getAddressId();
+		AddCustomerController addCustomerController = new AddCustomerController(customerId,addressId);
 		Stage stage = new Stage();
 		((Node) (event.getSource())).getScene().getWindow().hide();
 		addCustomerController.start(stage);
@@ -194,11 +197,15 @@ public class ManageCustomerController extends Application implements Initializab
 	protected void searchCustomer(ActionEvent event){
 		String searchText = txtSearchCustomer.getText();
 		if(!searchText.isEmpty()){
-			customerList.stream().filter(m->m.getFirstName().contains(searchText));
+			customerList.stream().filter(m->m.getFirstName().contains(searchText)|| 
+					                        m.getMiddleName().contains(searchText)|| 
+			                                m.getLastName().contains(searchText) );			
 			populateTable();
+		}else{
+			txtErrorMessage.setText(txtSearchCustomer.getText()+" Customer Not Found");
+			txtErrorMessage.setFill(Color.RED);
 		}
-		txtErrorMessage.setText(txtSearchCustomer.getText()+" Customer Not Found");
-		txtErrorMessage.setFill(Color.RED);
+		
 	}
 
 }

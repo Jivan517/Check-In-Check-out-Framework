@@ -75,6 +75,7 @@ public class AddCustomerController extends Application implements Initializable 
 
 	private CommandManager command;
 	public static int customerId;
+	public static int addressId ;
 	private ManageCustomerController manageController;
 
 	public AddCustomerController() {
@@ -82,8 +83,9 @@ public class AddCustomerController extends Application implements Initializable 
 		this.command = new CommandManagerImpl();
 	}
 
-	public AddCustomerController(int customerId) {
+	public AddCustomerController(int customerId,int addressId) {
 		this.customerId = customerId;
+		this.addressId = addressId;
 
 		this.command = new CommandManagerImpl();
 	}
@@ -128,9 +130,13 @@ public class AddCustomerController extends Application implements Initializable 
 			customer.setPhone(txtPhoneNumber.getText());
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
 					Integer.parseInt(txtZipCode.getText().trim()), txtStreet.getText());
-			customer.setAddress(userAddress);
-			if (customerId > 0)
+			
+			if (customerId > 0){
+                userAddress.setAddressId(addressId);
 				customer.setPersonId(customerId);
+				
+			}			
+			customer.setAddress(userAddress);
 			this.command.saveCustomer(customer);
 			((Node) (event.getSource())).getScene().getWindow().hide();
 			backToMaageController();
@@ -165,6 +171,7 @@ public class AddCustomerController extends Application implements Initializable 
 				txtPhoneNumber.setText(result.getString("phone"));
 				ResultSet address = custFacade.getAddressByCustomerId(customerId, Address.class);
 				while (address.next()) {
+					addressId = address.getInt("addressId");
 					txtStreet.setText(address.getString("streetAddress"));
 					txtCity.setText(address.getString("city"));
 					txtZipCode.setText("" + address.getInt("zipCode"));

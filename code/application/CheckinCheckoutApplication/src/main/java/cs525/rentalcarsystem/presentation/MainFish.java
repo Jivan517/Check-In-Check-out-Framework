@@ -1,6 +1,7 @@
 package cs525.rentalcarsystem.presentation;
 
 import cs525.rentalcarsystem.controller.CheckinFormController;
+import cs525.rentalcarsystem.controller.ManageCustomerController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -45,8 +46,8 @@ public class MainFish extends Application {
 		 * ApplicationUserController appuser = new ApplicationUserController();
 		 * appuser.start(primaryStage);
 		 */
-		CheckinFormController checkin = new CheckinFormController();
-		checkin.start(primaryStage);
+		ManageCustomerController manageCustomer = new ManageCustomerController();
+		manageCustomer.start(primaryStage);
 		/*
 		 * LoginController login = new LoginController();
 		 * login.start(primaryStage);
