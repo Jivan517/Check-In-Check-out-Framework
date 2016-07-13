@@ -15,6 +15,7 @@ import java.util.List;
 public class CheckoutCart {
 
 	private int customerId;
+	private String customerName;
 	private List<Car> cars;
 
 	public CheckoutCart() {
@@ -41,6 +42,14 @@ public class CheckoutCart {
 
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 }

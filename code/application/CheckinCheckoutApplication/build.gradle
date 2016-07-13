@@ -31,6 +31,9 @@ dependencies {
     
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+	
+	compile name: 'javaee'
+    compile name: 'mail'
     
 }
   

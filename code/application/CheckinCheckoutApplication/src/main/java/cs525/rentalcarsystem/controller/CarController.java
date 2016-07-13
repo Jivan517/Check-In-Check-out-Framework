@@ -80,15 +80,12 @@ public class CarController extends Application implements Initializable {
 	}
 
 	public CarController() {
-		System.out.println("without param: " + carId);
 		this.command = new CommandManagerImpl();
 		logger = new ConsoleLogger(new LoggerImpl());
 	}
 
 	public CarController(int carIdVal) {
-		System.out.println("with param");
 		carId = carIdVal;
-		System.out.println("carID: " + carId);
 		this.command = new CommandManagerImpl();
 		logger = new ConsoleLogger(new LoggerImpl());
 	}
