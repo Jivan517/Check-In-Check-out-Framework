@@ -14,8 +14,11 @@ import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
+import cs525.rentalcarsystem.controller.utils.DialogHelper;
+import cs525.rentalcarsystem.controller.utils.Validator;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
+import cs525.rentalcarsystem.model.FormException;
 import cs525.rentalcarsystem.presentation.Main;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -26,6 +29,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -109,6 +113,13 @@ public class AddCustomerController extends Application implements Initializable 
 	@FXML
 	protected void addCustomer(ActionEvent event) throws Exception {
 		if (!txtFirstName.getText().isEmpty()) {
+			
+			/*Validator.validateEmptiness(txtFirstName);
+			Validator.validateEmptiness(txtiddleName);
+			Validator.validateEmptiness(txtLastName);
+			
+			Validator.validateNumeric(txtZipCode);*/
+			
 			AppCustomer customer = new AppCustomer();
 			customer.setFirstName(txtFirstName.getText());
 			customer.setMiddleName(txtiddleName.getText());
@@ -116,15 +127,13 @@ public class AddCustomerController extends Application implements Initializable 
 			customer.setEmail(txtEmail.getText());
 			customer.setPhone(txtPhoneNumber.getText());
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
-					Integer.parseInt(txtZipCode.getText()), txtStreet.getText());
+					Integer.parseInt(txtZipCode.getText().trim()), txtStreet.getText());
 			customer.setAddress(userAddress);
 			if (customerId > 0)
 				customer.setPersonId(customerId);
 			this.command.saveCustomer(customer);
 			((Node) (event.getSource())).getScene().getWindow().hide();
-			manageController = new ManageCustomerController();
-			Stage stage = new Stage();
-			manageController.start(stage);
+			backToMaageController();
 			
 		} else {
 
@@ -136,10 +145,13 @@ public class AddCustomerController extends Application implements Initializable 
 
 	/**
 	 * Action will be performed when the user click cancel button
+	 * @throws Exception 
 	 */
 	@FXML
-	protected void cancelHandler(ActionEvent event) {
+	protected void cancelHandler(ActionEvent event) throws Exception {
 		((Node) (event.getSource())).getScene().getWindow().hide();
+		backToMaageController();
+		
 	}
 
 	private void initCustomerInfo() {
@@ -157,7 +169,7 @@ public class AddCustomerController extends Application implements Initializable 
                 while(address.next()){
                 	txtStreet.setText(address.getString("streetAddress"));
                 	txtCity.setText(address.getString("city"));
-                	txtZipCode.setText(" "+address.getInt("zipCode"));
+                	txtZipCode.setText(""+address.getInt("zipCode"));
                 	txtState.setText(address.getString("state"));
                 	
                 }
@@ -175,6 +187,11 @@ public class AddCustomerController extends Application implements Initializable 
 		if(customerId > 0)
 			initCustomerInfo();
 		
+	}
+	private void backToMaageController() throws Exception{
+		manageController = new ManageCustomerController();
+		Stage stage = new Stage();
+		manageController.start(stage);
 	}
 
 }

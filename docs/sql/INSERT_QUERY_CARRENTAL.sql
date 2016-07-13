@@ -114,3 +114,5 @@ CHANGE COLUMN `carId` `carRefId` INT(11) NOT NULL ;
 ALTER TABLE `carrentalsystem`.`address` 
 CHANGE COLUMN `zipCode` `zipCode` INT(11) NULL DEFAULT NULL ;
 
+ALTER TABLE `carrentalsystem`.`checkoutrecordentry` 
+CHANGE COLUMN `carRefId` `productRefId` INT(11) NOT NULL ;

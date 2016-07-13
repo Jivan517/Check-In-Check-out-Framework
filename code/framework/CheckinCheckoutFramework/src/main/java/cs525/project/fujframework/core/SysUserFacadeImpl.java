@@ -6,6 +6,7 @@
 package cs525.project.fujframework.core;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import cs525.project.fujframework.core.dataaccess.DbAction;
 import cs525.project.fujframework.core.dataaccess.DbActionImpl;
@@ -63,6 +64,15 @@ public class SysUserFacadeImpl implements SysUserFacade {
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
 		return this.dbaction.read(queryBuilder.toString());
+	}
+
+	@Override
+	public ResultSet getUserByUserNameAndPassword(String userName, String password, Class<?> userTable) {
+		
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + userTable.getSimpleName() + " WHERE username='" + userName +"' AND password='" + password +"';");
+		return this.dbaction.read(queryBuilder.toString());
+	
 	}
 
 }

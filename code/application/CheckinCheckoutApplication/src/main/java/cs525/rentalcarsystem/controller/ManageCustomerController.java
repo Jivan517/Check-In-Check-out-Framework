@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
@@ -33,6 +34,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -49,15 +51,14 @@ public class ManageCustomerController extends Application implements Initializab
 	private Button btnDelete;
 	@FXML
 	private Button btnEdit;
+	@FXML Button btnAddCustomer;
 	@FXML
 	private Text txtErrorMessage;
 	private Stage primaryStage;
-	private Stage rootStage = new Stage();
-
 	@FXML
 	TableView<AppCustomer> tblView;
 	@FXML
-	TableColumn<AppCustomer, String> colCustomerId;
+	TableColumn<AppCustomer, Integer> colCustomerId;
 	@FXML
 	TableColumn<AppCustomer, String> colCustomerName;
 	@FXML
@@ -83,6 +84,8 @@ public class ManageCustomerController extends Application implements Initializab
 				AppCustomer cus = new AppCustomer();
 				cus.setPersonId(result.getInt("customerId"));
 				cus.setFirstName(result.getString("firstName"));
+				cus.setMiddleName(result.getString("middleName"));
+				cus.setLastName(result.getString("lastName"));
 				cus.setEmail(result.getString("email"));
 				cus.setPhone(result.getString("phone"));
 				cus.setAddress(new cs525.project.fujframework.core.Address());
@@ -98,27 +101,30 @@ public class ManageCustomerController extends Application implements Initializab
 
 				customerList.add(cus);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
+    private void populateTable(){
+    	colCustomerId.setCellValueFactory(new PropertyValueFactory<AppCustomer, Integer>("personId"));
+		colCustomerName.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("fullName"));
+		colEmail.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("email"));
+		colPhoneNumber.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("phone"));
+		colAddress.setCellValueFactory(new PropertyValueFactory<Address, String>("fullAddress"));
+		tblView.setItems(customerList);
+    }
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tblView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		populateCustomer();
-		// colCustomerId.setCellValueFactory(new
-		// PropertyValueFactory<AppCustomer, String>("customerId"));
-		colCustomerName.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("firstName"));
-		colEmail.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("email"));
-		colPhoneNumber.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("phone"));
-		tblView.setItems(customerList);
+		populateTable();
 	}
+	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		this.rootStage = primaryStage;
 		this.primaryStage.setTitle("Add Customer Form");
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("ManageCustomerForm.fxml"));
@@ -133,7 +139,12 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 	}
-
+    @FXML protected void AddCustomer(ActionEvent event) throws Exception{
+    	AddCustomerController addcustomer = new AddCustomerController(0);
+    	Stage stage = new Stage();
+    	((Node) (event.getSource())).getScene().getWindow().hide();
+    	addcustomer.start(stage);
+    }
 	@FXML
 	protected void editCustomer(ActionEvent event) throws Exception {
 
@@ -151,6 +162,7 @@ public class ManageCustomerController extends Application implements Initializab
 		int customerId = customers.get(0).getPersonId();
 		AddCustomerController addCustomerController = new AddCustomerController(customerId);
 		Stage stage = new Stage();
+		((Node) (event.getSource())).getScene().getWindow().hide();
 		addCustomerController.start(stage);
 
 	}
@@ -168,9 +180,11 @@ public class ManageCustomerController extends Application implements Initializab
 			return;
 		}
 
-		int customerId = customers.get(0).getPersonId();
+		AppCustomer customer = customers.get(0);
 		CustomerFacade cutFacade = new CustomerFacadeImpl();
-		// cutFacade.removeCustomer(customerId);
+	     cutFacade.removeCustomer(customer);
+	    txtErrorMessage.setText("Customer Successfully Deleted");
+	    txtErrorMessage.setFill(Color.GREEN);	     	     
 
 	}
 

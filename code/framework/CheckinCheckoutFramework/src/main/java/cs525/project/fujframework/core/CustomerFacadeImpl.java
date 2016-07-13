@@ -45,8 +45,13 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 		if (customer.getPersonId() > 0) {
 			logger.debug("Update Customer");
-			return this.dbaction.update(DbHelper.getUpdateQuery(customer));
-			
+			 this.dbaction.update(DbHelper.getUpdateQuery(customer));
+			 Address address = customer.getAddress();
+			 if(address!=null){
+				 address.setPersonRefId(customer.getPersonId());
+				 address.setIsCustomer(true);
+				 return this.dbaction.update(DbHelper.getUpdateQuery(address));
+			 }		
 
 		} else {
 

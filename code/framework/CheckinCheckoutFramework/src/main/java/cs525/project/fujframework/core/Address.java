@@ -112,5 +112,12 @@ public class Address {
 	public void setIsCustomer(boolean isCustomer) {
 		this.isCustomer = isCustomer;
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getFullAddress(){
+		return getStreetAddress() + " , " + getCity() +" , " + getZipCode() + " , " + getState();
+	}
 
 }

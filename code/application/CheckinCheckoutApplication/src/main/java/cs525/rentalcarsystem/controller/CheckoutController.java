@@ -29,6 +29,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -102,6 +103,7 @@ public class CheckoutController extends Application implements Initializable {
 	private void populateTable() {
 
 		name.setCellValueFactory(new PropertyValueFactory<Car, String>("productName"));
+		name.setSortType(SortType.ASCENDING);
 		model.setCellValueFactory(new PropertyValueFactory<Car, String>("model"));
 		year.setCellValueFactory(new PropertyValueFactory<Car, Integer>("year"));
 		fee.setCellValueFactory(new PropertyValueFactory<Car, Double>("rentalFeePerDay"));
@@ -204,12 +206,20 @@ public class CheckoutController extends Application implements Initializable {
 		// selected customer
 		ComboBoxData<Integer, String> selectedCustomer = customerListComboBox.getSelectionModel().getSelectedItem();
 
+		if (selectedCustomer == null) {
+			DialogHelper.toast("Please, select a customer!", AlertType.WARNING);
+			return;
+		}
+
 		System.out.println("cust: " + selectedCustomer.getKey());
 		// prepare the cart
 		CheckoutCart cart = new CheckoutCart();
+		cart.setCustomerId(selectedCustomer.getKey());
+		cart.setCustomerName(selectedCustomer.getValue());
+		cart.setCars(cars);
 
 		Stage stage = new Stage();
-		CheckoutPaymentController controller = new CheckoutPaymentController();
+		CheckoutPaymentController controller = new CheckoutPaymentController(cart);
 		controller.start(stage);
 
 	}
