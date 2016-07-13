@@ -27,6 +27,14 @@ import cs525.project.fujframework.middleware.LoggerImpl;
  */
 public class DbActionImpl implements DbAction {
 	SimpleConnectionPool connection = SimpleConnectionPool.getInstance();
+	Logger consoleLogger;
+	
+	/**
+	 * 
+	 */
+	public DbActionImpl() {
+		consoleLogger = new ConsoleLogger(new LoggerImpl());
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -41,12 +49,9 @@ public class DbActionImpl implements DbAction {
 		PreparedStatement ps = null;
 		int countRecord = 0;
 		try {
-			Logger consoleLogger = new ConsoleLogger(new LoggerImpl());
-			consoleLogger.debug("QUERY: " + query);
+			consoleLogger.debug("INSERT QUERY: " + query);
 			con = SimpleConnectionPool.getConnection();
-			consoleLogger.debug("CONNECTION: " + con);
 			ps = con.prepareStatement(query);
-			consoleLogger.debug("PERPAREDSTATEMENT: " + ps);
 
 			countRecord = ps.executeUpdate();
 		} catch (Exception e) {
@@ -128,6 +133,7 @@ public class DbActionImpl implements DbAction {
 			con = SimpleConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
 
+			consoleLogger.debug("UPDATE QUERY: " + query);
 			recordCounter = ps.executeUpdate();
 		} catch (Exception e) {
 

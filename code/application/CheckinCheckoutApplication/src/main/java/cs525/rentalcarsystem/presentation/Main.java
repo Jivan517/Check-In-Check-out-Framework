@@ -23,11 +23,22 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		//CarController car = new CarController();
-		//car.start(primaryStage);
-		
+		// CarController car = new CarController();
+		// car.start(primaryStage);
+
 		CheckoutController checkout = new CheckoutController();
 		checkout.start(primaryStage);
+
+		/*
+		 * Parent root =
+		 * FXMLLoader.load(getClass().getResource("ApplicationUserForm.fxml"));
+		 * Scene scene = new Scene(root); scene.getStylesheets().add(
+		 * "cs525/rentalcarsystem/presentation/rentalcarsystem.css");
+		 * 
+		 * primaryStage.setResizable(true); primaryStage.setTitle(
+		 * "Checkout Form - Car List"); primaryStage.setScene(scene);
+		 * primaryStage.show();
+		 */
 
 	}
 

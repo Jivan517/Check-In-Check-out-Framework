@@ -54,7 +54,6 @@ public class SimpleConnectionPool {
 		DbConfig config = new DbConfig();
 		Connection con = null;
 		Logger consoleLogger = new ConsoleLogger(new LoggerImpl());
-		consoleLogger.debug("inside getConnection" + config.getDriver());
 		try {
 			Class.forName(config.getDriver());
 

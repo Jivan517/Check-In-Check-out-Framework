@@ -39,6 +39,8 @@ public class SysUserFacadeImpl implements SysUserFacade {
 	 */
 	@Override
 	public int saveSysUser(SysUser sysUser) {
+		if (sysUser.getSysuserId() > 0)
+			return this.dbaction.update(DbHelper.getUpdateQuery(sysUser));
 		return this.dbaction.Create(DbHelper.getInsertQuery(sysUser));
 	}
 
