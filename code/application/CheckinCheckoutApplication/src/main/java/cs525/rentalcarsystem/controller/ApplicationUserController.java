@@ -27,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
@@ -59,6 +60,8 @@ public class ApplicationUserController extends Application implements Initializa
 	private TextField emailTxt;
 	@FXML
 	private TextField phoneTxt;
+	@FXML
+	private CheckBox isAdminChkBox;
 	@FXML
 	private Label successMsgLabel;
 	@FXML
@@ -108,9 +111,13 @@ public class ApplicationUserController extends Application implements Initializa
 		try {
 			Validator.validateEmptiness(firstNameTxt);
 			Validator.validateEmptiness(lastNameTxt);
-			Validator.validateEmptiness(passwordTxt);
-			Validator.validateEmptiness(confirmPasswordTxt);
+			Validator.validateEmptiness(emailTxt);
+			if (!(userId > 0)) {
+				Validator.validateEmptiness(passwordTxt);
+				Validator.validateEmptiness(confirmPasswordTxt);
+			}
 			Validator.validateNumeric(phoneTxt);
+			Validator.validateEmail(emailTxt);
 
 			String firstName = firstNameTxt.getText().toString(), middleName = middleNameTxt.getText().toString(),
 					lastName = lastNameTxt.getText().toString(), userName = usernameTxt.getText().toString(),
@@ -120,8 +127,13 @@ public class ApplicationUserController extends Application implements Initializa
 
 			if (password.equals(confirmPassword)) {
 				ApplicationUser user = new ApplicationUser();
-				if (userId > 0)
+				System.out.println(user.isAdmin());
+				if (userId > 0) {
 					user.setSysuserId(userId);
+					/*
+					 * if (user.isAdmin()) { isAdminChkBox.setSelected(true); }
+					 */
+				}
 				user.setFirstName(firstName);
 				user.setMiddleName(middleName);
 				user.setLastName(lastName);
@@ -129,7 +141,11 @@ public class ApplicationUserController extends Application implements Initializa
 				user.setPassword(password);
 				user.setEmail(email);
 				user.setPhone(phone);
-				user.setIsAdmin(true);
+				if (isAdminChkBox.isSelected()) {
+					user.setIsAdmin(true);
+				} else {
+					user.setIsAdmin(false);
+				}
 
 				if (command.saveSysUser(user)) {
 					successMsgLabel.setText("User added/updated successfully !!!");
@@ -169,6 +185,7 @@ public class ApplicationUserController extends Application implements Initializa
 		confirmPasswordTxt.setText("");
 		emailTxt.setText("");
 		phoneTxt.setText("");
+		isAdminChkBox.setSelected(false);
 	}
 
 	/*
@@ -194,6 +211,7 @@ public class ApplicationUserController extends Application implements Initializa
 				user.setFirstName(rs.getString("firstName"));
 				user.setMiddleName(rs.getString("middleName"));
 				user.setLastName(rs.getString("lastName"));
+				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));
 				user.setIsAdmin(rs.getBoolean("isAdmin"));
 				user.setPhone(rs.getString("phone"));
@@ -213,6 +231,7 @@ public class ApplicationUserController extends Application implements Initializa
 				lastNameTxt.setText(newSelection.getLastName());
 				emailTxt.setText(newSelection.getEmail());
 				phoneTxt.setText(newSelection.getPhone());
+				isAdminChkBox.setSelected(newSelection.isAdmin());
 			}
 		});
 	}
