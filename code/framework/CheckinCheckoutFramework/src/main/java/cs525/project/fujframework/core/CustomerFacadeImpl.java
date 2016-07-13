@@ -42,7 +42,9 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
+		this.dbaction.Create(DbHelper.getInsertQuery(customer));
 		String tableName = customer.getClass().getSimpleName();
+		
 		int personId = getRecentlyAddedCustomer(tableName);
 		if (personId > 0) {
 			Address address = customer.getAddress();

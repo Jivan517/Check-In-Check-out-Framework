@@ -110,6 +110,8 @@ public class AddCustomerController extends Application {
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
 					Integer.parseInt(txtZipCode.getText()), txtStreet.getText());
 			customer.setAddress(userAddress);
+			if(customerId>0)
+				customer.setPersonId(customerId);
 			this.command.saveCustomer(customer);
 		} else {
 

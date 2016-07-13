@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
+import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.model.Car;
@@ -25,11 +26,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -77,7 +78,7 @@ public class ManageCustomerController extends Application implements Initializab
 			ResultSet result=customerFacade.getAllCustomers(AppCustomer.class);
 			while(result.next()){
 				AppCustomer cus=new AppCustomer();
-				//cus.setPersonId(result.getString("customerId"));
+				cus.setPersonId(result.getInt("customerId"));
 				cus.setFirstName(result.getString("firstName"));
 				cus.setEmail(result.getString("email"));
 				cus.setPhone(result.getString("phone"));
@@ -120,22 +121,32 @@ public class ManageCustomerController extends Application implements Initializab
 	protected void editCustomer(ActionEvent event) {
 		
 		ObservableList<AppCustomer> customers = taview.getSelectionModel().getSelectedItems();
-		if (customers.size()>1) {
-            AddCustomerController addCustomerController = new AddCustomerController();
-            try {
-				addCustomerController.start(this.primaryStage);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if (customers.size() > 1) {
+			DialogHelper.toast("Please, select only one record!", AlertType.WARNING);
+			return;
+		}
+		if (customers.size() < 1) {
+			DialogHelper.toast("Please, select a record!", AlertType.WARNING);
+			return;
+		}
+
+		int customerId = customers.get(0).getPersonId();
+		 AddCustomerController addCustomerController = new AddCustomerController(customerId);		
+		Stage stage = new Stage();
+		try {
+			addCustomerController.start(stage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-			
+		
+		/*	
 			txtErrorMessage.setText("Customer Successfully Updated!");
 			txtErrorMessage.setFill(Color.GREEN);
 		} else {
 			txtErrorMessage.setText("Please Select Customer to Edit!");
 			txtErrorMessage.setFill(Color.RED);
-		}
+		}*/
 
 	}
 
