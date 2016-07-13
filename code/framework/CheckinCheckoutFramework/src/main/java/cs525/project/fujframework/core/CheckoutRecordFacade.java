@@ -51,11 +51,12 @@ public interface CheckoutRecordFacade {
 	/**
 	 * 
 	 * @param customerId
-	 * @param tableName
-	 *            className
+	 * @param tableName:
+	 *            mainClassName like checkoutrecordentry, joinTableName:
+	 *            joinTableName like car table
 	 * @return resultSet of all checkout entries of customers
 	 */
-	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName);
+	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName, Class<?> joinTableName);
 
 	/**
 	 * 

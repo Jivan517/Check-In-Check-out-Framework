@@ -27,10 +27,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		/*CheckoutController checkout = new CheckoutController();
 		checkout.start(primaryStage);*/
-		/*CheckinFormController checkin = new CheckinFormController();
-		checkin.start(primaryStage);*/
-		AddCustomerController customer = new AddCustomerController();
-		customer.start(primaryStage);
+		CheckinFormController checkin = new CheckinFormController();
+		checkin.start(primaryStage);
+		/*AddCustomerController customer = new AddCustomerController();
+		customer.start(primaryStage);*/
 	}
 
 	public static void main(String[] args) {
