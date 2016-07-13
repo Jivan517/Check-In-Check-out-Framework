@@ -22,7 +22,12 @@ public abstract class TransactionManager {
 	public final void proceedTransaction(List<CheckoutRecordEntry> checkoutRecordEntries, Class<?> productClass) {
 		List<CheckoutRecordEntry> rentalFeeFine = calculateRentalFeeOrOverdueFine(checkoutRecordEntries, productClass);
 		processCheckoutRecord(checkoutRecordEntries);
-		// sendNotification(checkoutRecordEntries, productClass);
+		try {
+			sendNotification(checkoutRecordEntries, productClass);
+		} catch (Exception ex) {
+
+		}
+
 		printBill(rentalFeeFine);
 	}
 
@@ -58,13 +63,13 @@ public abstract class TransactionManager {
 	 */
 	protected void printBill(List<CheckoutRecordEntry> checkoutRecordEntries) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("---------------------------------------");
-		builder.append("========Rental System Bill=========");
+		builder.append("\n\n---------------------------------------\n");
+		builder.append("========Rental System Bill=========\n");
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
 			builder.append("Your total Rental Fee is : " + checkoutRecordEntry.getRentalFee());
-			builder.append("Your total Rental Fine is : " + checkoutRecordEntry.getRentalFine());
+			builder.append("\nYour total Rental Fine is : " + checkoutRecordEntry.getRentalFine());
 		}
-		builder.append("---------------------------------------");
+		builder.append("\n---------------------------------------\n");
 
 		System.out.println(builder.toString());
 	}
