@@ -39,10 +39,9 @@
             <TableView fx:id="tblView" prefHeight="399.0" prefWidth="762.0">
               <columns>
                   <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Customer ID" />
-                <TableColumn id="colCustomerName" fx:id="colCustomerName" prefWidth="199.0" text="Customer Name" />
-                <TableColumn id="colEmail" fx:id="colEmail" prefWidth="174.0" text="E-mail" />
-                  <TableColumn id="colPhone" fx:id="colPhoneNumber" prefWidth="140.0" text="Phone No" />
-                  <TableColumn id="colAddress" fx:id="colAddress" prefWidth="227.0" text="Address" />
+                <TableColumn id="colCustomerName" fx:id="colCustomerName" prefWidth="254.0" text="Customer Name" />
+                <TableColumn id="colEmail" fx:id="colEmail" prefWidth="209.0" text="E-mail" />
+                  <TableColumn id="colPhone" fx:id="colPhoneNumber" prefWidth="276.0" text="Phone Number" />
               </columns>
             </TableView>
             <HBox prefHeight="158.0" prefWidth="794.0">

@@ -10,11 +10,9 @@ import java.sql.SQLException;
 
 import cs525.project.fujframework.core.SysUserFacade;
 import cs525.project.fujframework.core.SysUserFacadeImpl;
-import cs525.rentalcarsystem.controller.utils.DialogHelper;
-import cs525.rentalcarsystem.controller.utils.LoginHelper;
-import cs525.rentalcarsystem.controller.utils.Validator;
+import cs525.project.fujframework.utils.BusinessConstants;
+import cs525.project.fujframework.utils.SessionCache;
 import cs525.rentalcarsystem.model.ApplicationUser;
-import cs525.rentalcarsystem.model.FormException;
 import cs525.rentalcarsystem.presentation.Main;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,7 +22,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -83,9 +80,15 @@ public class LoginController extends Application {
 			String userName = txtUserName.getText();
 			String password = txtPassword.getText();
 			ApplicationUser user = authenticateUser(userName, password);
-			if (user!= null) {
-				LoginHelper.isAdmin = true;
-			    ((Node) (event.getSource())).getScene().getWindow().hide();
+			if (user != null) {
+
+				SessionCache session = SessionCache.getInstance();
+				if (user.isAdmin())
+					session.add(BusinessConstants.ADMIN, BusinessConstants.ADMIN);
+				else
+					session.add(BusinessConstants.STAFF, BusinessConstants.STAFF);
+
+				((Node) (event.getSource())).getScene().getWindow().hide();
 				ManageCustomerController manageCustomer = new ManageCustomerController();
 				Stage stage = new Stage();
 				manageCustomer.start(stage);
@@ -103,7 +106,7 @@ public class LoginController extends Application {
 
 	private ApplicationUser authenticateUser(String userName, String password) throws SQLException {
 		SysUserFacade userFacade = new SysUserFacadeImpl();
-		ResultSet result = userFacade.getUserByUserNameAndPassword(userName, password,ApplicationUser.class);
+		ResultSet result = userFacade.getUserByUserNameAndPassword(userName, password, ApplicationUser.class);
 		ApplicationUser user = null;
 		while (result.next()) {
 			user = new ApplicationUser();
