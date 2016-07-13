@@ -120,6 +120,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		System.out.println(queryBuilder.toString());
 		return this.dbaction.read(queryBuilder.toString());
 	}
 
