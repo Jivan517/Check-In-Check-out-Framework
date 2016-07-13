@@ -23,7 +23,6 @@ import cs525.project.fujframework.utils.DbHelper;
 public class CustomerFacadeImpl implements CustomerFacade {
 	private DbAction dbaction;
 	StringBuilder queryBuilder;
-
 	private Logger logger;
 
 	/**
@@ -43,7 +42,6 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
-		this.dbaction.Create(DbHelper.getInsertQuery(customer));
 		String tableName = customer.getClass().getSimpleName();
 		int personId = getRecentlyAddedCustomer(tableName);
 		if (personId > 0) {
@@ -65,7 +63,8 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	@Override
 	public int removeCustomer(Customer customer) {
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("DELETE FROM customer WHERE customerId=" + customer.getPersonId());
+		String tableName = customer.getClass().getSimpleName();
+		queryBuilder.append("DELETE FROM " + tableName + " WHERE customerId=" + customer.getPersonId());
 		return this.dbaction.delete(queryBuilder.toString());
 	}
 

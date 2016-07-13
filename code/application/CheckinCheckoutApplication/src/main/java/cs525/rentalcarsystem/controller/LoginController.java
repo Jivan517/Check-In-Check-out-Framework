@@ -6,6 +6,7 @@
 package cs525.rentalcarsystem.controller;
 import java.awt.TextField;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -41,7 +42,7 @@ public class LoginController extends Application {
 	 * if not it displays appropriate message
 	 */
 	@FXML
-	public void login(){
+	public void login(ActionEvent event){
 		if(!txtUserName.getText().isEmpty()&& !txtPassword.getText().isEmpty()){
 			
 		}

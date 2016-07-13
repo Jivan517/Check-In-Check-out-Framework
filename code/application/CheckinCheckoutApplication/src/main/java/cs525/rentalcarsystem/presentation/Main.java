@@ -22,7 +22,14 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
+		// Parent root =
+		// FXMLLoader.load(getClass().getResource("ManageCustomerForm.fxml"));
+		// Scene scene = new Scene(root);
+		//
+		// primaryStage.setResizable(false);
+		// primaryStage.setTitle("Checkout Form - Car List");
+		// primaryStage.setScene(scene);
+		// primaryStage.show();
 		// CarController car = new CarController();
 		// car.start(primaryStage);
 
