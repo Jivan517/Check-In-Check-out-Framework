@@ -79,7 +79,7 @@ public class HomeController extends Application implements Initializable {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/MainForm.fxml"));
 		Scene scene = new Scene(root);
 		//scene.getStylesheets().add("cs525/rentalcarsystem/presentation/background.css");
 		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));

@@ -93,9 +93,10 @@ public class LoginController extends Application {
 					session.add(BusinessConstants.STAFF, BusinessConstants.STAFF);
 
 				((Node) (event.getSource())).getScene().getWindow().hide();
-				ManageCustomerController manageCustomer = new ManageCustomerController();
+
+				HomeController home = new HomeController();
 				Stage stage = new Stage();
-				manageCustomer.start(stage);
+				home.start(stage);
 			} else {
 				txtErrorMessage.setFill(Color.RED);
 				txtErrorMessage.setText("Invalid User Name and Password!");
