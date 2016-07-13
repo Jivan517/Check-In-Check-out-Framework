@@ -17,7 +17,7 @@ import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.model.Car;
 import cs525.rentalcarsystem.model.CheckoutCart;
-import cs525.rentalcarsystem.model.ComboBoxData;
+import cs525.rentalcarsystem.model.KeyValuePair;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,16 +31,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class CheckoutController extends Application implements Initializable {
 
 	@FXML
-	private ComboBox<ComboBoxData<Integer, String>> customerListComboBox;
+	private ComboBox<KeyValuePair<Integer, String>> customerListComboBox;
 	@FXML
 	private TableColumn<Car, String> name;
 
@@ -57,19 +59,29 @@ public class CheckoutController extends Application implements Initializable {
 	private TableColumn<Car, Integer> quantity;
 
 	@FXML
+	private Label lblTitle;
+
+	@FXML
 	private TableView<Car> carList;
 	ObservableList<Car> carListObservable = FXCollections.observableArrayList();
 	private Logger logger;
+	public static String title = "Car List - Car Rental System";
 
-	ObservableList<ComboBoxData<Integer, String>> customerListObservable = FXCollections.observableArrayList();
+	ObservableList<KeyValuePair<Integer, String>> customerListObservable = FXCollections.observableArrayList();
 
 	public CheckoutController() {
 		logger = new ConsoleLogger(new LoggerImpl());
 	}
 
+	public CheckoutController(String title) {
+		this.title = title;
+
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
+		lblTitle.setText(title);
 		carList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		getTableData();
 	};
@@ -129,7 +141,7 @@ public class CheckoutController extends Application implements Initializable {
 
 				String content = firstName + " " + middleName + " " + lName;
 
-				ComboBoxData<Integer, String> data = new ComboBoxData<Integer, String>();
+				KeyValuePair<Integer, String> data = new KeyValuePair<Integer, String>();
 				data.setKey(id);
 				data.setValue(content);
 				customerListObservable.add(data);
@@ -149,7 +161,7 @@ public class CheckoutController extends Application implements Initializable {
 				.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/CheckoutForm.fxml"));
 		Scene scene = new Scene(root, 800, 800);
 		// scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
-
+		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Checkout Form - Car List");
 		primaryStage.setScene(scene);
@@ -204,7 +216,7 @@ public class CheckoutController extends Application implements Initializable {
 		}
 
 		// selected customer
-		ComboBoxData<Integer, String> selectedCustomer = customerListComboBox.getSelectionModel().getSelectedItem();
+		KeyValuePair<Integer, String> selectedCustomer = customerListComboBox.getSelectionModel().getSelectedItem();
 
 		if (selectedCustomer == null) {
 			DialogHelper.toast("Please, select a customer!", AlertType.WARNING);

@@ -17,7 +17,7 @@
 	<top>
 		<HBox prefHeight="87.0" prefWidth="927.0" BorderPane.alignment="CENTER">
 			<children>
-				<Label text="Checkout Form" underline="true">
+				<Label fx:id="lblTitle" text="Car List - Car Rental System" underline="true">
 					<HBox.margin>
 						<Insets top="40.0" />
 					</HBox.margin>

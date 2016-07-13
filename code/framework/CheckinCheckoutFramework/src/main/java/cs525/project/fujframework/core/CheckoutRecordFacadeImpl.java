@@ -114,4 +114,11 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 		return this.dbaction.read(queryBuilder.toString());
 	}
 
+	@Override
+	public ResultSet getAllCheckoutRecords(Class<?> tableName) {
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		return this.dbaction.read(queryBuilder.toString());
+	}
+
 }

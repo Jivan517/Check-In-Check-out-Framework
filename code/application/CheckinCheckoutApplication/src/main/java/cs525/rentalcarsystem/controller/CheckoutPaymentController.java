@@ -46,6 +46,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -104,7 +105,7 @@ public class CheckoutPaymentController extends Application implements Initializa
 				getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/CheckoutPaymentForm.fxml"));
 		Scene scene = new Scene(root);
 		// scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
-
+		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Rental Fee Payment");
 		primaryStage.setScene(scene);
