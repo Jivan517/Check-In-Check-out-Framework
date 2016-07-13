@@ -97,10 +97,12 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	}
 
 	@Override
-	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName) {
+	public ResultSet getAllCheckoutRecordsByCustomer(int customerId, Class<?> tableName, Class<?> joinTableName) {
 
 		queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName() + " WHERE customerRefId = " + customerId);
+		queryBuilder
+				.append("SELECT * FROM " + tableName.getSimpleName() + " a INNER JOIN " + joinTableName.getSimpleName()
+						+ " b ON a.customerRefId = " + customerId + " AND a.carRefId=b.productId");
 		return this.dbaction.read(queryBuilder.toString());
 	}
 
