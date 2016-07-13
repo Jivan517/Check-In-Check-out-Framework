@@ -67,4 +67,10 @@ public interface CheckoutRecordFacade {
 	 * @return resultSet of all checkout entries of customers
 	 */
 	public ResultSet getAllCheckoutRecordsByCustomerAndUser(int customerId, int userId, Class<?> tableName);
+	
+	/**
+	 * 
+	 * @return resultSet
+	 */
+	public ResultSet getAllCheckoutRecords(Class<?> tableName);
 }

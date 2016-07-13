@@ -26,7 +26,7 @@ import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.model.Car;
 import cs525.rentalcarsystem.model.CheckinData;
-import cs525.rentalcarsystem.model.ComboBoxData;
+import cs525.rentalcarsystem.model.KeyValuePair;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,7 +51,7 @@ import javafx.stage.Stage;
  */
 public class CheckinFormController extends Application implements Initializable {
 	@FXML
-	private ComboBox<ComboBoxData<Integer, String>> customerCombo;
+	private ComboBox<KeyValuePair<Integer, String>> customerCombo;
 	@FXML
 	private TableView<CheckinData> checkinRecordTable;
 	@FXML
@@ -70,7 +70,7 @@ public class CheckinFormController extends Application implements Initializable 
 	private CommandManager command;
 	private CustomerFacade facade;
 	private CheckoutRecordFacade checkoutFacade;
-	private ObservableList<ComboBoxData<Integer, String>> customerListObservable = FXCollections.observableArrayList();
+	private ObservableList<KeyValuePair<Integer, String>> customerListObservable = FXCollections.observableArrayList();
 
 	/**
 	 * 
@@ -104,7 +104,7 @@ public class CheckinFormController extends Application implements Initializable 
 		ObservableList<CheckoutRecordEntry> entries = FXCollections.observableArrayList();
 		ObservableList<CheckinData> data = FXCollections.observableArrayList();
 		// selected customer
-		ComboBoxData<Integer, String> selectedCustomer = customerCombo.getSelectionModel().getSelectedItem();
+		KeyValuePair<Integer, String> selectedCustomer = customerCombo.getSelectionModel().getSelectedItem();
 		ResultSet recordEntries = checkoutFacade.getAllCheckoutRecordsByCustomer(selectedCustomer.getKey(),
 				CheckoutRecordEntry.class, Car.class);
 		try {
@@ -167,7 +167,7 @@ public class CheckinFormController extends Application implements Initializable 
 
 				String content = firstName + " " + middleName + " " + lName;
 
-				ComboBoxData<Integer, String> data = new ComboBoxData<Integer, String>();
+				KeyValuePair<Integer, String> data = new KeyValuePair<Integer, String>();
 				data.setKey(id);
 				data.setValue(content);
 				customerListObservable.add(data);

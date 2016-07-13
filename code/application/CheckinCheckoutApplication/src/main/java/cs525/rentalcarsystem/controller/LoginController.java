@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import cs525.project.fujframework.core.SysUserFacade;
 import cs525.project.fujframework.core.SysUserFacadeImpl;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
+import cs525.rentalcarsystem.controller.utils.LoginHelper;
 import cs525.rentalcarsystem.controller.utils.Validator;
 import cs525.rentalcarsystem.model.ApplicationUser;
 import cs525.rentalcarsystem.model.FormException;
@@ -83,7 +84,8 @@ public class LoginController extends Application {
 			String password = txtPassword.getText();
 			ApplicationUser user = authenticateUser(userName, password);
 			if (user!= null) {
-				((Node) (event.getSource())).getScene().getWindow().hide();
+				LoginHelper.isAdmin = true;
+			    ((Node) (event.getSource())).getScene().getWindow().hide();
 				ManageCustomerController manageCustomer = new ManageCustomerController();
 				Stage stage = new Stage();
 				manageCustomer.start(stage);

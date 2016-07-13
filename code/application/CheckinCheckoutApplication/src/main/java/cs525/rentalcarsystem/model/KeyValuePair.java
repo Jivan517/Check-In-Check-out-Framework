@@ -10,16 +10,16 @@ package cs525.rentalcarsystem.model;
  * @author OWNER
  *
  */
-public class ComboBoxData<K, V> {
+public class KeyValuePair<K, V> {
 
 	private K key;
 	private V value;
 
-	public ComboBoxData() {
+	public KeyValuePair() {
 
 	}
 
-	public ComboBoxData(K key, V value) {
+	public KeyValuePair(K key, V value) {
 		this.setKey(key);
 		this.setValue(value);
 	}

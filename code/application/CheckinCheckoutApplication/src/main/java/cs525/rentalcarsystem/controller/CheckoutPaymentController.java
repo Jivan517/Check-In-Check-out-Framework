@@ -46,6 +46,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -104,7 +105,7 @@ public class CheckoutPaymentController extends Application implements Initializa
 				getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/CheckoutPaymentForm.fxml"));
 		Scene scene = new Scene(root);
 		// scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
-
+		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Rental Fee Payment");
 		primaryStage.setScene(scene);
@@ -127,31 +128,28 @@ public class CheckoutPaymentController extends Application implements Initializa
 		int customerId = cart.getCustomerId();
 
 		List<CheckoutRecordEntry> entries = new ArrayList<>();
-		for (Car car : cars) {
+		long diff = getTotalDays(LocalDate.now(), dueDate);
+		if (diff < 0) {
+			DialogHelper.toast("Due date can not be past date", AlertType.WARNING);
+			// return;
+		} else if (diff > 0) {
+			for (Car car : cars) {
 
-			CheckoutRecordEntry entry = new CheckoutRecordEntry();
-			entry.setCheckoutDate(LocalDate.now());
-			entry.setDueDate(dueDate);
-			entry.setCustomerRefId(customerId);
-			entry.setProductRefId(car.getProductId());
-			entry.setQuantity(car.getQuantity());
-			long diff = getTotalDays(LocalDate.now(), dueDate);
-			if (diff < 0) {
-				DialogHelper.toast("Due date can not be past date", AlertType.WARNING);
-				return;
+				CheckoutRecordEntry entry = new CheckoutRecordEntry();
+				entry.setCheckoutDate(LocalDate.now());
+				entry.setDueDate(dueDate);
+				entry.setCustomerRefId(customerId);
+				entry.setProductRefId(car.getProductId());
+				entry.setQuantity(car.getQuantity());
+				double fee = car.getRentalFeePerDay() * car.getQuantity() * diff;
+				entry.setRentalFee(fee);
+				entries.add(entry);
 			}
-			double fee = car.getRentalFeePerDay() * car.getQuantity() * diff;
 
-			entry.setRentalFee(fee);
-
-			entries.add(entry);
+			TransactionManager txn = new CheckoutTransactionManager();
+			txn.proceedTransaction(entries, Car.class);
+			DialogHelper.toast("Checkout record saved successfully!", AlertType.INFORMATION);
 		}
-
-		TransactionManager txn = new CheckoutTransactionManager();
-		txn.proceedTransaction(entries, Car.class);
-
-		DialogHelper.toast("Checkout record saved successfully!", AlertType.INFORMATION);
-
 	}
 
 	@Override
