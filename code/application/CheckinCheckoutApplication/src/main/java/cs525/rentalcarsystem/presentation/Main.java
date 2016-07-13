@@ -1,16 +1,10 @@
 package cs525.rentalcarsystem.presentation;
 
 import cs525.rentalcarsystem.controller.AddCustomerController;
-import cs525.rentalcarsystem.controller.CarController;
-import cs525.rentalcarsystem.controller.CheckoutController;
 import cs525.rentalcarsystem.controller.ManageCustomerController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
 	private Stage primaryStage;
@@ -34,7 +28,7 @@ public class Main extends Application {
 		// CarController car = new CarController();
 		// car.start(primaryStage);
 
-		ManageCustomerController manageCust = new ManageCustomerController();
+		AddCustomerController manageCust = new AddCustomerController();
 		manageCust.start(primaryStage);
 
 		/*
