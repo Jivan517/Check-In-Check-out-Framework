@@ -197,6 +197,7 @@ public class ManageCustomerController extends Application implements Initializab
 	protected void searchCustomer(ActionEvent event){
 		String searchText = txtSearchCustomer.getText();
 		if(!searchText.isEmpty()){
+			
 			customerList.stream().filter(m->m.getFirstName().contains(searchText)|| 
 					                        m.getMiddleName().contains(searchText)|| 
 			                                m.getLastName().contains(searchText) );			
