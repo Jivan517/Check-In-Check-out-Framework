@@ -47,7 +47,7 @@ public class MainFish extends Application {
 		 * ApplicationUserController appuser = new ApplicationUserController();
 		 * appuser.start(primaryStage);
 		 */
-        ManageCustomerController manageCustomer = new ManageCustomerController();
+        LoginController manageCustomer = new LoginController();
 		manageCustomer.start(primaryStage);
 		/*
 		 * LoginController login = new LoginController();

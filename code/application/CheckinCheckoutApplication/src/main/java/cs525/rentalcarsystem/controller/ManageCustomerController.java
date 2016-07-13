@@ -72,8 +72,9 @@ public class ManageCustomerController extends Application implements Initializab
 	TableColumn<AppCustomer, String> colEmail;
 	@FXML
 	TableColumn<AppCustomer, String> colPhoneNumber;
-	@FXML
-	TableColumn<Address, String> colAddress;
+	/*
+	 * @FXML TableColumn<Address, String> colAddress;
+	 */
 
 	ObservableList<AppCustomer> customerList = FXCollections.observableArrayList();
 
@@ -121,7 +122,6 @@ public class ManageCustomerController extends Application implements Initializab
 		colCustomerName.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("fullName"));
 		colEmail.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("email"));
 		colPhoneNumber.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("phone"));
-		colAddress.setCellValueFactory(new PropertyValueFactory<Address, String>("fullAddress"));
 		tblView.setItems(customerList);
 	}
 
@@ -208,10 +208,10 @@ public class ManageCustomerController extends Application implements Initializab
 		searchText.toLowerCase();
 		if (!searchText.isEmpty()) {
 
-			List<AppCustomer> appCustomerList = customerList
-					.stream().filter(m -> m.getFirstName().toLowerCase().contains(searchText)
-							           || m.getMiddleName().toLowerCase().contains(searchText)
-							           || m.getLastName().toLowerCase().contains(searchText))
+			List<AppCustomer> appCustomerList = customerList.stream()
+					.filter(m -> m.getFirstName().toLowerCase().contains(searchText)
+							|| m.getMiddleName().toLowerCase().contains(searchText)
+							|| m.getLastName().toLowerCase().contains(searchText))
 					.collect(Collectors.toList());
 
 			customerList.clear();
