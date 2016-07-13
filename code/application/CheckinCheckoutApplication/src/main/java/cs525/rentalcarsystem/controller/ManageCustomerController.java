@@ -7,6 +7,7 @@ package cs525.rentalcarsystem.controller;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -64,18 +65,21 @@ public class ManageCustomerController extends Application implements Initializab
 	}
 	final ObservableList<AppCustomer> data= FXCollections.observableArrayList();
 	private void populateCustomer(){
-		CustomerFacade customerFacade = new CustomerFacadeImpl();
-		//ResultSet result=customerFacade.getCustomerById(1);
-		
-		for(int i=0;i<10;i++){
-		AppCustomer cus=new AppCustomer();
-		cus.setPersonId(1);
-		cus.setFirstName("Fisseha");
-		cus.setEmail("abebfisseha5@gmail.com");
-		cus.setPhone("24097652");
-		data.add(cus);
+		try{
+			CustomerFacade customerFacade = new CustomerFacadeImpl();
+			ResultSet result=customerFacade.getAllCustomers(AppCustomer.class);
+			while(result.next()){
+				AppCustomer cus=new AppCustomer();
+				//cus.setPersonId(result.getString("customerId"));
+				cus.setFirstName(result.getString("firstName"));
+				cus.setEmail(result.getString("emaial"));
+				cus.setPhone(result.getString("phone"));
+				data.add(cus);
+			}
 		}
-		
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
