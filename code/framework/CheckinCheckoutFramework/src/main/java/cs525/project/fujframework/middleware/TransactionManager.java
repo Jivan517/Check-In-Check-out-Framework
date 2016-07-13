@@ -22,7 +22,7 @@ public abstract class TransactionManager {
 	public final void proceedTransaction(List<CheckoutRecordEntry> checkoutRecordEntries, Class<?> productClass) {
 		List<CheckoutRecordEntry> rentalFeeFine = calculateRentalFeeOrOverdueFine(checkoutRecordEntries, productClass);
 		processCheckoutRecord(checkoutRecordEntries);
-		sendNotification(checkoutRecordEntries, productClass);
+		//sendNotification(checkoutRecordEntries, productClass);
 		printBill(rentalFeeFine);
 	}
 
