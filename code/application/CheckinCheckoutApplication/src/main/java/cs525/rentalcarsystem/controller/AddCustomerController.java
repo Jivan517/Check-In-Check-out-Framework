@@ -84,7 +84,7 @@ public class AddCustomerController extends Application implements Initializable 
 
 	public AddCustomerController(int customerId) {
 		this.customerId = customerId;
-		
+
 		this.command = new CommandManagerImpl();
 	}
 
@@ -112,14 +112,14 @@ public class AddCustomerController extends Application implements Initializable 
 	 */
 	@FXML
 	protected void addCustomer(ActionEvent event) throws Exception {
-		if (!txtFirstName.getText().isEmpty()) {
-			
-			/*Validator.validateEmptiness(txtFirstName);
+
+		try {
+			Validator.validateEmptiness(txtFirstName);
 			Validator.validateEmptiness(txtiddleName);
 			Validator.validateEmptiness(txtLastName);
-			
-			Validator.validateNumeric(txtZipCode);*/
-			
+			Validator.validateEmptiness(txtStreet);
+			Validator.validateNumeric(txtZipCode);
+
 			AppCustomer customer = new AppCustomer();
 			customer.setFirstName(txtFirstName.getText());
 			customer.setMiddleName(txtiddleName.getText());
@@ -134,24 +134,22 @@ public class AddCustomerController extends Application implements Initializable 
 			this.command.saveCustomer(customer);
 			((Node) (event.getSource())).getScene().getWindow().hide();
 			backToMaageController();
-			
-		} else {
-
-			txtErrorMessag.setText("All fields are Required");
-			txtErrorMessag.setFill(Color.RED);
+		} catch (FormException ex) {
+			DialogHelper.toast(ex.getMessage(), AlertType.ERROR);
 		}
 
 	}
 
 	/**
 	 * Action will be performed when the user click cancel button
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@FXML
 	protected void cancelHandler(ActionEvent event) throws Exception {
 		((Node) (event.getSource())).getScene().getWindow().hide();
 		backToMaageController();
-		
+
 	}
 
 	private void initCustomerInfo() {
@@ -160,20 +158,20 @@ public class AddCustomerController extends Application implements Initializable 
 			CustomerFacade custFacade = new CustomerFacadeImpl();
 			ResultSet result = custFacade.getCustomerById(customerId);
 			while (result.next()) {
-                txtFirstName.setText(result.getString("firstName"));
-                txtiddleName.setText(result.getString("middleName"));
-                txtLastName.setText(result.getString("lastName"));
-                txtEmail.setText(result.getString("email"));
-                txtPhoneNumber.setText(result.getString("phone"));
+				txtFirstName.setText(result.getString("firstName"));
+				txtiddleName.setText(result.getString("middleName"));
+				txtLastName.setText(result.getString("lastName"));
+				txtEmail.setText(result.getString("email"));
+				txtPhoneNumber.setText(result.getString("phone"));
 				ResultSet address = custFacade.getAddressByCustomerId(customerId, Address.class);
-                while(address.next()){
-                	txtStreet.setText(address.getString("streetAddress"));
-                	txtCity.setText(address.getString("city"));
-                	txtZipCode.setText(""+address.getInt("zipCode"));
-                	txtState.setText(address.getString("state"));
-                	
-                }
-                
+				while (address.next()) {
+					txtStreet.setText(address.getString("streetAddress"));
+					txtCity.setText(address.getString("city"));
+					txtZipCode.setText("" + address.getInt("zipCode"));
+					txtState.setText(address.getString("state"));
+
+				}
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -184,11 +182,12 @@ public class AddCustomerController extends Application implements Initializable 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(customerId > 0)
+		if (customerId > 0)
 			initCustomerInfo();
-		
+
 	}
-	private void backToMaageController() throws Exception{
+
+	private void backToMaageController() throws Exception {
 		manageController = new ManageCustomerController();
 		Stage stage = new Stage();
 		manageController.start(stage);
