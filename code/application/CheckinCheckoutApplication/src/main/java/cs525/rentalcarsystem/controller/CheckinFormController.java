@@ -213,9 +213,10 @@ public class CheckinFormController extends Application implements Initializable 
 					LocalDate.now());
 			System.out.println("TODAY: " + LocalDate.now());
 			System.out.println("DUEDATE: " + checkOutRecordEntry.getDueDate());
-
-			double rentalFine = loanDays * checkin.getQuantity() * checkin.getRentalFinePerDay();
-			checkOutRecordEntry.setRentalFine(rentalFine);
+			if (loanDays > 0) {
+				double rentalFine = loanDays * checkin.getQuantity() * checkin.getRentalFinePerDay();
+				checkOutRecordEntry.setRentalFine(rentalFine);
+			}
 			entries.add(checkOutRecordEntry);
 		}
 

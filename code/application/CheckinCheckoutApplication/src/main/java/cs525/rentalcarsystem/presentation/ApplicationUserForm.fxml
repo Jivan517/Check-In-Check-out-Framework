@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="741.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ApplicationUserController">
+<BorderPane prefHeight="783.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ApplicationUserController">
 	<center>
 		<HBox prefHeight="641.0" prefWidth="380.0" BorderPane.alignment="CENTER">
 			<children>
@@ -16,7 +16,7 @@
 					<children>
 						<VBox prefHeight="641.0" prefWidth="237.0">
 							<children>
-								<Label alignment="BOTTOM_RIGHT" prefHeight="39.0" prefWidth="80.0" text="First Name:">
+								<Label alignment="BOTTOM_RIGHT" prefHeight="39.0" prefWidth="85.0" text="First Name:">
 									<VBox.margin>
 										<Insets top="10.0" />
 									</VBox.margin>
@@ -24,15 +24,23 @@
 										<Font name="SansSerif Regular" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="62.0" prefWidth="127.0" text="Middle Name:">
+								<Label prefHeight="43.0" prefWidth="127.0" text="Middle Name:">
 									<VBox.margin>
-										<Insets top="30.0" />
+										<Insets top="35.0" />
 									</VBox.margin>
 									<font>
 										<Font name="SansSerif Regular" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="41.0" prefWidth="84.0" text="LastName">
+								<Label prefHeight="37.0" prefWidth="84.0" text="LastName:">
+									<VBox.margin>
+										<Insets top="25.0" />
+									</VBox.margin>
+									<font>
+										<Font name="SansSerif Regular" size="15.0" />
+									</font>
+								</Label>
+								<Label prefHeight="44.0" prefWidth="104.0" text="UserName:">
 									<VBox.margin>
 										<Insets top="20.0" />
 									</VBox.margin>
@@ -40,23 +48,31 @@
 										<Font name="SansSerif Regular" size="15.0" />
 									</font>
 								</Label>
-								<Label prefHeight="67.0" prefWidth="104.0" text="UserName:">
-									<VBox.margin>
-										<Insets top="10.0" />
-									</VBox.margin>
-									<font>
-										<Font name="SansSerif Regular" size="15.0" />
-									</font>
-								</Label>
-								<Label prefHeight="60.0" prefWidth="125.0" text="Password:">
+								<Label prefHeight="45.0" prefWidth="125.0" text="Password:">
 									<font>
 										<Font name="SansSerif Regular" size="15.0" />
 									</font>
                            <VBox.margin>
-                              <Insets top="-5.0" />
+                              <Insets top="20.0" />
                            </VBox.margin>
 								</Label>
-								<Label prefHeight="60.0" prefWidth="163.0" text="Confirm Password:">
+								<Label prefHeight="44.0" prefWidth="163.0" text="Confirm Password:">
+									<font>
+										<Font name="SansSerif Regular" size="15.0" />
+									</font>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+								</Label>
+								<Label prefHeight="60.0" prefWidth="125.0" text="Email:">
+									<font>
+										<Font name="SansSerif Regular" size="15.0" />
+									</font>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+								</Label>
+								<Label prefHeight="50.0" prefWidth="125.0" text="Phone:">
 									<font>
 										<Font name="SansSerif Regular" size="15.0" />
 									</font>
@@ -64,22 +80,11 @@
                               <Insets top="5.0" />
                            </VBox.margin>
 								</Label>
-								<Label prefHeight="80.0" prefWidth="125.0" text="Email:">
-									<font>
-										<Font name="SansSerif Regular" size="15.0" />
-									</font>
+                        <Label text="Is Admin">
                            <VBox.margin>
-                              <Insets />
+                              <Insets top="35.0" />
                            </VBox.margin>
-								</Label>
-								<Label prefHeight="80.0" prefWidth="125.0" text="Phone:">
-									<font>
-										<Font name="SansSerif Regular" size="15.0" />
-									</font>
-                           <VBox.margin>
-                              <Insets top="-10.0" />
-                           </VBox.margin>
-								</Label>
+                        </Label>
 							</children>
 						</VBox>
 						<VBox prefHeight="542.0" prefWidth="324.0">
@@ -127,9 +132,14 @@
 										<Insets top="20.0" />
 									</VBox.margin>
 								</TextField>
+                        <CheckBox fx:id="isAdminChkBox" mnemonicParsing="false" prefHeight="9.0" prefWidth="72.0">
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                        </CheckBox>
 								<Button fx:id="saveBtn" defaultButton="true" mnemonicParsing="false" onAction="#onSaveBtnClicked" text="Save User">
 									<VBox.margin>
-										<Insets top="20.0" />
+										<Insets top="40.0" />
 									</VBox.margin>
 								</Button>
                         <Button cancelButton="true" mnemonicParsing="false" onAction="#btnCancelAction" text="Cancel">
