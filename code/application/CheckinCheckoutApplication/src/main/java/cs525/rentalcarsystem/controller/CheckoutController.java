@@ -68,8 +68,13 @@ public class CheckoutController extends Application implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		carList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		ProductFacade facade = new ProductFacadeImpl();
+		getTableData();
+	};
 
+	private void getTableData() {
+
+		carList.getItems().clear();
+		ProductFacade facade = new ProductFacadeImpl();
 		ResultSet resultSet = facade.getAllProduct(Car.class);
 		try {
 			while (resultSet.next()) {
@@ -90,7 +95,7 @@ public class CheckoutController extends Application implements Initializable {
 		}
 
 		populateTable();
-	};
+	}
 
 	private void populateTable() {
 
@@ -118,7 +123,7 @@ public class CheckoutController extends Application implements Initializable {
 				String middleName = rs.getString("middleName");
 				String lName = rs.getString("lastName");
 
-				String content = firstName + " " + middleName + " " + lName + "[" + id + "]";
+				String content = firstName + " " + middleName + " " + lName + "-" + id;
 
 				customerListObservable.add(content);
 
@@ -127,7 +132,7 @@ public class CheckoutController extends Application implements Initializable {
 			logger.error(e.getMessage());
 		}
 
-		this.customerListComboBox.setPromptText("--Choose");
+		this.customerListComboBox.setPromptText("--Choose for checkout");
 		this.customerListComboBox.setItems(customerListObservable);
 	}
 
@@ -135,8 +140,8 @@ public class CheckoutController extends Application implements Initializable {
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader
 				.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/CheckoutForm.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
+		Scene scene = new Scene(root, 800, 800);
+		// scene.getStylesheets().add("cs525/rentalcarsystem/presentation/rentalcarsystem.css");
 
 		primaryStage.setResizable(true);
 		primaryStage.setTitle("Checkout Form - Car List");
@@ -168,6 +173,18 @@ public class CheckoutController extends Application implements Initializable {
 		Stage stage = new Stage();
 		carController.start(stage);
 
+	}
+
+	@FXML
+	protected void btnRefreshAction(ActionEvent event) throws Exception {
+		getTableData();
+	}
+
+	@FXML
+	protected void btnAddCarAction(ActionEvent event) throws Exception {
+		Stage stage = new Stage();
+		CarController controller = new CarController();
+		controller.start(stage);
 	}
 
 }

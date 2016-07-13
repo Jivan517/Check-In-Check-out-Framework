@@ -66,10 +66,14 @@ public class AddCustomerController extends Application {
 	private Stage rootStage = new Stage();
 
 	private CommandManager command;
+	private int customerId;
 
 	public AddCustomerController() {
 
 		this.command = new CommandManagerImpl();
+	}
+	public AddCustomerController(int customerId){
+		this.customerId=customerId;
 	}
 
 	@Override
@@ -106,6 +110,8 @@ public class AddCustomerController extends Application {
 			Address userAddress = new Address(txtStreet.getText(), txtCity.getText(),
 					Integer.parseInt(txtZipCode.getText()), txtStreet.getText());
 			customer.setAddress(userAddress);
+			if(customerId>0)
+				customer.setPersonId(customerId);
 			this.command.saveCustomer(customer);
 		} else {
 
