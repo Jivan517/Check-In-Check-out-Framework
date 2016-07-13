@@ -19,11 +19,11 @@ import cs525.project.fujframework.utils.LoginUtil;
 public class CheckoutRecordProtectionProxy implements CheckoutRecordFacade {
 
 	private CheckoutRecordFacade checkOutRecordFacade;
-	private boolean isAdmin = false;
+	private boolean isStaff = false;
 
 	public CheckoutRecordProtectionProxy() {
 		this.checkOutRecordFacade = new CheckoutRecordFacadeImpl();
-		isAdmin = LoginUtil.isAdmin();
+		isStaff = LoginUtil.isStaff();
 
 	}
 
@@ -36,7 +36,7 @@ public class CheckoutRecordProtectionProxy implements CheckoutRecordFacade {
 	 */
 	@Override
 	public int saveCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry) {
-		if (isAdmin) {
+		if (isStaff) {
 			return checkOutRecordFacade.saveCheckoutRecord(checkoutRecordEntry);
 		}
 
@@ -52,7 +52,7 @@ public class CheckoutRecordProtectionProxy implements CheckoutRecordFacade {
 	 */
 	@Override
 	public int removeCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry) {
-		if (isAdmin) {
+		if (isStaff) {
 			return checkOutRecordFacade.removeCheckoutRecord(checkoutRecordEntry);
 		}
 		return 0;
@@ -67,7 +67,7 @@ public class CheckoutRecordProtectionProxy implements CheckoutRecordFacade {
 	 */
 	@Override
 	public int checkInRecord(CheckoutRecordEntry checkoutRecordEntry) {
-		if (isAdmin) {
+		if (isStaff) {
 			return checkOutRecordFacade.checkInRecord(checkoutRecordEntry);
 		}
 		return 0;
@@ -82,7 +82,7 @@ public class CheckoutRecordProtectionProxy implements CheckoutRecordFacade {
 	 */
 	@Override
 	public int undoCheckIn(CheckoutRecordEntry checkoutRecordEntry) {
-		if (isAdmin) {
+		if (isStaff) {
 			return checkOutRecordFacade.undoCheckIn(checkoutRecordEntry);
 		}
 		return 0;

@@ -31,14 +31,14 @@ public class Main extends Application {
 		 */
 		// AddCustomerController customer = new AddCustomerController();
 		// customer.start(primaryStage);
-		/*CheckoutController checkout = new CheckoutController();
-		checkout.start(primaryStage);*/
-		ApplicationUserController appuser = new ApplicationUserController();
-		appuser.start(primaryStage);
+//		CheckoutController checkout = new CheckoutController();
+//		checkout.start(primaryStage);
+//		ApplicationUserController appuser = new ApplicationUserController();
+//		appuser.start(primaryStage);
 		/*CheckinFormController checkin = new CheckinFormController();
 		checkin.start(primaryStage);*/
-		ManageCustomerController customer = new ManageCustomerController();
-		customer.start(primaryStage);
+//		ManageCustomerController customer = new ManageCustomerController();
+//		customer.start(primaryStage);
 		/*AddCustomerController customer = new AddCustomerController();
 		customer.start(primaryStage);*/
 	}

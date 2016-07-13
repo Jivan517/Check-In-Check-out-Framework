@@ -8,6 +8,7 @@ package cs525.rentalcarsystem.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,6 +22,8 @@ import cs525.project.fujframework.middleware.ConsoleLogger;
 import cs525.project.fujframework.middleware.Logger;
 import cs525.project.fujframework.middleware.LoggerImpl;
 import cs525.project.fujframework.middleware.TransactionManager;
+import cs525.project.fujframework.utils.BusinessConstants;
+import cs525.project.fujframework.utils.SessionCache;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.Car;
 import cs525.rentalcarsystem.model.CheckoutCart;
@@ -116,27 +119,39 @@ public class CheckoutPaymentController extends Application implements Initializa
 	@FXML
 	protected void btnPayAction(ActionEvent event) throws Exception {
 
+		SessionCache session = SessionCache.getInstance();
+		session.add(BusinessConstants.STAFF, BusinessConstants.STAFF);
+
 		ObservableList<Car> cars = cartTable.getItems();
-		double totalFee = Double.parseDouble(totalRentalFeeTxt.getText());
 		LocalDate dueDate = ((DatePicker) dueDateVBox.getChildren().get(0)).getValue();
 		int customerId = cart.getCustomerId();
 
 		List<CheckoutRecordEntry> entries = new ArrayList<>();
 		for (Car car : cars) {
+
 			CheckoutRecordEntry entry = new CheckoutRecordEntry();
 			entry.setCheckoutDate(LocalDate.now());
 			entry.setDueDate(dueDate);
 			entry.setCustomerRefId(customerId);
 			entry.setProductRefId(car.getProductId());
 			entry.setQuantity(car.getQuantity());
-			entry.setRentalFee(totalFee);
+			long diff = getTotalDays(LocalDate.now(), dueDate);
+			if (diff < 0) {
+				DialogHelper.toast("Due date can not be past date", AlertType.WARNING);
+				return;
+			}
+			double fee = car.getRentalFeePerDay() * car.getQuantity() * diff;
 
+			entry.setRentalFee(fee);
+
+			entries.add(entry);
 		}
 
 		TransactionManager txn = new CheckoutTransactionManager();
 		txn.proceedTransaction(entries, Car.class);
 
 		DialogHelper.toast("Checkout record saved successfully!", AlertType.INFORMATION);
+
 	}
 
 	@Override
@@ -253,7 +268,20 @@ public class CheckoutPaymentController extends Application implements Initializa
 			totalFee += car.getRentalFeePerDay() * car.getQuantity();
 		}
 
-		return totalFee;
+		LocalDate dueDate = ((DatePicker) dueDateVBox.getChildren().get(0)).getValue();
+
+		return totalFee * getTotalDays(LocalDate.now(), dueDate);
+	}
+
+	private long getTotalDays(LocalDate start, LocalDate end) {
+
+		long diff = ChronoUnit.DAYS.between(start, end) + 1;
+
+		if (diff < 0) {
+			DialogHelper.toast("Due date can not be past date", AlertType.WARNING);
+			return 0;
+		}
+		return diff;
 	}
 
 }

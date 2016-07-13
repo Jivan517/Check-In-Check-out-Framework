@@ -6,7 +6,9 @@
 package cs525.project.fujframework.utils;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,9 +46,14 @@ public class DbHelper {
 
 				if (field.getName().contains("Id") && !field.getName().contains("RefId")) {
 					// left empty
-				} else if (field.getType().isAssignableFrom(String.class)) {
+				} else if (field.getType().isAssignableFrom(String.class)
+						|| field.getType().isAssignableFrom(LocalDate.class)
+						|| field.getType().isAssignableFrom(Date.class)) {
 					fields.add(field.getName());
-					values.add("'" + value + "'");
+					if (value == null)
+						values.add("NULL");
+					else
+						values.add("'" + value + "'");
 				} else if (field.getType().isAssignableFrom(Address.class)) {
 					// left empty
 				} else {
@@ -54,8 +61,14 @@ public class DbHelper {
 					fields.add(field.getName());
 					if (value == null)
 						values.add("NULL");
-					else
-						values.add(value.toString());
+					else {
+						if (value.toString().equals("true"))
+							values.add("b'1'");
+						else if (value.toString().equals("false"))
+							values.add("b'0'");
+						else
+							values.add(value.toString());
+					}
 				}
 
 			} catch (IllegalArgumentException e) {
@@ -106,15 +119,26 @@ public class DbHelper {
 						|| (field.getName().contains("Id") && !field.getName().contains("RefId"))) {
 					idValue = (int) value;
 					primaryKeyField = field.getName();
-				} else if (field.getType().isAssignableFrom(String.class)) {
-					fields.add(field.getName() + " = '" + value + "'");
+				} else if (field.getType().isAssignableFrom(String.class)
+						|| field.getType().isAssignableFrom(LocalDate.class)
+						|| field.getType().isAssignableFrom(Date.class)) {
+					if (value == null) {
+						fields.add(field.getName() + " = NULL");
+					} else
+						fields.add(field.getName() + " = '" + value + "'");
 				} else if (field.getType().isAssignableFrom(Address.class)) {
 					// left empty
 				} else {
 					if (value == null) {
 						fields.add(field.getName() + " = NULL");
 					} else {
-						fields.add(field.getName() + " = " + value.toString());
+						String updatedValue = value.toString();
+						if (updatedValue.equals("true"))
+							updatedValue = "b'1'";
+						else if (updatedValue.equals("false"))
+							updatedValue = "b'0'";
+
+						fields.add(field.getName() + " = " + updatedValue);
 					}
 				}
 
