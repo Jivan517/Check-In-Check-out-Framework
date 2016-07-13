@@ -1,7 +1,10 @@
 package cs525.rentalcarsystem.presentation;
 
+import cs525.rentalcarsystem.controller.AddCustomerController;
 import cs525.rentalcarsystem.controller.CarController;
+import cs525.rentalcarsystem.controller.CheckinFormController;
 import cs525.rentalcarsystem.controller.CheckoutController;
+import cs525.rentalcarsystem.controller.ManageCustomerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,9 +25,12 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
-		CheckoutController checkout = new CheckoutController();
-		checkout.start(primaryStage);
+		/*CheckoutController checkout = new CheckoutController();
+		checkout.start(primaryStage);*/
+		/*CheckinFormController checkin = new CheckinFormController();
+		checkin.start(primaryStage);*/
+		AddCustomerController customer = new AddCustomerController();
+		customer.start(primaryStage);
 	}
 
 	public static void main(String[] args) {

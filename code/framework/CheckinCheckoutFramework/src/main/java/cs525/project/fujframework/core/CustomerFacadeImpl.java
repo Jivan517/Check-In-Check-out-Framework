@@ -42,7 +42,9 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
+		this.dbaction.Create(DbHelper.getInsertQuery(customer));
 		String tableName = customer.getClass().getSimpleName();
+		
 		int personId = getRecentlyAddedCustomer(tableName);
 		if (personId > 0) {
 			Address address = customer.getAddress();
@@ -80,7 +82,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		String tableName = "AppCustomer";
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName + " where customerId = " + customerId);
-		return  this.dbaction.read(queryBuilder.toString());
+		return this.dbaction.read(queryBuilder.toString());
 	}
 
 	private int getRecentlyAddedCustomer(String tableName) {
@@ -109,6 +111,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
+		System.out.println(queryBuilder.toString());
 		return this.dbaction.read(queryBuilder.toString());
 	}
 
