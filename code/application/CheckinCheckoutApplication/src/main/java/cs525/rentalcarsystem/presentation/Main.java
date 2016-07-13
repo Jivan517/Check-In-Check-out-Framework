@@ -1,7 +1,9 @@
 package cs525.rentalcarsystem.presentation;
 
+import cs525.rentalcarsystem.controller.AddCustomerController;
 import cs525.rentalcarsystem.controller.CarController;
 import cs525.rentalcarsystem.controller.CheckoutController;
+import cs525.rentalcarsystem.controller.ManageCustomerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,19 +24,18 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// Parent root =
-		// FXMLLoader.load(getClass().getResource("ManageCustomerForm.fxml"));
-		// Scene scene = new Scene(root);
-		//
-		// primaryStage.setResizable(false);
-		// primaryStage.setTitle("Checkout Form - Car List");
-		// primaryStage.setScene(scene);
-		// primaryStage.show();
+//		Parent root = FXMLLoader.load(getClass().getResource("ManageCustomerForm.fxml"));
+//		Scene scene = new Scene(root);
+//
+//		primaryStage.setResizable(false);
+//		primaryStage.setTitle("Checkout Form - Car List");
+//		primaryStage.setScene(scene);
+//		primaryStage.show();
 		// CarController car = new CarController();
 		// car.start(primaryStage);
 
-		CheckoutController checkout = new CheckoutController();
-		checkout.start(primaryStage);
+		ManageCustomerController manageCust = new ManageCustomerController();
+		manageCust.start(primaryStage);
 
 		/*
 		 * Parent root =

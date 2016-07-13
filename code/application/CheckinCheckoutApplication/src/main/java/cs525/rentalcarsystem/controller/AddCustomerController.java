@@ -66,10 +66,14 @@ public class AddCustomerController extends Application {
 	private Stage rootStage = new Stage();
 
 	private CommandManager command;
+	private int customerId;
 
 	public AddCustomerController() {
 
 		this.command = new CommandManagerImpl();
+	}
+	public AddCustomerController(int customerId){
+		this.customerId=customerId;
 	}
 
 	@Override

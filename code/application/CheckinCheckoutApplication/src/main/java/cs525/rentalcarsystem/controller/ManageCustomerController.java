@@ -16,6 +16,8 @@ import cs525.project.fujframework.core.CustomerFacade;
 import cs525.project.fujframework.core.CustomerFacadeImpl;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
+import cs525.rentalcarsystem.model.Car;
+import cs525.rentalcarsystem.presentation.Main;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -50,6 +53,8 @@ public class ManageCustomerController extends Application implements Initializab
 	private Button btnEdit;
 	@FXML
 	private Text txtErrorMessage;
+	private Stage primaryStage;
+	private Stage rootStage = new Stage();
 	
 	@FXML TableView<AppCustomer> tblView;
 	//@FXML TableColumn<AppCustomer, String> colCustomerId;
@@ -57,13 +62,15 @@ public class ManageCustomerController extends Application implements Initializab
 	@FXML TableColumn<AppCustomer, String> colEmail;
 	@FXML TableColumn<AppCustomer,String> colPhoneNumber;
 	@FXML TableColumn<Address, String> colAddress;
+	private ObservableList<AppCustomer> customerList= FXCollections.observableArrayList();
 	
 	
 	private AppCustomer selectedCustomer;
 	public ManageCustomerController() {
 
 	}
-	final ObservableList<AppCustomer> data= FXCollections.observableArrayList();
+	
+	
 	private void populateCustomer(){
 		try{
 			CustomerFacade customerFacade = new CustomerFacadeImpl();
@@ -72,9 +79,9 @@ public class ManageCustomerController extends Application implements Initializab
 				AppCustomer cus=new AppCustomer();
 				//cus.setPersonId(result.getString("customerId"));
 				cus.setFirstName(result.getString("firstName"));
-				cus.setEmail(result.getString("emaial"));
+				cus.setEmail(result.getString("email"));
 				cus.setPhone(result.getString("phone"));
-				data.add(cus);
+				customerList.add(cus);
 			}
 		}
 		catch (SQLException e) {
@@ -88,25 +95,39 @@ public class ManageCustomerController extends Application implements Initializab
 		colCustomerName.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("firstName"));
 		colEmail.setCellValueFactory(new PropertyValueFactory<AppCustomer, String>("email"));
 		colPhoneNumber.setCellValueFactory(new PropertyValueFactory<AppCustomer,String>("phone"));
-		tblView.setItems(data);
+		tblView.setItems(customerList);
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = FXMLLoader.load(getClass().getResource("ManageCustomerForm.fxml"));
-		AnchorPane page = (AnchorPane) loader.load();
-		primaryStage.setTitle("Manage Customer ");
-		Scene scene = new Scene(page);
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		this.primaryStage = primaryStage;
+		this.rootStage = primaryStage;
+		this.primaryStage.setTitle("Add Customer Form");
+		try {
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("ManageCustomerForm.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			Stage ps = new Stage();
+			ps.setScene(scene);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
 	}
 
 	@FXML
 	protected void editCustomer(ActionEvent event) {
-		selectedCustomer = taview.getSelectionModel().getSelectedItem();
-		if (selectedCustomer != null) {
-            /*AddCustomerController addCustomerController = new AddCustomerController();
-            addCustomerController.addCustomer();*/
+		
+		ObservableList<AppCustomer> customers = taview.getSelectionModel().getSelectedItems();
+		if (customers.size()>1) {
+            AddCustomerController addCustomerController = new AddCustomerController();
+            try {
+				addCustomerController.start(this.primaryStage);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 			
 			txtErrorMessage.setText("Customer Successfully Updated!");
@@ -133,7 +154,5 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 	}
-
-	
 
 }
