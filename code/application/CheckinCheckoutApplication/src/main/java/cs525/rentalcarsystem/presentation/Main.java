@@ -28,7 +28,7 @@ public class Main extends Application {
 		// CarController car = new CarController();
 		// car.start(primaryStage);
 
-		AddCustomerController manageCust = new AddCustomerController();
+		ManageCustomerController manageCust = new ManageCustomerController();
 		manageCust.start(primaryStage);
 
 		/*
