@@ -8,23 +8,69 @@
 
 <AnchorPane prefHeight="462.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.ManageCustomerController">
    <children>
-      <TableView fx:id="tblView" layoutX="13.0" layoutY="29.0" prefHeight="399.0" prefWidth="762.0">
-        <columns>
-            <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Customer ID" />
-          <TableColumn id="colCustomerName" fx:id="colCustomerName" prefWidth="152.0" text="Customer Name" />
-          <TableColumn id="colEmail" fx:id="colEmail" prefWidth="159.0" text="E-mail" />
-            <TableColumn id="colPhone" fx:id="colPhoneNumber" prefWidth="114.0" text="Phone No" />
-            <TableColumn id="colAddress" fx:id="colAddress" prefWidth="153.0" text="Address" />
-        </columns>
-      </TableView>
-      <Button fx:id="btnAddCustomer" layoutX="529.0" layoutY="433.0" mnemonicParsing="false" onAction="#AddCustomer" text="AddCustomer" />
-      <Button fx:id="btnEdit" layoutX="627.0" layoutY="433.0" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="80.0" text="Edit" />
-      <Button fx:id="btnDelete" layoutX="716.0" layoutY="432.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="25.0" prefWidth="59.0" text="Delete" />
-      <Text layoutX="214.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Customer" wrappingWidth="286.13671875">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
-      <Text fx:id="txtErrorMessage" layoutX="288.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="240.13671875" />
+      <VBox prefHeight="462.0" prefWidth="817.0">
+         <children>
+            <VBox prefHeight="35.0" prefWidth="328.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                                                                                      Manage Customer" wrappingWidth="778.13671875">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="28.0" prefWidth="22.0" />
+                  <VBox prefHeight="35.0" prefWidth="282.0">
+                     <children>
+                        <TextField fx:id="txtSearchCustomer" prefHeight="25.0" prefWidth="238.0" promptText="Sear User by Name" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="28.0" prefWidth="19.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="25.0" prefWidth="91.0" text="Search" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </HBox>
+            <TableView fx:id="tblView" prefHeight="399.0" prefWidth="762.0">
+              <columns>
+                  <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Customer ID" />
+                <TableColumn id="colCustomerName" fx:id="colCustomerName" prefWidth="152.0" text="Customer Name" />
+                <TableColumn id="colEmail" fx:id="colEmail" prefWidth="159.0" text="E-mail" />
+                  <TableColumn id="colPhone" fx:id="colPhoneNumber" prefWidth="114.0" text="Phone No" />
+                  <TableColumn id="colAddress" fx:id="colAddress" prefWidth="153.0" text="Address" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="158.0" prefWidth="794.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox prefHeight="56.0" prefWidth="400.0">
+                     <children>
+                        <Text fx:id="txtErrorMessage" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="397.13671875" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="68.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#AddCustomer" text="AddCustomer" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editCustomer" prefHeight="25.0" prefWidth="80.0" text="Edit" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="25.0" prefWidth="79.0" text="Delete" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
