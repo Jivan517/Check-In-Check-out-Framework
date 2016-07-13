@@ -10,6 +10,7 @@
    <children>
       <TableView fx:id="tblView" layoutX="20.0" layoutY="29.0" prefHeight="291.0" prefWidth="606.0">
         <columns>
+            <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Customer ID" />
           <TableColumn id="colCustomerName" fx:id="colCustomerName" prefWidth="152.0" text="Customer Name" />
           <TableColumn id="colEmail" fx:id="colEmail" prefWidth="159.0" text="E-mail" />
             <TableColumn id="colPhone" fx:id="colPhoneNumber" prefWidth="114.0" text="Phone No" />

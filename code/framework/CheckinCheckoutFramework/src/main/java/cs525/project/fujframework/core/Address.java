@@ -21,6 +21,9 @@ public class Address {
 	private int zipCode;
 	private String state;
 
+	public Address() {
+	}
+
 	/**
 	 * creates an address object
 	 * 

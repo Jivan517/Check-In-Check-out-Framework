@@ -42,15 +42,24 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 */
 	@Override
 	public int saveCustomer(Customer customer) {
-		this.dbaction.Create(DbHelper.getInsertQuery(customer));
-		String tableName = customer.getClass().getSimpleName();
-		
-		int personId = getRecentlyAddedCustomer(tableName);
-		if (personId > 0) {
-			Address address = customer.getAddress();
-			address.setPersonRefId(personId);
-			address.setIsCustomer(true);
-			return this.dbaction.Create(DbHelper.getInsertQuery(address));
+
+		if (customer.getPersonId() > 0) {
+			logger.debug("Update Customer");
+			return this.dbaction.update(DbHelper.getUpdateQuery(customer));
+			
+
+		} else {
+
+			this.dbaction.Create(DbHelper.getInsertQuery(customer));
+			String tableName = customer.getClass().getSimpleName();
+
+			int personId = getRecentlyAddedCustomer(tableName);
+			if (personId > 0) {
+				Address address = customer.getAddress();
+				address.setPersonRefId(personId);
+				address.setIsCustomer(true);
+				return this.dbaction.Create(DbHelper.getInsertQuery(address));
+			}
 		}
 		return 0;
 
@@ -113,6 +122,15 @@ public class CustomerFacadeImpl implements CustomerFacade {
 		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName());
 		System.out.println(queryBuilder.toString());
 		return this.dbaction.read(queryBuilder.toString());
+	}
+
+	@Override
+	public ResultSet getAddressByCustomerId(int customerId, Class<?> tableName) {
+
+		queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT * FROM " + tableName.getSimpleName() + " WHERE personRefId=" + customerId);
+		return this.dbaction.read(queryBuilder.toString());
+
 	}
 
 }
