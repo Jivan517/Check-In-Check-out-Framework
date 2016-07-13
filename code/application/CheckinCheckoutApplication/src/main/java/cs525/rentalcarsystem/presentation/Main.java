@@ -57,7 +57,6 @@ public class Main extends Application {
 //		customer.start(primaryStage);
 		/*AddCustomerController customer = new AddCustomerController();
 		customer.start(primaryStage);*/
-
 		/*
 		 * CheckoutController checkout = new CheckoutController();
 		 * checkout.start(primaryStage);

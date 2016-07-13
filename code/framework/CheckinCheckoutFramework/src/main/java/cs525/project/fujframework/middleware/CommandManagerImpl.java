@@ -75,7 +75,9 @@ public class CommandManagerImpl implements CommandManager {
 			currentCommand = new CheckoutCommand(entry);
 			if (currentCommand.execute()) {
 				commands.push(currentCommand);
+				System.out.println("executed");
 			} else {
+				System.out.println("not executed");
 				// rollback
 				while (commands.size() > 0) {
 					currentCommand = commands.pop();
@@ -95,7 +97,9 @@ public class CommandManagerImpl implements CommandManager {
 		commands.clear();
 		for (CheckoutRecordEntry entry : checkInEntries) {
 			currentCommand = new CheckinCommand(entry);
+			System.out.println("before execution");
 			if (currentCommand.execute()) {
+				System.out.println("executing");
 				commands.push(currentCommand);
 			} else {
 

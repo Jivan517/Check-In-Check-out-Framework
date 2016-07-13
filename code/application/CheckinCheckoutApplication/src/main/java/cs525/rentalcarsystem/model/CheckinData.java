@@ -5,17 +5,18 @@
  */
 package cs525.rentalcarsystem.model;
 
+import cs525.project.fujframework.core.CheckoutRecordEntry;
+
 /**
  * @author paudelumesh
  *
  */
-public class CheckinData {
+public class CheckinData extends CheckoutRecordEntry {
 	private String name;
 	private String model;
 	private double rentalFeePerDay;
 	private double rentalFinePerDay;
 	private double rentalFee;
-	private String dueDate;
 
 	/**
 	 * @return the name
@@ -92,28 +93,15 @@ public class CheckinData {
 		this.rentalFee = rentalFee;
 	}
 
-	/**
-	 * @return the dueDate
-	 */
-	public String getDueDate() {
-		return dueDate;
-	}
-
-	/**
-	 * @param dueDate
-	 *            the dueDate to set
-	 */
-	public void setDueDate(String dueDate) {
-		this.dueDate = dueDate;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "CheckinData [name=" + name + ", model=" + model + ", rentalFeePerDay=" + rentalFeePerDay
-				+ ", rentalFinePerDay=" + rentalFinePerDay + ", rentalFee=" + rentalFee + ", dueDate=" + dueDate + "]";
+				+ ", rentalFinePerDay=" + rentalFinePerDay + ", rentalFee=" + rentalFee + "]";
 	}
 
 }

@@ -45,7 +45,7 @@
                               <Insets top="25.0" />
                            </VBox.margin>
                         </TableView>
-                        <Button fx:id="checkinBtn" defaultButton="true" mnemonicParsing="false" text="Checkin">
+                        <Button fx:id="checkinBtn" defaultButton="true" mnemonicParsing="false" onAction="#btnCheckinAction" text="Checkin">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>

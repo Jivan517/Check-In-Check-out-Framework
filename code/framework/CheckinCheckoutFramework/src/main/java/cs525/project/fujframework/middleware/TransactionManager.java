@@ -63,6 +63,7 @@ public abstract class TransactionManager {
 	 */
 	protected void printBill(List<CheckoutRecordEntry> checkoutRecordEntries) {
 		StringBuilder builder = new StringBuilder();
+
 		builder.append("\n\n---------------------------------------\n");
 		builder.append("========Rental System Bill=========\n");
 		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {

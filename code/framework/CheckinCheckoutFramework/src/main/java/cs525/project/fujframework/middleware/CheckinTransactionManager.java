@@ -47,22 +47,19 @@ public class CheckinTransactionManager extends TransactionManager {
 	@Override
 	protected List<CheckoutRecordEntry> calculateRentalFeeOrOverdueFine(List<CheckoutRecordEntry> checkoutRecordEntries,
 			Class<?> productClass) {
-		for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries) {
-			long loanDays = java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(),
-					checkoutRecordEntry.getDueDate());
-			ResultSet rs = productFacade.getProductById(checkoutRecordEntry.getProductRefId(), productClass);
-			double fine = 0;
-			try {
-				while (rs.next()) {
-					fine = rs.getDouble("overdueFinePerDay");
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			double rentalFine = loanDays * fine;
-			checkoutRecordEntry.setRentalFee(rentalFine);
-		}
+		/*
+		 * for (CheckoutRecordEntry checkoutRecordEntry : checkoutRecordEntries)
+		 * { long loanDays =
+		 * java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(),
+		 * checkoutRecordEntry.getDueDate()); ResultSet rs =
+		 * productFacade.getProductById(checkoutRecordEntry.getProductRefId(),
+		 * productClass); double fine = 0; try { while (rs.next()) { fine =
+		 * rs.getDouble("overdueFinePerDay"); } } catch (SQLException e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * double rentalFine = loanDays * fine;
+		 * checkoutRecordEntry.setRentalFine(rentalFine); }
+		 */
 		return checkoutRecordEntries;
 	}
 
@@ -74,7 +71,7 @@ public class CheckinTransactionManager extends TransactionManager {
 	 */
 	@Override
 	protected void processCheckoutRecord(List<CheckoutRecordEntry> checkoutRecordEntries) {
-		command.saveCheckoutRecords(checkoutRecordEntries);
+		command.checkBackRecordsIn(checkoutRecordEntries);
 	}
 
 	/*
