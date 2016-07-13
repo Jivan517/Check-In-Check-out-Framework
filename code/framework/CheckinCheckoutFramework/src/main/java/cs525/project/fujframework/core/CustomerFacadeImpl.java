@@ -75,13 +75,13 @@ public class CustomerFacadeImpl implements CustomerFacade {
 	 * @see cs525.project.fujframework.core.CustomerFacade#getCustomerById(int)
 	 */
 	@Override
-	public Customer getCustomerById(int customerId) {
+	public ResultSet getCustomerById(int customerId) {
 
 		// TODO: Generalize the table name value
 		String tableName = "AppCustomer";
 		queryBuilder = new StringBuilder();
 		queryBuilder.append("SELECT * FROM " + tableName + " where customerId = " + customerId);
-		return (Customer) this.dbaction.read(queryBuilder.toString());
+		return  this.dbaction.read(queryBuilder.toString());
 	}
 
 	private int getRecentlyAddedCustomer(String tableName) {

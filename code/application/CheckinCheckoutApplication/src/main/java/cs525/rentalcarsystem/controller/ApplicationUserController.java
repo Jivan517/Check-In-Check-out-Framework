@@ -7,9 +7,9 @@ package cs525.rentalcarsystem.controller;
 
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
+import cs525.rentalcarsystem.controller.utils.Validator;
 import cs525.rentalcarsystem.model.ApplicationUser;
 import cs525.rentalcarsystem.model.FormException;
-import cs525.rentalcarsystem.model.Validator;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

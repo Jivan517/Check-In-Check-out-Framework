@@ -3,8 +3,9 @@
  * 
  * Licensed under the MIT License (MIT);
  */
-package cs525.rentalcarsystem.model;
+package cs525.rentalcarsystem.controller.utils;
 
+import cs525.rentalcarsystem.model.FormException;
 import javafx.scene.control.TextField;
 
 /**

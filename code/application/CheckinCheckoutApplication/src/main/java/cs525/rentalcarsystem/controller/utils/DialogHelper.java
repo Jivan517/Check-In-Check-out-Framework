@@ -17,7 +17,7 @@ public class DialogHelper {
 
 	public static void toast(String msg, AlertType alertType) {
 		Alert alert = new Alert(alertType);
-		alert.setTitle("Information");
+		alert.setTitle(alertType.name());
 		alert.setHeaderText(msg);
 		alert.showAndWait();
 	}

@@ -40,7 +40,7 @@ public interface CustomerFacade {
 	 * @param customerId
 	 * @return the customer object
 	 */
-	public Customer getCustomerById(int customerId);
+	public ResultSet getCustomerById(int customerId);
 
 	/**
 	 * @param tableName
