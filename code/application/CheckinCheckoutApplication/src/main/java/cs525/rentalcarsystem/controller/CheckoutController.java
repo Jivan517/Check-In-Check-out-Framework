@@ -16,6 +16,8 @@ import cs525.project.fujframework.middleware.LoggerImpl;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.model.Car;
+import cs525.rentalcarsystem.model.CheckoutCart;
+import cs525.rentalcarsystem.model.ComboBoxData;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,7 +39,7 @@ import javafx.stage.Stage;
 public class CheckoutController extends Application implements Initializable {
 
 	@FXML
-	private ComboBox<String> customerListComboBox;
+	private ComboBox<ComboBoxData<Integer, String>> customerListComboBox;
 	@FXML
 	private TableColumn<Car, String> name;
 
@@ -58,7 +60,7 @@ public class CheckoutController extends Application implements Initializable {
 	ObservableList<Car> carListObservable = FXCollections.observableArrayList();
 	private Logger logger;
 
-	ObservableList<String> customerListObservable = FXCollections.observableArrayList();
+	ObservableList<ComboBoxData<Integer, String>> customerListObservable = FXCollections.observableArrayList();
 
 	public CheckoutController() {
 		logger = new ConsoleLogger(new LoggerImpl());
@@ -123,9 +125,12 @@ public class CheckoutController extends Application implements Initializable {
 				String middleName = rs.getString("middleName");
 				String lName = rs.getString("lastName");
 
-				String content = firstName + " " + middleName + " " + lName + "-" + id;
+				String content = firstName + " " + middleName + " " + lName;
 
-				customerListObservable.add(content);
+				ComboBoxData<Integer, String> data = new ComboBoxData<Integer, String>();
+				data.setKey(id);
+				data.setValue(content);
+				customerListObservable.add(data);
 
 			}
 		} catch (SQLException e) {
@@ -185,6 +190,28 @@ public class CheckoutController extends Application implements Initializable {
 		Stage stage = new Stage();
 		CarController controller = new CarController();
 		controller.start(stage);
+	}
+
+	@FXML
+	protected void btnCheckoutAction(ActionEvent event) throws Exception {
+
+		ObservableList<Car> cars = carList.getSelectionModel().getSelectedItems();
+		if (cars.size() < 1) {
+			DialogHelper.toast("Please, select a record!", AlertType.WARNING);
+			return;
+		}
+
+		// selected customer
+		ComboBoxData<Integer, String> selectedCustomer = customerListComboBox.getSelectionModel().getSelectedItem();
+
+		System.out.println("cust: " + selectedCustomer.getKey());
+		// prepare the cart
+		CheckoutCart cart = new CheckoutCart();
+
+		Stage stage = new Stage();
+		CheckoutPaymentController controller = new CheckoutPaymentController();
+		controller.start(stage);
+
 	}
 
 }

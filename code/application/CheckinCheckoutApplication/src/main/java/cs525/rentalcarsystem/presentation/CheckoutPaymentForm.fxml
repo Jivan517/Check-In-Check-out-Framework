@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.CheckoutPaymentController">
    <left>
       <VBox prefHeight="471.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </left>
@@ -49,7 +49,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="337.0">
                      <children>
-                        <TextField fx:id="cutomerTxt" editable="false" />
+                        <Label fx:id="customerNameTxt" disable="true" opacity="0.45" text="Customer Name" />
                      </children>
                   </VBox>
                </children>
@@ -67,7 +67,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="341.0">
                      <children>
-                        <TextField fx:id="totalRentalFeeTxt" />
+                        <TextField fx:id="totalRentalFeeTxt" editable="false" promptText="Total Rental Fee" />
                      </children>
                   </VBox>
                </children>
@@ -85,9 +85,31 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="346.0">
                      <children>
-                        <TextField fx:id="dueDateTxt" prefHeight="31.0" prefWidth="327.0" />
+                        <TextField fx:id="dueDateTxt" prefHeight="31.0" prefWidth="327.0" promptText="Due Date" />
                      </children>
                   </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="647.0">
+               <children>
+                  <Label text="Checkout Cart" textFill="#b94f4f">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="cartTable" prefHeight="100.0" prefWidth="599.0">
+                    <columns>
+                      <TableColumn fx:id="nameCol" prefWidth="167.0" text="Car Name" />
+                      <TableColumn fx:id="modelCol" prefWidth="91.0" text="Model" />
+                        <TableColumn fx:id="yearCol" minWidth="0.0" prefWidth="92.0" text="Year" />
+                        <TableColumn fx:id="feeCol" prefWidth="106.0" text="Fee/Day" />
+                        <TableColumn fx:id="quantityCol" prefWidth="89.0" text="Quantity" />
+                    </columns>
+                  </TableView>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -95,12 +117,12 @@
                   <VBox prefHeight="100.0" prefWidth="402.0" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="payBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Pay" />
+                        <Button fx:id="payBtn" defaultButton="true" mnemonicParsing="false" onAction="#btnPayAction" prefHeight="31.0" prefWidth="87.0" text="Pay" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel" />
+                        <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#btnCancelAction" text="Cancel" />
                      </children>
                   </VBox>
                </children>
