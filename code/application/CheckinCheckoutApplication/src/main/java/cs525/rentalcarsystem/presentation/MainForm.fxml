@@ -61,37 +61,37 @@
    <top>
       <MenuBar fx:id="menubar" BorderPane.alignment="CENTER">
         <menus>
-				<Menu mnemonicParsing="false" text="Applicaton User">
+				<Menu fx:id="userMenu" mnemonicParsing="false" text="Applicaton User">
 					<items>
 						<MenuItem fx:id="listUsersMenu" mnemonicParsing="false" onAction="#listUsersMenuAction" text="List Users" />
 						<MenuItem fx:id="addUserMenu" mnemonicParsing="false" onAction="#addUserMenuAction" text="Add User" />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="false" text="Customer">
+				<Menu fx:id="customerMenu" mnemonicParsing="false" text="Customer">
 					<items>
 						<MenuItem fx:id="listCustomersMenu" mnemonicParsing="false" onAction="#listCustomersMenuAction" text="List Customers" />
 						<MenuItem fx:id="addCustomerMenu" mnemonicParsing="false" onAction="#addCustomerMenuAction" text="Add Customer" />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="false" text="Car">
+				<Menu fx:id="carMenu" mnemonicParsing="false" text="Car">
 					<items>
 						<MenuItem fx:id="listCarsMenu" mnemonicParsing="false" onAction="#listCarsMenuAction" text="List Cars" />
 						<MenuItem fx:id="addCarMenu" mnemonicParsing="false" onAction="#addCarMenuAction" text="Add Car" />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="false" text="Transactions">
+				<Menu fx:id="transactionMenu" mnemonicParsing="false" text="Transactions">
 					<items>
 						<MenuItem fx:id="checkoutMenu" mnemonicParsing="false" onAction="#checkoutMenuAction" text="Checkout Car" />
 						<MenuItem fx:id="checkinMenu" mnemonicParsing="false" onAction="#checkinMenuAction" text="CheckIn Car" />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="false" text="System">
+				<Menu fx:id="systemMenu" mnemonicParsing="false" text="System">
 					<items>
 						<MenuItem fx:id="logoutMenu" mnemonicParsing="false" onAction="#logoutMenuAction" text="Logout" />
 						<MenuItem fx:id="exitMenu" mnemonicParsing="false" onAction="#exitMenuAction" text="Exit" />
 					</items>
 				</Menu>
-				<Menu mnemonicParsing="false" text="Help">
+				<Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
 					<items>
 						<MenuItem fx:id="userManualMenu" mnemonicParsing="false" text="User Manual" />
 						<MenuItem fx:id="aboutMenu" mnemonicParsing="false" onAction="#aboutMenuAction" text="About" />

@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="205.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.LoginController">
+<AnchorPane prefHeight="291.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.LoginController">
    <children>
-      <VBox prefHeight="203.0" prefWidth="356.0">
+      <VBox alignment="CENTER" prefHeight="252.0" prefWidth="373.0">
          <children>
-            <HBox prefHeight="25.0" prefWidth="239.0" />
-            <HBox prefHeight="49.0" prefWidth="358.0">
+            <HBox prefHeight="15.0" prefWidth="367.0" />
+            <HBox alignment="CENTER" prefHeight="93.0" prefWidth="356.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                         Login-Car Rental System" wrappingWidth="373.724609375">
+                  <Label text="Login - Car Rental System">
                      <font>
-                        <Font name="System Bold" size="17.0" />
+                        <Font name="System Bold" size="19.0" />
                      </font>
-                  </Text>
+                  </Label>
                </children>
             </HBox>
-            <HBox prefHeight="76.0" prefWidth="355.0">
+            <HBox prefHeight="92.0" prefWidth="356.0">
                <children>
                   <VBox prefHeight="76.0" prefWidth="87.0" />
                   <VBox prefHeight="93.0" prefWidth="230.0">
@@ -32,6 +32,7 @@
                   </VBox>
                </children>
             </HBox>
+            <HBox prefHeight="87.0" prefWidth="356.0" />
             <HBox prefHeight="27.0" prefWidth="389.0">
                <children>
                   <VBox prefHeight="27.0" prefWidth="174.0" />
@@ -40,10 +41,10 @@
                         <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="72.0" text="Login" />
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Reset" />
+                  <Button cancelButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Reset" />
                </children>
             </HBox>
-            <HBox prefHeight="21.0" prefWidth="375.0">
+            <HBox alignment="CENTER" prefHeight="21.0" prefWidth="375.0">
                <children>
                   <Text fx:id="txtErrorMessage" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="289.0" />
                </children>
