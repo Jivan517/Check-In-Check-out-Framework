@@ -206,8 +206,10 @@ public class ManageCustomerController extends Application implements Initializab
 
 	@FXML
 	protected void searchCustomer(ActionEvent event) {
-		String searchText = txtSearchCustomer.getText();
+		String searchText = txtSearchCustomer.getText();		 
 		searchText.toLowerCase();
+		customerList.clear();
+		populateCustomer();
 		if (!searchText.isEmpty()) {
 
 			List<AppCustomer> appCustomerList = customerList.stream()
@@ -222,8 +224,11 @@ public class ManageCustomerController extends Application implements Initializab
 			}
 			populateTable();
 		} else {
-			txtErrorMessage.setText(txtSearchCustomer.getText() + " Customer Not Found");
-			txtErrorMessage.setFill(Color.RED);
+			customerList.clear();
+			populateCustomer();
+			populateTable();
+			/*txtErrorMessage.setText(txtSearchCustomer.getText() + " Customer Not Found");
+			txtErrorMessage.setFill(Color.RED);*/
 		}
 
 	}
