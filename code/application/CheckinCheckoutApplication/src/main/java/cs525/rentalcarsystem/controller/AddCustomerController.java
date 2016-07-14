@@ -19,7 +19,7 @@ import cs525.rentalcarsystem.controller.utils.Validator;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.model.FormException;
-import cs525.rentalcarsystem.presentation.Main;
+import cs525.rentalcarsystem.presentation.MainForm;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -97,7 +97,7 @@ public class AddCustomerController extends Application implements Initializable 
 		this.rootStage = primaryStage;
 		this.primaryStage.setTitle("Add Customer Form");
 		try {
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("AddCustomerForm.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainForm.class.getResource("AddCustomerForm.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 			Scene scene = new Scene(page);

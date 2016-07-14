@@ -18,7 +18,7 @@ import cs525.project.fujframework.core.CustomerFacadeImpl;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.Address;
 import cs525.rentalcarsystem.model.AppCustomer;
-import cs525.rentalcarsystem.presentation.Main;
+import cs525.rentalcarsystem.presentation.MainForm;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -138,7 +138,7 @@ public class ManageCustomerController extends Application implements Initializab
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Add Customer Form");
 		try {
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("ManageCustomerForm.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainForm.class.getResource("ManageCustomerForm.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 			Scene scene = new Scene(page);

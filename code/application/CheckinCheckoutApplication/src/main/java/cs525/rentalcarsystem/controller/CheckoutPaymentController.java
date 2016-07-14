@@ -23,6 +23,7 @@ import cs525.project.fujframework.middleware.Logger;
 import cs525.project.fujframework.middleware.LoggerImpl;
 import cs525.project.fujframework.middleware.TransactionManager;
 import cs525.project.fujframework.utils.BusinessConstants;
+import cs525.project.fujframework.utils.LoginUtil;
 import cs525.project.fujframework.utils.SessionCache;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.Car;
@@ -120,8 +121,10 @@ public class CheckoutPaymentController extends Application implements Initializa
 	@FXML
 	protected void btnPayAction(ActionEvent event) throws Exception {
 
-		SessionCache session = SessionCache.getInstance();
-		session.add(BusinessConstants.STAFF, BusinessConstants.STAFF);
+		if (!LoginUtil.isStaff()) {
+			DialogHelper.toast("Not Allowed for non-staff user", AlertType.ERROR);
+			return;
+		}
 
 		ObservableList<Car> cars = cartTable.getItems();
 		LocalDate dueDate = ((DatePicker) dueDateVBox.getChildren().get(0)).getValue();

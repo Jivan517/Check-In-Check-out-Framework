@@ -48,6 +48,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Menu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -70,6 +71,9 @@ public class HomeController extends Application implements Initializable {
 
 	@FXML
 	private CategoryAxis xAxis;
+	
+	@FXML
+	private Menu carMenu;
 
 	@FXML
 	private ImageView imageView;
@@ -199,7 +203,8 @@ public class HomeController extends Application implements Initializable {
 		xAxis.setCategories(monthNames);
 
 		renderGraph();
-
+		//carMenu.setDisable(true);
+		carMenu.hide();
 		imageView.setImage(new Image("file:resources/images/car.jpg"));
 	}
 
