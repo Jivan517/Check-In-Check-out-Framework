@@ -19,9 +19,9 @@
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin></Label>
-                        <Label prefHeight="62.0" prefWidth="119.0" text="             Products:">
+                        <Label prefHeight="46.0" prefWidth="139.0" text="             Product:">
                            <VBox.margin>
-                              <Insets top="25.0" />
+                              <Insets top="10.0" />
                            </VBox.margin></Label>
                      </children>
                   </VBox>

@@ -7,9 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="273.0" prefWidth="781.0"
-	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="cs525.rentalcarsystem.controller.CheckinPaymentController">
+<BorderPane prefHeight="273.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs525.rentalcarsystem.controller.CheckinPaymentController">
 	<center>
 		<HBox prefHeight="50.0" prefWidth="581.0" BorderPane.alignment="CENTER">
 			<children>
@@ -17,30 +15,29 @@
 					<children>
 						<VBox prefHeight="436.0" prefWidth="147.0">
 							<children>
-								<Label alignment="BOTTOM_RIGHT" prefHeight="39.0"
-									prefWidth="118.0" text="OverDueFine:">
+								<Label alignment="BOTTOM_RIGHT" prefHeight="39.0" prefWidth="118.0" text="OverDueFine:">
 									<VBox.margin>
 										<Insets top="10.0" />
 									</VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
 								</Label>
 							</children>
 						</VBox>
-						<VBox fx:id="overDueFineLabel" maxHeight="-Infinity"
-							prefHeight="45.0" prefWidth="325.0">
+						<VBox fx:id="overDueFineLabel" maxHeight="-Infinity" prefHeight="45.0" prefWidth="325.0">
 							<children>
 								<Label fx:id="overDueFineAmountLabel">
 									<VBox.margin>
 										<Insets top="25.0" />
 									</VBox.margin>
 								</Label>
-								<Button fx:id="payBtn" defaultButton="true"
-									mnemonicParsing="false" onAction="#onPayment" text="Pay">
+								<Button fx:id="payBtn" defaultButton="true" mnemonicParsing="false" onAction="#onPayment" text="Pay">
 									<VBox.margin>
 										<Insets top="40.0" />
 									</VBox.margin>
 								</Button>
-								<Button cancelButton="true" mnemonicParsing="false"
-									onAction="#onPaymentCancel" text="Cancel">
+								<Button cancelButton="true" mnemonicParsing="false" onAction="#onPaymentCancel" text="Cancel">
 									<VBox.margin>
 										<Insets left="60.0" top="-31.0" />
 									</VBox.margin>
