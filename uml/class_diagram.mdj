@@ -1087,7 +1087,7 @@
 							"containerChangeable": false,
 							"containerExtending": false,
 							"left": 784,
-							"top": 336,
+							"top": 328,
 							"width": 1273,
 							"height": 705,
 							"autoResize": false
@@ -28388,7 +28388,7 @@
 								"$ref": "AAAAAAFV0PN8PgTAlY8="
 							},
 							"lineStyle": 1,
-							"points": "2119:388;2057:415"
+							"points": "2119:388;2057:414"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -30584,7 +30584,7 @@
 											"containerExtending": false,
 											"left": -304,
 											"top": 912,
-											"width": 80.9072265625,
+											"width": 81,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
