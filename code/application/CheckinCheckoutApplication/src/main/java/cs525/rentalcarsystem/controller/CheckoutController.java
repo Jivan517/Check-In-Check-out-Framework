@@ -3,6 +3,7 @@ package cs525.rentalcarsystem.controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -13,6 +14,7 @@ import cs525.project.fujframework.core.ProductFacadeImpl;
 import cs525.project.fujframework.middleware.ConsoleLogger;
 import cs525.project.fujframework.middleware.Logger;
 import cs525.project.fujframework.middleware.LoggerImpl;
+import cs525.project.fujframework.utils.LoginUtil;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import cs525.rentalcarsystem.model.AppCustomer;
 import cs525.rentalcarsystem.model.Car;
@@ -29,6 +31,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -43,6 +46,16 @@ public class CheckoutController extends Application implements Initializable {
 
 	@FXML
 	private ComboBox<KeyValuePair<Integer, String>> customerListComboBox;
+
+	@FXML
+	private Button checkoutBtn;
+
+	@FXML
+	private Button btnAddCar;
+
+	@FXML
+	private Button updateBtn;
+
 	@FXML
 	private TableColumn<Car, String> name;
 
@@ -80,7 +93,17 @@ public class CheckoutController extends Application implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
+		if (LoginUtil.isStaff()) {
+			btnAddCar.setDisable(true);
+			updateBtn.setDisable(true);
+			// customerListComboBox.setDisable(true);
+		} else if (LoginUtil.isAdmin()) {
+			// customerListComboBox.setDisable(false);
+			btnAddCar.setDisable(false);
+			updateBtn.setDisable(false);
+		}
+
 		lblTitle.setText(title);
 		carList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		getTableData();
@@ -151,6 +174,7 @@ public class CheckoutController extends Application implements Initializable {
 			logger.error(e.getMessage());
 		}
 
+		this.customerListComboBox.getItems().clear();
 		this.customerListComboBox.setPromptText("--Choose for checkout");
 		this.customerListComboBox.setItems(customerListObservable);
 	}
