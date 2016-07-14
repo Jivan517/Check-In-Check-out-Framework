@@ -14,6 +14,9 @@ import cs525.project.fujframework.core.SysUserFacade;
 import cs525.project.fujframework.core.SysUserFacadeImpl;
 import cs525.project.fujframework.middleware.CommandManager;
 import cs525.project.fujframework.middleware.CommandManagerImpl;
+import cs525.project.fujframework.utils.BusinessConstants;
+import cs525.project.fujframework.utils.LoginUtil;
+import cs525.project.fujframework.utils.SessionCache;
 import cs525.rentalcarsystem.controller.utils.Validator;
 import cs525.rentalcarsystem.model.ApplicationUser;
 import cs525.rentalcarsystem.model.FormException;
@@ -148,6 +151,19 @@ public class ApplicationUserController extends Application implements Initializa
 				}
 
 				if (command.saveSysUser(user)) {
+
+					if (LoginUtil.getLoggedInUsername() != null
+							&& LoginUtil.getLoggedInUsername().equals(userName)) {
+						SessionCache session = SessionCache.getInstance();
+						if (user.isAdmin()) {
+							session.add(BusinessConstants.LOGGED_IN_USERID, userName);
+							session.add(BusinessConstants.ADMIN, BusinessConstants.ADMIN);
+						} else {
+							session.add(BusinessConstants.LOGGED_IN_USERID, userName);
+							session.add(BusinessConstants.STAFF, BusinessConstants.STAFF);
+						}
+					}
+
 					successMsgLabel.setText("User added/updated successfully !!!");
 					successMsgLabel.getStyleClass().add("color-success");
 					clearFields();

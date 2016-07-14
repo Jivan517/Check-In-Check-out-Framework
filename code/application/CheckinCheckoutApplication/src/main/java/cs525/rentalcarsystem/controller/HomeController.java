@@ -32,6 +32,7 @@ import cs525.project.fujframework.middleware.ConsoleLogger;
 import cs525.project.fujframework.middleware.Logger;
 import cs525.project.fujframework.middleware.LoggerImpl;
 import cs525.project.fujframework.utils.BusinessConstants;
+import cs525.project.fujframework.utils.LoginUtil;
 import cs525.project.fujframework.utils.SessionCache;
 import cs525.rentalcarsystem.controller.utils.DialogHelper;
 import javafx.application.Application;
@@ -71,9 +72,18 @@ public class HomeController extends Application implements Initializable {
 
 	@FXML
 	private CategoryAxis xAxis;
-	
+
 	@FXML
 	private Menu carMenu;
+
+	@FXML
+	private Menu userMenu;
+
+	@FXML
+	private Menu customerMenu;
+
+	@FXML
+	private Menu transactionMenu;
 
 	@FXML
 	private ImageView imageView;
@@ -83,9 +93,10 @@ public class HomeController extends Application implements Initializable {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/MainForm.fxml"));
+		Parent root = FXMLLoader
+				.load(getClass().getClassLoader().getResource("cs525/rentalcarsystem/presentation/MainForm.fxml"));
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add("cs525/rentalcarsystem/presentation/background.css");
+		// scene.getStylesheets().add("cs525/rentalcarsystem/presentation/background.css");
 		primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Home - Car Rental System [V1.0.0]");
@@ -105,6 +116,10 @@ public class HomeController extends Application implements Initializable {
 	@FXML
 	protected void listUsersMenuAction(ActionEvent event) throws Exception {
 
+		checkForUserAccessPrivilege();
+		if (LoginUtil.isStaff())
+			return;
+
 		Stage stage = new Stage();
 		ApplicationUserController controller = new ApplicationUserController();
 		controller.start(stage);
@@ -112,6 +127,11 @@ public class HomeController extends Application implements Initializable {
 
 	@FXML
 	protected void addUserMenuAction(ActionEvent event) throws Exception {
+
+		checkForUserAccessPrivilege();
+		if (LoginUtil.isStaff())
+			return;
+
 		Stage stage = new Stage();
 		ApplicationUserController controller = new ApplicationUserController();
 		controller.start(stage);
@@ -119,6 +139,11 @@ public class HomeController extends Application implements Initializable {
 
 	@FXML
 	protected void listCustomersMenuAction(ActionEvent event) throws Exception {
+
+		checkForUserAccessPrivilege();
+		if (LoginUtil.isStaff())
+			return;
+
 		Stage stage = new Stage();
 		ManageCustomerController controller = new ManageCustomerController();
 		controller.start(stage);
@@ -126,6 +151,10 @@ public class HomeController extends Application implements Initializable {
 
 	@FXML
 	protected void addCustomerMenuAction(ActionEvent event) throws Exception {
+		checkForUserAccessPrivilege();
+		if (LoginUtil.isStaff())
+			return;
+
 		Stage stage = new Stage();
 		AddCustomerController controller = new AddCustomerController();
 		controller.start(stage);
@@ -133,6 +162,9 @@ public class HomeController extends Application implements Initializable {
 
 	@FXML
 	protected void listCarsMenuAction(ActionEvent event) throws Exception {
+		checkForUserAccessPrivilege();
+		if (LoginUtil.isStaff())
+			return;
 		Stage stage = new Stage();
 		CheckoutController controller = new CheckoutController("Car List - Car Rental System");
 		controller.start(stage);
@@ -140,6 +172,10 @@ public class HomeController extends Application implements Initializable {
 
 	@FXML
 	protected void addCarMenuAction(ActionEvent event) throws Exception {
+		checkForUserAccessPrivilege();
+		if (LoginUtil.isStaff())
+			return;
+
 		Stage stage = new Stage();
 		CarController controller = new CarController();
 		controller.start(stage);
@@ -195,6 +231,17 @@ public class HomeController extends Application implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		if (LoginUtil.isStaff()) {
+			userMenu.setDisable(true);
+			customerMenu.setDisable(true);
+			carMenu.setDisable(true);
+		} else if (LoginUtil.isAdmin()) {
+			userMenu.setDisable(false);
+			customerMenu.setDisable(false);
+			carMenu.setDisable(false);
+		}
+
 		// Get an array with the English month names.
 		String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
 		// Convert it to a list and add it to our ObservableList of months.
@@ -203,8 +250,7 @@ public class HomeController extends Application implements Initializable {
 		xAxis.setCategories(monthNames);
 
 		renderGraph();
-		//carMenu.setDisable(true);
-		carMenu.hide();
+
 		imageView.setImage(new Image("file:resources/images/car.jpg"));
 	}
 
@@ -263,6 +309,20 @@ public class HomeController extends Application implements Initializable {
 		}
 
 		return dates;
+
+	}
+
+	private void checkForUserAccessPrivilege() {
+
+		if (LoginUtil.isStaff()) {
+			userMenu.setDisable(true);
+			customerMenu.setDisable(true);
+			carMenu.setDisable(true);
+		} else if (LoginUtil.isAdmin()) {
+			userMenu.setDisable(false);
+			customerMenu.setDisable(false);
+			carMenu.setDisable(false);
+		}
 
 	}
 }
