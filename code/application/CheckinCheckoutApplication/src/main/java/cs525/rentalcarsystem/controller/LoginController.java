@@ -13,7 +13,7 @@ import cs525.project.fujframework.core.SysUserFacadeImpl;
 import cs525.project.fujframework.utils.BusinessConstants;
 import cs525.project.fujframework.utils.SessionCache;
 import cs525.rentalcarsystem.model.ApplicationUser;
-import cs525.rentalcarsystem.presentation.Main;
+import cs525.rentalcarsystem.presentation.MainForm;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,12 +59,12 @@ public class LoginController extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Login");
 		try {
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("LoginForm.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainForm.class.getResource("LoginForm.fxml"));
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Login - Car Rental System [V1.0.0]");
 			primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 			AnchorPane page = (AnchorPane) loader.load();
-			Scene scene = new Scene(page, 400, 400);
+			Scene scene = new Scene(page, 500, 300);
 			Stage ps = new Stage();
 			ps.setScene(scene);
 			primaryStage.setScene(scene);
