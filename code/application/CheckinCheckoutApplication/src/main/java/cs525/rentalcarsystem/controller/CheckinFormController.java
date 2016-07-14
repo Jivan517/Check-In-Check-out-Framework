@@ -140,7 +140,7 @@ public class CheckinFormController extends Application implements Initializable 
 	public void populateTable(ObservableList<CheckinData> checkinRecords) {
 		name.setCellValueFactory(new PropertyValueFactory<CheckinData, String>("name"));
 		model.setCellValueFactory(new PropertyValueFactory<CheckinData, String>("model"));
-		rentalFeePerDay.setCellValueFactory(new PropertyValueFactory<CheckinData, Double>("rentalFeePerDay"));
+		rentalFeePerDay.setCellValueFactory(new PropertyValueFactory<CheckinData, Double>("rentalFee"));
 		rentalFinePerDay.setCellValueFactory(new PropertyValueFactory<CheckinData, Double>("rentalFinePerDay"));
 		rentalFee.setCellValueFactory(new PropertyValueFactory<CheckinData, Double>("rentalFee"));
 		dueDate.setCellValueFactory(new PropertyValueFactory<CheckinData, String>("dueDate"));
