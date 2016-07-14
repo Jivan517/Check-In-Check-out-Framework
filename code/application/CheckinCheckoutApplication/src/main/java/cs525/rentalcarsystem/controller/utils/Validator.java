@@ -30,5 +30,6 @@ public class Validator {
 		if (!field.getText().toString().matches(
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
 			throw new FormException(field.getId() + " field must have valid email");
+
 	}
 }

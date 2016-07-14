@@ -46,6 +46,8 @@ public class LoginController extends Application {
 	private Button btnLogin;
 	@FXML
 	private Text txtErrorMessage;
+	@FXML
+	private Button btnRest;
 	private Stage primaryStage;
 
 	public LoginController() {
@@ -121,6 +123,11 @@ public class LoginController extends Application {
 
 		}
 		return user;
+	}
+
+	@FXML protected void clearField(ActionEvent event) throws Exception{
+		txtUserName.clear();
+		txtPassword.clear();
 	}
 
 }
