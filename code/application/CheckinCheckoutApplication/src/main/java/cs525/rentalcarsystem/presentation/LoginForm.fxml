@@ -42,7 +42,6 @@
                      </children>
                   </VBox>
                   <Button fx:id="btnRest" cancelButton="true" mnemonicParsing="false" onAction="#clearField" prefHeight="25.0" prefWidth="62.0" text="Reset" />
-                  <Button cancelButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Reset" />
 
                </children>
             </HBox>
