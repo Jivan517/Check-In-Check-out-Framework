@@ -153,6 +153,11 @@ public class ManageCustomerController extends Application implements Initializab
 	}
 
 	@FXML
+	protected void btnCancelAction(ActionEvent event) throws Exception {
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
+
+	@FXML
 	protected void AddCustomer(ActionEvent event) throws Exception {
 		AddCustomerController addcustomer = new AddCustomerController(0, 0);
 		Stage stage = new Stage();
@@ -208,6 +213,8 @@ public class ManageCustomerController extends Application implements Initializab
 	protected void searchCustomer(ActionEvent event) {
 		String searchText = txtSearchCustomer.getText();
 		searchText.toLowerCase();
+		customerList.clear();
+		populateCustomer();
 		if (!searchText.isEmpty()) {
 
 			List<AppCustomer> appCustomerList = customerList.stream()
@@ -222,8 +229,13 @@ public class ManageCustomerController extends Application implements Initializab
 			}
 			populateTable();
 		} else {
-			txtErrorMessage.setText(txtSearchCustomer.getText() + " Customer Not Found");
-			txtErrorMessage.setFill(Color.RED);
+			customerList.clear();
+			populateCustomer();
+			populateTable();
+			/*
+			 * txtErrorMessage.setText(txtSearchCustomer.getText() +
+			 * " Customer Not Found"); txtErrorMessage.setFill(Color.RED);
+			 */
 		}
 
 	}

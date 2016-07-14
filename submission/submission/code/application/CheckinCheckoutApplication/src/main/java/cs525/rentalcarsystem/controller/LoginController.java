@@ -89,10 +89,13 @@ public class LoginController extends Application {
 			ApplicationUser user = authenticateUser(userName, password);
 			if (user != null) {
 				SessionCache session = SessionCache.getInstance();
-				if (user.isAdmin())
+				if (user.isAdmin()) {
+					session.add(BusinessConstants.LOGGED_IN_USERID, userName);
 					session.add(BusinessConstants.ADMIN, BusinessConstants.ADMIN);
-				else
+				} else {
+					session.add(BusinessConstants.LOGGED_IN_USERID, userName);
 					session.add(BusinessConstants.STAFF, BusinessConstants.STAFF);
+				}
 
 				((Node) (event.getSource())).getScene().getWindow().hide();
 
@@ -125,7 +128,8 @@ public class LoginController extends Application {
 		return user;
 	}
 
-	@FXML protected void clearField(ActionEvent event) throws Exception{
+	@FXML
+	protected void clearField(ActionEvent event) throws Exception {
 		txtUserName.clear();
 		txtPassword.clear();
 	}
