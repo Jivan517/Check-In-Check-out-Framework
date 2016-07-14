@@ -121,10 +121,11 @@ public class CheckoutPaymentController extends Application implements Initializa
 	@FXML
 	protected void btnPayAction(ActionEvent event) throws Exception {
 
-		if (!LoginUtil.isStaff()) {
-			DialogHelper.toast("Not Allowed for non-staff user", AlertType.ERROR);
-			return;
-		}
+		// if (!LoginUtil.isStaff()) {
+		// DialogHelper.toast("Not Allowed for non-staff user",
+		// AlertType.ERROR);
+		// return;
+		// }
 
 		ObservableList<Car> cars = cartTable.getItems();
 		LocalDate dueDate = ((DatePicker) dueDateVBox.getChildren().get(0)).getValue();

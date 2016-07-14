@@ -52,4 +52,11 @@ public class LoginUtil {
 		return flag;
 	}
 
+	public static String getLoggedInUsername() {
+		Object value = SessionCache.getInstance().get(BusinessConstants.STAFF);
+		if (value != null)
+			return value.toString();
+		return null;
+	}
+
 }

@@ -41,8 +41,7 @@
                         <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="72.0" text="Login" />
                      </children>
                   </VBox>
-                  <Button fx:id="btnRest" cancelButton="true" mnemonicParsing="false" onAction="#clearField" prefHeight="25.0" prefWidth="62.0" text="Reset" />
-                  <Button cancelButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Reset" />
+                  <Button fx:id="btnRest" cancelButton="true" mnemonicParsing="false" onAction="#clearField" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #EC7063;" text="Reset" />
 
                </children>
             </HBox>
