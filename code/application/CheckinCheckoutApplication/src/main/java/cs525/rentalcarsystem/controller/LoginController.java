@@ -132,6 +132,7 @@ public class LoginController extends Application {
 	protected void clearField(ActionEvent event) throws Exception {
 		txtUserName.clear();
 		txtPassword.clear();
+		txtErrorMessage.setText("");
 	}
 
 }
