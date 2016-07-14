@@ -44,7 +44,13 @@ public class CheckoutRecordFacadeImpl implements CheckoutRecordFacade {
 	@Override
 	public int saveCheckoutRecord(CheckoutRecordEntry checkoutRecordEntry) {
 		System.out.println("QUERY: " + DbHelper.getInsertQuery(checkoutRecordEntry));
-		return this.dbaction.Create(DbHelper.getInsertQuery(checkoutRecordEntry));
+		int rows = this.dbaction.Create(DbHelper.getInsertQuery(checkoutRecordEntry));
+
+		updateProductQuery = new StringBuilder();
+		updateProductQuery.append("UPDATE car SET quantity = quantity - " + checkoutRecordEntry.getQuantity()
+				+ " WHERE productId=" + checkoutRecordEntry.getProductRefId());
+		this.dbaction.update(updateProductQuery.toString());
+		return rows;
 	}
 
 	/*
