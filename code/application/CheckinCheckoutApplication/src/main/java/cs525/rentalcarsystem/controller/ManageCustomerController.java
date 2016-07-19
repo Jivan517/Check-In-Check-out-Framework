@@ -239,5 +239,9 @@ public class ManageCustomerController extends Application implements Initializab
 		}
 
 	}
+	@FXML
+	protected void cancelBtnAction(ActionEvent event) {
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
 
 }

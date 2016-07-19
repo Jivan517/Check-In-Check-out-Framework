@@ -73,7 +73,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="96.0" prefWidth="64.0">
                      <children>
-                        <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancelBtnAction" text="Cancel" />
+                        <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelBtnAction" text="Cancel" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" />
